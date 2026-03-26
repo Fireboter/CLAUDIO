@@ -78,3 +78,44 @@ Always back up the production database before running any migration script.
 - Test PHP changes locally before FTP upload
 - Always run `check_shop_images.py` after image operations to verify consistency
 - Follow root CLAUDE.md orchestration rules
+
+---
+
+### Claudio Agent Startup Checklist
+
+When starting as a Claudio project agent (opened by `scripts/spawn-agent.ps1`):
+
+1. **Register:** `pwsh D:/CLAUDIO/scripts/agent-checkin.ps1 -Project WebsMami -Status active`
+2. **Read learnings journal:** Read `D:/CLAUDIO/.claudio/agents/WebsMami/learnings.md` before any work.
+3. **CRITICAL — check credentials:** Before ANY file edit, verify no config.php or similar file containing DB/payment credentials will be modified accidentally.
+4. **Check tasks:** Scan `D:/CLAUDIO/.claudio/tasks/WebsMami/pending/` — pick highest-priority task.
+5. **If task found:**
+   - Move task JSON from `pending/` to `active/`
+   - Update registry: `agent-checkin.ps1 -Project WebsMami -Status active -CurrentTask <id>`
+   - `pwsh D:/CLAUDIO/scripts/telegram-notify.ps1 "<b>WebsMami</b> Starting: <title>"`
+   - For `feature`/`bugfix`/`maintenance` → create git worktree (see Git Worktree Pattern below)
+   - For `review`/`research` → work in project dir, write report to `D:/CLAUDIO/.claudio/results/WebsMami/<id>.json`
+   - Write result JSON to `D:/CLAUDIO/.claudio/results/WebsMami/<task-id>.json`
+   - Move task JSON from `active/` to `done/`
+   - **Append learnings:** Add non-obvious discoveries to `D:/CLAUDIO/.claudio/agents/WebsMami/learnings.md`
+   - **Store in claude-mem:** Record key decisions via claude-mem MCP tools
+   - `pwsh D:/CLAUDIO/scripts/telegram-notify.ps1 "<b>WebsMami</b> Done: <title> ✓"`
+   - `agent-checkin.ps1 -Project WebsMami -Status idle -CompleteTask <id>`
+   - Run `/compact` to keep context lean
+6. **If no tasks:** `agent-checkin.ps1 -Project WebsMami -Status idle` + send Telegram idle message
+7. **Poll:** Use `/loop 30s` skill, or await Queen prompt
+8. **On failure:** Move task to `failed/` + `telegram-notify.ps1 "<b>WebsMami</b> ✗ Failed: <title>"` → escalate per Memory-First Rule
+
+### Git Worktree Pattern
+
+```bash
+cd "D:/CLAUDIO/Projects/WebsMami"
+git worktree add "D:/CLAUDIO/.worktrees/WebsMami/<task-id>" feature/<name>-$(date +%Y%m%d)
+cd "D:/CLAUDIO/.worktrees/WebsMami/<task-id>"
+# ... work ...
+cd "D:/CLAUDIO/Projects/WebsMami"
+git merge --no-ff feature/<name>-<date>
+git push
+git worktree remove "D:/CLAUDIO/.worktrees/WebsMami/<task-id>"
+git branch -d feature/<name>-<date>
+```

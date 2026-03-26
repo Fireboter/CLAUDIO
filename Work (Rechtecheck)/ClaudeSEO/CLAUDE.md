@@ -107,3 +107,42 @@ composer update
 - Follow ALL existing rules above (CRITICAL RULES, UNDERSTANDING-FIRST, REQUIREMENTS)
 - Follow root CLAUDE.md orchestration rules
 - This is a Work project — apply extra caution before any deploy or data actions
+
+---
+
+### Claudio Agent Startup Checklist
+
+When starting as a Claudio project agent (opened by `scripts/spawn-agent.ps1`):
+
+**IMPORTANT:** ClaudeSEO is a Work project. `auto_merge` and `auto_push` are disabled in config.json.
+Do NOT merge or push without explicit Queen approval via Telegram or terminal.
+
+1. **Register:** `pwsh D:/CLAUDIO/scripts/agent-checkin.ps1 -Project ClaudeSEO -Status active`
+2. **Read learnings journal:** Read `D:/CLAUDIO/.claudio/agents/ClaudeSEO/learnings.md` before any work.
+3. **Check tasks:** Scan `D:/CLAUDIO/.claudio/tasks/ClaudeSEO/pending/` — pick highest-priority task.
+4. **If task found:**
+   - Move task JSON from `pending/` to `active/`
+   - Update registry: `agent-checkin.ps1 -Project ClaudeSEO -Status active -CurrentTask <id>`
+   - `pwsh D:/CLAUDIO/scripts/telegram-notify.ps1 "<b>ClaudeSEO</b> Starting: <title>"`
+   - For `feature`/`bugfix`/`maintenance` → create git worktree (see pattern below). Do NOT auto-merge.
+   - For `review`/`research` → work in project dir, write report to `D:/CLAUDIO/.claudio/results/ClaudeSEO/<id>.json`
+   - Write result JSON to `D:/CLAUDIO/.claudio/results/ClaudeSEO/<task-id>.json`
+   - Move task JSON from `active/` to `done/`
+   - **Append learnings** to `D:/CLAUDIO/.claudio/agents/ClaudeSEO/learnings.md`
+   - **Store in claude-mem** via claude-mem MCP tools
+   - `pwsh D:/CLAUDIO/scripts/telegram-notify.ps1 "<b>ClaudeSEO</b> Done (awaiting merge approval): <title>"`
+   - `agent-checkin.ps1 -Project ClaudeSEO -Status idle -CompleteTask <id>`
+   - Run `/compact`
+5. **If no tasks:** `agent-checkin.ps1 -Project ClaudeSEO -Status idle` + Telegram idle message
+6. **Poll:** Use `/loop 30s` skill, or await Queen prompt
+7. **On failure:** Move task to `failed/` + Telegram alert → escalate per Memory-First Rule
+
+### Git Worktree Pattern
+
+```bash
+cd "D:/CLAUDIO/Work (Rechtecheck)/ClaudeSEO"
+git worktree add "D:/CLAUDIO/.worktrees/ClaudeSEO/<task-id>" feature/<name>-$(date +%Y%m%d)
+cd "D:/CLAUDIO/.worktrees/ClaudeSEO/<task-id>"
+# ... work, commit — but DO NOT MERGE or PUSH without Queen approval ...
+# Notify Queen: telegram-notify.ps1 "<b>ClaudeSEO</b> Branch ready for review: feature/<name>"
+```
