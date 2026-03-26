@@ -71,11 +71,53 @@ def append_to_inbox(text: str, from_name: str, thread_id: int | None) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Agent routing helpers
+# ---------------------------------------------------------------------------
+
+AGENT_ALIASES = {
+    '@claudetrader': 'ClaudeTrader',
+    '@websmami':     'WebsMami',
+    '@claudeseo':    'ClaudeSEO',
+    'claudetrader':  'ClaudeTrader',
+    'websmami':      'WebsMami',
+    'claudeseo':     'ClaudeSEO',
+}
+
+
+def detect_agent_target(text: str) -> tuple[str | None, str]:
+    """Return (project_name, stripped_text) if text starts with @ProjectName, else (None, text)."""
+    lower = text.lower().strip()
+    for alias, project in AGENT_ALIASES.items():
+        if lower.startswith(alias):
+            return project, text[len(alias):].strip()
+    return None, text
+
+
+def queue_task_for_agent(project: str, description: str) -> str:
+    """Write a task JSON to .claudio/tasks/{project}/pending/. Returns task ID."""
+    import datetime as _dt
+    tasks_dir = CLAUDIO_ROOT / '.claudio' / 'tasks' / project / 'pending'
+    tasks_dir.mkdir(parents=True, exist_ok=True)
+    ts      = _dt.datetime.utcnow().strftime('%Y%m%d-%H%M%S')
+    task_id = f'task-tg-{ts}'
+    task = {
+        'id':          task_id,
+        'type':        'feature',
+        'priority':    'normal',
+        'description': description,
+        'created_at':  _dt.datetime.utcnow().isoformat() + 'Z',
+        'source':      'telegram',
+    }
+    (tasks_dir / f'{task_id}.json').write_text(json.dumps(task, indent=2))
+    return task_id
+
+
+# ---------------------------------------------------------------------------
 # Message handler
 # ---------------------------------------------------------------------------
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Receive Telegram message, write to inbox, acknowledge receipt."""
+    """Receive Telegram message, route to agent or Claudio inbox."""
     # Security: only accept messages from the configured chat
     if str(update.effective_chat.id) != TELEGRAM_CHAT_ID:
         return
@@ -95,6 +137,19 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     from_name = update.effective_user.first_name if update.effective_user else "user"
     thread_id = getattr(update.message, "message_thread_id", None)
+
+    # Detect @Agent routing prefix (e.g. "@ClaudeTrader add feature X")
+    target_project, clean_text = detect_agent_target(user_text)
+
+    if target_project:
+        # Route directly to project agent task queue
+        task_id = queue_task_for_agent(target_project, clean_text)
+        print(f"[route] {target_project} task {task_id}: {clean_text[:60]}")
+        await update.message.reply_text(
+            f"Queued for {target_project}: {clean_text[:80]}\nTask ID: {task_id}\n"
+            f"Start agent: spawn ClaudeTrader (or open from this terminal)"
+        )
+        return
 
     msg_id = append_to_inbox(user_text, from_name, thread_id)
     print(f"[inbox] queued message {msg_id} from {from_name}: {user_text[:60]}")

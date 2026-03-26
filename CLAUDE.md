@@ -13,6 +13,20 @@ I manage:
 
 ---
 
+## Every Interaction — Always Do First
+Before responding to ANYTHING, always:
+```bash
+python D:/CLAUDIO/scripts/_tg.py --check 2>/dev/null || \
+  python -c "
+import json; p = __import__('pathlib').Path('D:/CLAUDIO/.claudio/telegram-inbox.json')
+if p.exists():
+    msgs = [m for m in json.loads(p.read_text()).get('messages',[]) if not m.get('processed')]
+    if msgs:
+        for m in msgs: print(f'TELEGRAM_CONTEXT [{m[\"from\"]}]: {m[\"text\"]}')
+"
+```
+If there are unprocessed inbox messages: process them, reply via `python scripts/_tg.py claudio "<reply>"`, then mark processed.
+
 ## Session Startup
 Run these steps at the start of EVERY session:
 
