@@ -93,7 +93,7 @@ function renderAgentCards() {
           <div><span class="label">Beat:</span>   ${escapeHtml(beat)}</div>
           <div><span class="label">Done today:</span> ${escapeHtml(String(done))}</div>
         </div>
-        <button class="btn-detail" onclick="openModal(${JSON.stringify(name)})">View Details &#x25b8;</button>
+        <button class="btn-detail" data-agent="${escapeHtml(name)}">View Details &#x25b8;</button>
       </div>`;
   }).join('');
 }
@@ -295,4 +295,9 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     if (openAgent) loadTab(btn.dataset.tab, openAgent);
   });
+});
+
+document.getElementById('agent-cards').addEventListener('click', e => {
+  const btn = e.target.closest('.btn-detail');
+  if (btn) openModal(btn.dataset.agent);
 });
