@@ -9,12 +9,16 @@ node_modules/
 .next/
 *.log
 npm-debug.log*
+*.tsbuildinfo
+.eslintcache
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+venv/
+.venv/
 
 # PHP Composer
 vendor/
