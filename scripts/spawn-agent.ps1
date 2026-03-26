@@ -42,8 +42,10 @@ Write-Host "Spawning agent for $ProjectName at $projectPath"
 Write-Host "Windows Terminal will open a new tab. Claude Code will start in the project directory."
 Write-Host "If this is the first time opening this directory, approve the trust prompt once."
 
+# Build the startup command string and base64-encode it to avoid all quoting/escaping issues
+# (especially for paths with spaces and parentheses like "Work (Rechtecheck)/ClaudeSEO")
 # Open new Windows Terminal tab, cd to project, launch claude
 # Claude Code auto-loads CLAUDE.md and .mcp.json from the project directory
-wt.exe new-tab `
-  --title "Claudio: $ProjectName" `
-  -- pwsh -NoExit -Command "Set-Location '$projectPath'; Write-Host 'Claudio Agent: $ProjectName — ready'; claude"
+$startCmd = "Set-Location '$projectPath'; Write-Host 'Claudio Agent: $ProjectName - ready'; claude"
+$encodedCmd = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($startCmd))
+wt.exe new-tab --title "Claudio: $ProjectName" -- pwsh -NoExit -EncodedCommand $encodedCmd
