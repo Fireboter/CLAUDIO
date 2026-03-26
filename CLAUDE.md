@@ -148,3 +148,7 @@ When a new project is added to `Projects/`, `Work/`, or `University/`:
 6. Run `git worktree list` in the project to surface active branches
 7. Record to claude-mem: "Imported [project name]: [one-line stack summary]"
 8. Commit all changes: `feat: onboard [project name] into Claudio`
+9. Scaffold `.claudio/agents/{project}/tests.json` — detect stack and `base_url`,
+   create starter config with `"enabled": true`, one check for `/`, and
+   `startup` set if a local dev server command was detected. Fill `REPLACE_WITH_URL`
+   if the live URL is unknown. Commit with the onboarding commit.

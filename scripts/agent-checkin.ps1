@@ -20,7 +20,8 @@ param(
 
   [string]$CurrentTask    = $null,
   [string]$CurrentBranch  = $null,
-  [string]$CompleteTask   = $null   # task ID just completed — prepended to recent_completions
+  [string]$CompleteTask   = $null,  # task ID just completed — prepended to recent_completions
+  [switch]$RunTests                 # when set, run tests after task completion
 )
 
 $claudioRoot  = Split-Path $PSScriptRoot -Parent
@@ -105,3 +106,10 @@ foreach ($agentName in @('ClaudeTrader', 'WebsMami', 'ClaudeSEO')) {
   $summary.agents | Add-Member -NotePropertyName $agentName -NotePropertyValue $agentEntry -Force
 }
 $summary | ConvertTo-Json -Depth 8 | Set-Content $taskSummaryPath -Encoding UTF8
+
+# Run tests if requested (agent passes this flag when code changes warrant verification)
+if ($RunTests) {
+  Write-Host "[$Project] running tests..."
+  $testScript = Join-Path $claudioRoot "scripts\run-tests.py"
+  python $testScript --project $Project
+}
