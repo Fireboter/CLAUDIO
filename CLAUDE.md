@@ -101,6 +101,7 @@ After every significant decision, record to claude-mem:
 Run after each session:
 ```bash
 cd "D:/CLAUDIO"
+mkdir -p memory/snapshots
 echo "Session ended $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> memory/snapshots/$(date +%Y-%m-%d).log
 git add memory/snapshots/
 git diff --cached --quiet || git commit -m "chore: memory snapshot $(date +%Y-%m-%d)"
@@ -110,7 +111,7 @@ git push
 ---
 
 ## Project Import Procedure
-When a new project is added to `Projects\`, `Work\`, or `University\`:
+When a new project is added to `Projects/`, `Work/`, or `University/`:
 
 1. Read the codebase — detect stack, framework versions, entry points, build/test/deploy commands
 2. Read existing `CLAUDE.md` if present — migrate rules, **do not overwrite them**
