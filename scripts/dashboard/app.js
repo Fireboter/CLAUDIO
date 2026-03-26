@@ -91,7 +91,7 @@ function renderAgentCards() {
           <div><span class="label">Task:</span>   <span class="mono">${escapeHtml(task)}</span></div>
           <div><span class="label">Branch:</span> <span class="mono">${escapeHtml(branch)}</span></div>
           <div><span class="label">Beat:</span>   ${escapeHtml(beat)}</div>
-          <div><span class="label">Done today:</span> ${done}</div>
+          <div><span class="label">Done today:</span> ${escapeHtml(String(done))}</div>
         </div>
         <button class="btn-detail" onclick="openModal('${escapeHtml(name)}')">View Details &#x25b8;</button>
       </div>`;
