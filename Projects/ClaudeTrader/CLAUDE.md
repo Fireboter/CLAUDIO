@@ -72,7 +72,7 @@ Watch for: completion drive, confidence w/o reading, pattern matching, efficienc
 ## Claudio — Project Context
 
 **Domain:** Personal Projects
-**Stack:** Next.js 15 (webpack), TypeScript, Tailwind CSS, Lucide React, lightweight-charts, Recharts, Axios
+**Stack:** Next.js 16 (webpack), TypeScript, Tailwind CSS, Lucide React, lightweight-charts, Recharts, Axios
 
 ### Commands
 ```bash
