@@ -87,3 +87,70 @@ def test_run_health_checks_captures_output(tmp_path):
     health = [{'cmd': 'python -c "print(\'hello health\')"', 'cwd': '.'}]
     results = run_tests.run_health_checks(health, tmp_path)
     assert 'hello health' in results[0]['output']
+
+
+# ──────────────────────────────────────────────
+# _wait_for_ready / start_server / stop_server
+# ──────────────────────────────────────────────
+
+def test_wait_for_ready_nextjs_reads_ready():
+    """Real subprocess that echoes 'Ready' — should return without raising."""
+    proc = subprocess.Popen(
+        'echo Ready',
+        shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+    )
+    run_tests._wait_for_ready('http://localhost:9999', proc, timeout=10, stack='nextjs')
+    proc.wait()
+
+
+def test_wait_for_ready_nextjs_process_exits_early():
+    """Process exits without printing 'Ready' — should raise RuntimeError."""
+    proc = subprocess.Popen(
+        'python -c "import sys; sys.exit(0)"',
+        shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+    )
+    with pytest.raises(RuntimeError, match='exited unexpectedly'):
+        run_tests._wait_for_ready('http://localhost:9999', proc, timeout=5, stack='nextjs')
+    proc.wait()
+
+
+def test_wait_for_ready_url_polling_succeeds(monkeypatch):
+    """URL polling returns after one successful urlopen call."""
+    call_count = [0]
+
+    def mock_urlopen(url, timeout=None):
+        call_count[0] += 1
+        return MagicMock()
+
+    monkeypatch.setattr(run_tests.urllib.request, 'urlopen', mock_urlopen)
+
+    proc = MagicMock()
+    proc.poll.return_value = None
+
+    run_tests._wait_for_ready('http://localhost:9999', proc, timeout=5, stack='php')
+    assert call_count[0] == 1
+
+
+def test_wait_for_ready_http_error_means_up(monkeypatch):
+    """An HTTPError (e.g. 404) still means the server is responding — should return."""
+    def mock_urlopen(url, timeout=None):
+        raise run_tests.urllib.error.HTTPError(url, 404, 'Not Found', {}, None)
+
+    monkeypatch.setattr(run_tests.urllib.request, 'urlopen', mock_urlopen)
+
+    proc = MagicMock()
+    run_tests._wait_for_ready('http://localhost:9999', proc, timeout=5, stack='php')
+
+
+def test_stop_server_terminates():
+    proc = subprocess.Popen(
+        'python -c "import time; time.sleep(30)"',
+        shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    )
+    assert proc.poll() is None
+    run_tests.stop_server(proc)
+    assert proc.poll() is not None
+
+
+def test_stop_server_noop_on_none():
+    run_tests.stop_server(None)  # must not raise
