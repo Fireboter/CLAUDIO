@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:rechtecheck.de)",
+      "Bash(echo no docs:*)",
+      "Bash(echo php not found:*)",
+      "Bash(head:*)",
+      "Bash(php:*)",
+      "Bash(curl:*)",
+      "Bash(cd:*)",
+      "Bash(git:*)"
+    ]
+  }
+}

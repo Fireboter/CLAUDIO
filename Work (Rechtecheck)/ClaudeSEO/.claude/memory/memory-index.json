@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "current": "memory.md",
+  "rotatedFiles": [],
+  "stats": {
+    "totalRotations": 0,
+    "lastRotation": null
+  },
+  "counter": 0,
+  "lastMemoryUpdateTs": null,
+  "lastL1TranscriptMtime": 1772978861386.3457,
+  "pendingLastProcessedTs": "2026-03-08T14:07:11.727Z",
+  "deltaReady": true
+}
