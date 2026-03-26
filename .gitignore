@@ -44,3 +44,7 @@ desktop.ini
 .claudio/registry.json
 .claudio/tasks/*/pending/
 .claudio/tasks/*/active/
+
+# Telegram bot ephemeral state
+.claudio/telegram-session.json
+.claudio/screenshots/
