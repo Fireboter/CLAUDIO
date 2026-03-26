@@ -1,1 +1,37 @@
+# Worktrees
 .worktrees/
+
+# Brainstorming and runtime sessions
+.superpowers/
+
+# Node.js / Next.js
+node_modules/
+.next/
+*.log
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PHP Composer
+vendor/
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# RuFlo runtime state (config is committed, runtime tmp is not)
+.ruflo/tmp/
+.ruflo/cache/
+
+# Jupyter
+.ipynb_checkpoints/
