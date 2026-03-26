@@ -32,7 +32,8 @@ if (-not (Test-Path $pendingDir)) {
 }
 
 # Task ID: timestamp-based for uniqueness and natural sort order
-$taskId = "task-$(Get-Date -AsUTC -Format 'yyyyMMdd-HHmmss')"
+# Note: [System.DateTime]::UtcNow used for PS5.1 compatibility (-AsUTC is PS7+ only)
+$taskId = "task-$([System.DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss'))"
 
 $task = [ordered]@{
   id              = $taskId
