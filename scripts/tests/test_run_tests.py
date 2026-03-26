@@ -154,3 +154,48 @@ def test_stop_server_terminates():
 
 def test_stop_server_noop_on_none():
     run_tests.stop_server(None)  # must not raise
+
+
+# ──────────────────────────────────────────────
+# run_browser_checks
+# ──────────────────────────────────────────────
+
+def test_browser_check_pass(local_server, tmp_path):
+    checks = [
+        {'path': '/', 'expect_status': 200, 'expect_text': 'TestApp Hello', 'screenshot': 'home'}
+    ]
+    results = run_tests.run_browser_checks(local_server, checks, 'TestProject', tmp_path)
+
+    assert len(results) == 1
+    assert results[0]['passed'] is True
+    assert results[0]['reason'] is None
+    assert (tmp_path / 'test-TestProject-home.png').exists()
+
+
+def test_browser_check_wrong_status(local_server, tmp_path):
+    checks = [{'path': '/', 'expect_status': 404, 'screenshot': 'home'}]
+    results = run_tests.run_browser_checks(local_server, checks, 'TestProject', tmp_path)
+
+    assert results[0]['passed'] is False
+    assert 'HTTP 200' in results[0]['reason']
+    assert 'expected 404' in results[0]['reason']
+
+
+def test_browser_check_missing_text(local_server, tmp_path):
+    checks = [{'path': '/', 'expect_text': 'NotPresent', 'screenshot': 'home'}]
+    results = run_tests.run_browser_checks(local_server, checks, 'TestProject', tmp_path)
+
+    assert results[0]['passed'] is False
+    assert 'NotPresent' in results[0]['reason']
+
+
+def test_browser_check_creates_screenshot_dir(local_server, tmp_path):
+    """screenshots_dir is created automatically when it doesn't exist."""
+    screenshots_dir = tmp_path / 'nested' / 'screenshots'
+    assert not screenshots_dir.exists()
+
+    checks = [{'path': '/', 'screenshot': 'home'}]
+    run_tests.run_browser_checks(local_server, checks, 'T', screenshots_dir)
+
+    assert screenshots_dir.exists()
+    assert (screenshots_dir / 'test-T-home.png').exists()

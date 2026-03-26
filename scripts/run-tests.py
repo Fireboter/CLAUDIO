@@ -100,3 +100,61 @@ def stop_server(proc: subprocess.Popen | None):
             proc.wait(timeout=5)
         except subprocess.TimeoutExpired:
             proc.kill()
+
+
+def run_browser_checks(
+    base_url: str, checks: list, project: str, screenshots_dir: Path
+) -> list[dict]:
+    """Navigate to each URL, assert status + text, take screenshot. Returns result list."""
+    from playwright.sync_api import sync_playwright
+
+    screenshots_dir.mkdir(parents=True, exist_ok=True)
+    results = []
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+
+        for check in checks:
+            url             = base_url.rstrip('/') + check['path']
+            stem            = check['screenshot']
+            screenshot_path = screenshots_dir / f'test-{project}-{stem}.png'
+
+            try:
+                response = page.goto(url, wait_until='networkidle', timeout=15000)
+                status   = response.status if response else 0
+                content  = page.content()
+                page.screenshot(path=str(screenshot_path), full_page=True)
+
+                status_ok = (status == check.get('expect_status', 200))
+                text_ok   = (check['expect_text'] in content) if 'expect_text' in check else True
+                passed    = status_ok and text_ok
+
+                reason = None
+                if not status_ok:
+                    reason = f'HTTP {status} (expected {check.get("expect_status", 200)})'
+                if not text_ok:
+                    reason = f'expect_text "{check["expect_text"]}" not found'
+
+                results.append({
+                    'path':       check['path'],
+                    'passed':     passed,
+                    'reason':     reason,
+                    'screenshot': str(screenshot_path),
+                })
+
+            except Exception as e:
+                try:
+                    page.screenshot(path=str(screenshot_path), full_page=True)
+                except Exception:
+                    pass
+                results.append({
+                    'path':       check['path'],
+                    'passed':     False,
+                    'reason':     str(e),
+                    'screenshot': str(screenshot_path),
+                })
+
+        browser.close()
+
+    return results
