@@ -7,11 +7,20 @@
     "cwd": "Work (Rechtecheck)/ClaudeSEO/public",
     "ready_timeout": 15
   },
+  "extra_startups": [
+    {
+      "cmd": "php -S localhost:8001 router.php",
+      "cwd": "Work (Rechtecheck)/ClaudeSEO/admin",
+      "ready_url": "http://localhost:8001",
+      "ready_timeout": 15
+    }
+  ],
   "health": [
     { "cmd": "php -l public/index.php", "cwd": "Work (Rechtecheck)/ClaudeSEO" }
   ],
   "checks": [
     { "path": "/",                                 "expect_status": 200, "screenshot": "claudeseo-home" },
-    { "path": "/experten-service/unsere-services", "expect_status": 200, "screenshot": "claudeseo-services" }
+    { "path": "/experten-service/unsere-services", "expect_status": 200, "screenshot": "claudeseo-services" },
+    { "base_url": "http://localhost:8001",         "path": "/",          "expect_status": 200, "screenshot": "claudeseo-admin" }
   ]
 }

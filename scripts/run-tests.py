@@ -111,9 +111,16 @@ def stop_server(proc: subprocess.Popen | None):
 
 
 def run_browser_checks(
-    base_url: str, checks: list, project: str, screenshots_dir: Path
+    base_url: str, checks: list, project: str, screenshots_dir: Path,
+    auth_config: dict | None = None,
 ) -> list[dict]:
-    """Navigate to each URL, assert status + text, take screenshot. Returns result list."""
+    """Navigate to each URL, assert status + text, take screenshot. Returns result list.
+
+    auth_config keys:
+      login_path  — path appended to each check's base_url to reach the login page
+      fields      — {css_selector: value} mapping of form fields to fill
+      submit      — CSS selector of the submit button
+    """
     from playwright.sync_api import sync_playwright
 
     screenshots_dir.mkdir(parents=True, exist_ok=True)
@@ -123,13 +130,30 @@ def run_browser_checks(
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
+        authenticated_bases: set = set()
+
         for check in checks:
-            url             = (check.get('base_url') or base_url).rstrip('/') + check['path']
+            check_base      = (check.get('base_url') or base_url).rstrip('/')
+            url             = check_base + check['path']
             stem            = check['screenshot']
             screenshot_path = screenshots_dir / f'test-{project}-{stem}.png'
 
+            # Perform login for this base_url if auth is required and not yet done
+            if check.get('requires_auth') and auth_config and check_base not in authenticated_bases:
+                login_url = check_base + auth_config['login_path']
+                try:
+                    page.goto(login_url, wait_until='networkidle', timeout=15000)
+                    for selector, value in auth_config.get('fields', {}).items():
+                        page.fill(selector, value)
+                    page.click(auth_config['submit'])
+                    page.wait_for_load_state('networkidle')
+                    authenticated_bases.add(check_base)
+                    print(f'[auth] logged in at {login_url}')
+                except Exception as e:
+                    print(f'[auth] login failed for {check_base}: {e}')
+
             try:
-                response = page.goto(url, wait_until='networkidle', timeout=15000)
+                response = page.goto(url, wait_until='networkidle', timeout=check.get('timeout', 30000))
                 status   = response.status if response else 0
                 content  = page.content()
                 page.screenshot(path=str(screenshot_path), full_page=True)
@@ -302,11 +326,13 @@ def send_telegram(message: str, screenshot_paths: list, project: str | None = No
         if thread_id:
             payload['message_thread_id'] = thread_id
         _post('sendMessage', payload)
+        import time as _time
         for path_str in screenshot_paths:
             p = Path(path_str)
             if p.exists():
                 try:
                     _post_photo(p)
+                    _time.sleep(0.5)   # avoid Telegram photo rate-limit
                 except Exception as e:
                     print(f'[telegram] photo send failed: {e}')
     except Exception as e:
@@ -332,6 +358,7 @@ def run_project(project: str) -> bool | None:
     health_results = []
     check_results  = []
     server_proc    = None
+    extra_procs: list[subprocess.Popen] = []
 
     try:
         health_results = run_health_checks(config.get('health', []), CLAUDIO_ROOT)
@@ -344,8 +371,13 @@ def run_project(project: str) -> bool | None:
                 server_proc = start_server(
                     config['startup'], CLAUDIO_ROOT, config.get('stack'), base_url
                 )
+            for es in config.get('extra_startups', []):
+                ready_url = es.get('ready_url', base_url)
+                p = start_server(es, CLAUDIO_ROOT, es.get('stack'), ready_url)
+                extra_procs.append(p)
             check_results = run_browser_checks(
-                base_url, config.get('checks', []), project, SCREENSHOTS_DIR
+                base_url, config.get('checks', []), project, SCREENSHOTS_DIR,
+                auth_config=config.get('auth'),
             )
 
     except Exception as e:
@@ -361,6 +393,8 @@ def run_project(project: str) -> bool | None:
 
     finally:
         stop_server(server_proc)
+        for ep in extra_procs:
+            stop_server(ep)
 
     elapsed     = time.time() - start_time
     result_path = write_result(project, health_results, check_results, elapsed, RESULTS_DIR)

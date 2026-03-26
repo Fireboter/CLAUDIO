@@ -4,17 +4,36 @@
   "base_url": "https://kokett.ad",
   "startup": null,
   "health": [],
+  "auth": {
+    "login_path": "/admin/login",
+    "fields": { "input[name='password']": "KarenVB_13061975" },
+    "submit": "button[type='submit']"
+  },
   "checks": [
-    { "path": "/",                "expect_status": 200, "screenshot": "kokett-home" },
-    { "path": "/shop",            "expect_status": 200, "screenshot": "kokett-shop" },
-    { "path": "/cart",            "expect_status": 200, "screenshot": "kokett-cart" },
-    { "path": "/pages/contact",   "expect_status": 200, "screenshot": "kokett-contact" },
-    { "path": "/admin/login",     "expect_status": 200, "screenshot": "kokett-admin" },
+    { "path": "/",              "expect_status": 200, "screenshot": "kokett-home" },
+    { "path": "/shop",          "expect_status": 200, "screenshot": "kokett-shop" },
+    { "path": "/cart",          "expect_status": 200, "screenshot": "kokett-cart" },
+    { "path": "/pages/contact", "expect_status": 200, "screenshot": "kokett-contact" },
+
+    { "path": "/admin/login",   "expect_status": 200, "screenshot": "kokett-admin-login" },
+    { "path": "/admin/",        "expect_status": 200, "screenshot": "kokett-admin-dashboard", "requires_auth": true },
+    { "path": "/admin/products","expect_status": 200, "screenshot": "kokett-admin-products",  "requires_auth": true },
+    { "path": "/admin/orders",  "expect_status": 200, "screenshot": "kokett-admin-orders",    "requires_auth": true },
+    { "path": "/admin/collections","expect_status": 200,"screenshot": "kokett-admin-collections","requires_auth": true },
+    { "path": "/admin/contacts","expect_status": 200, "screenshot": "kokett-admin-contacts",  "requires_auth": true },
+    { "path": "/admin/settings","expect_status": 200, "screenshot": "kokett-admin-settings",  "requires_auth": true },
 
     { "base_url": "https://bawywear.com", "path": "/",              "expect_status": 200, "screenshot": "bawywear-home" },
     { "base_url": "https://bawywear.com", "path": "/shop",          "expect_status": 200, "screenshot": "bawywear-shop" },
     { "base_url": "https://bawywear.com", "path": "/cart",          "expect_status": 200, "screenshot": "bawywear-cart" },
     { "base_url": "https://bawywear.com", "path": "/pages/contact", "expect_status": 200, "screenshot": "bawywear-contact" },
-    { "base_url": "https://bawywear.com", "path": "/admin/login",   "expect_status": 200, "screenshot": "bawywear-admin" }
+
+    { "base_url": "https://bawywear.com", "path": "/admin/login",    "expect_status": 200, "screenshot": "bawywear-admin-login" },
+    { "base_url": "https://bawywear.com", "path": "/admin/",         "expect_status": 200, "screenshot": "bawywear-admin-dashboard",   "requires_auth": true },
+    { "base_url": "https://bawywear.com", "path": "/admin/products", "expect_status": 200, "screenshot": "bawywear-admin-products",    "requires_auth": true },
+    { "base_url": "https://bawywear.com", "path": "/admin/orders",   "expect_status": 200, "screenshot": "bawywear-admin-orders",      "requires_auth": true },
+    { "base_url": "https://bawywear.com", "path": "/admin/collections","expect_status": 200,"screenshot": "bawywear-admin-collections","requires_auth": true },
+    { "base_url": "https://bawywear.com", "path": "/admin/contacts", "expect_status": 200, "screenshot": "bawywear-admin-contacts",    "requires_auth": true },
+    { "base_url": "https://bawywear.com", "path": "/admin/settings", "expect_status": 200, "screenshot": "bawywear-admin-settings",    "requires_auth": true }
   ]
 }
