@@ -62,6 +62,10 @@ Run these steps at the start of EVERY session:
    - Any failed tasks needing attention
    - Example: "ClaudeTrader: active on task-001. WebsMami: idle. ClaudeSEO: offline. 1 pending task (WebsMami). 3 completed yesterday."
 
+> **Note:** If a Telegram bot session is active, instructions will arrive prefixed with
+> `TELEGRAM_CONTEXT:`. Follow the marker protocol in the prompt exactly.
+> Save any screenshots to `D:/CLAUDIO/.claudio/screenshots/` via Playwright MCP.
+
 ---
 
 ## Orchestration Model
