@@ -84,6 +84,26 @@ async function main() {
 
 const handlers = {
   'route': () => {
+    // ── Telegram inbox injection ──────────────────────────────────────────
+    // If the bot wrote a pending message to telegram-inbox.json, surface it
+    // here so Claude sees it as TELEGRAM_CONTEXT in the system-reminder.
+    // Claude is responsible for replying via `python scripts/_tg.py claudio`.
+    try {
+      const inboxPath = path.join(helpersDir, '..', '..', '.claudio', 'telegram-inbox.json');
+      if (fs.existsSync(inboxPath)) {
+        const inbox = JSON.parse(fs.readFileSync(inboxPath, 'utf8'));
+        const pending = (inbox.messages || []).filter(m => !m.processed);
+        if (pending.length > 0) {
+          pending.forEach(m => {
+            console.log(`TELEGRAM_CONTEXT [from: ${m.from || 'user'} | thread: ${m.thread_id || 'main'} | id: ${m.id}]: ${m.text}`);
+            m.processed = true;
+          });
+          fs.writeFileSync(inboxPath, JSON.stringify(inbox, null, 2));
+        }
+      }
+    } catch (e) { /* inbox read errors are non-fatal */ }
+    // ─────────────────────────────────────────────────────────────────────
+
     // Inject ranked intelligence context before routing
     if (intelligence && intelligence.getContext) {
       try {
