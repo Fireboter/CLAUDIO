@@ -253,29 +253,62 @@ def send_telegram(message: str, screenshot_paths: list, project: str | None = No
         print('[telegram] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID missing — skipping')
         return
 
-    import asyncio
-    import telegram
+    import json as _json
+    import urllib.request as _req
 
     thread_str = TELEGRAM_THREADS.get(project or '', '') if project else ''
     thread_id  = int(thread_str) if thread_str else None
 
-    async def _send():
-        bot    = telegram.Bot(token=TELEGRAM_TOKEN)
-        kwargs = {'chat_id': TELEGRAM_CHAT, 'text': message}
+    def _post(endpoint: str, payload: dict):
+        data = _json.dumps(payload).encode('utf-8')
+        request = _req.Request(
+            f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/{endpoint}',
+            data=data, headers={'Content-Type': 'application/json'}
+        )
+        _req.urlopen(request, timeout=10)
+
+    def _post_photo(path: Path):
+        import mimetypes, email.mime.multipart, email.mime.base, email.encoders
+        from urllib.request import Request as R
+        boundary = b'----TGBoundary'
+        body = (
+            b'--' + boundary + b'\r\n'
+            b'Content-Disposition: form-data; name="chat_id"\r\n\r\n' +
+            TELEGRAM_CHAT.encode() + b'\r\n'
+        )
         if thread_id:
-            kwargs['message_thread_id'] = thread_id
-        await bot.send_message(**kwargs)
-        for path in screenshot_paths:
-            p = Path(path)
-            if p.exists():
-                with open(p, 'rb') as f:
-                    photo_kwargs = {'chat_id': TELEGRAM_CHAT, 'photo': f}
-                    if thread_id:
-                        photo_kwargs['message_thread_id'] = thread_id
-                    await bot.send_photo(**photo_kwargs)
+            body += (
+                b'--' + boundary + b'\r\n'
+                b'Content-Disposition: form-data; name="message_thread_id"\r\n\r\n' +
+                str(thread_id).encode() + b'\r\n'
+            )
+        photo_bytes = path.read_bytes()
+        body += (
+            b'--' + boundary + b'\r\n'
+            b'Content-Disposition: form-data; name="photo"; filename="' + path.name.encode() + b'"\r\n'
+            b'Content-Type: image/png\r\n\r\n' +
+            photo_bytes + b'\r\n'
+            b'--' + boundary + b'--\r\n'
+        )
+        request = R(
+            f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendPhoto',
+            data=body,
+            headers={'Content-Type': f'multipart/form-data; boundary={boundary.decode()}'}
+        )
+        _req.urlopen(request, timeout=30)
 
     try:
-        asyncio.run(_send())
+        payload = {'chat_id': TELEGRAM_CHAT, 'text': message}
+        if thread_id:
+            payload['message_thread_id'] = thread_id
+        _post('sendMessage', payload)
+        for path_str in screenshot_paths:
+            p = Path(path_str)
+            if p.exists():
+                try:
+                    _post_photo(p)
+                except Exception as e:
+                    print(f'[telegram] photo send failed: {e}')
     except Exception as e:
         print(f'[telegram] send failed: {e}')
 
