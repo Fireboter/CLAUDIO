@@ -258,12 +258,14 @@ def main():
                     win = find_claudio_window()
                     if win:
                         hwnd, title = win
-                        log(f"Found Claudio window  ({len(pending)} pending message(s))")
-                        if inject_trigger(hwnd, title, pending):
+                        # Inject ONE message at a time to avoid concatenation in prompt
+                        single = pending[:1]
+                        log(f"Found Claudio window  ({len(pending)} pending, injecting 1)")
+                        if inject_trigger(hwnd, title, single):
                             last_inject = now
-                            # Mark injected messages as processed immediately so
+                            # Mark ALL pending as processed immediately so
                             # they are not re-injected if Claude is interrupted.
-                            # The hook will ALSO mark them and output TELEGRAM_CONTEXT.
+                            # The hook will surface remaining ones via TELEGRAM_CONTEXT.
                             _mark_injected(pending)
                     else:
                         log("Claudio window not found — messages will be picked up on next prompt")
