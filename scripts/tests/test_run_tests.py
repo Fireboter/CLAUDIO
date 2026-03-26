@@ -199,3 +199,60 @@ def test_browser_check_creates_screenshot_dir(local_server, tmp_path):
 
     assert screenshots_dir.exists()
     assert (screenshots_dir / 'test-T-home.png').exists()
+
+
+# ──────────────────────────────────────────────
+# write_result
+# ──────────────────────────────────────────────
+
+def test_write_result_creates_json(tmp_path):
+    health = [{'cmd': 'test', 'passed': True, 'output': ''}]
+    checks = [{'path': '/', 'passed': True, 'reason': None, 'screenshot': 'home.png'}]
+
+    path = run_tests.write_result('TestProject', health, checks, 14.3, tmp_path / 'results')
+
+    assert path.exists()
+    assert path.suffix == '.json'
+    assert 'TestProject' in path.name
+
+    data = json.loads(path.read_text())
+    assert data['project'] == 'TestProject'
+    assert data['passed'] is True
+    assert data['elapsed_seconds'] == 14.3
+    assert len(data['health']) == 1
+    assert len(data['checks']) == 1
+
+
+def test_write_result_passed_false_when_any_fail(tmp_path):
+    checks = [
+        {'path': '/',    'passed': True,  'reason': None,       'screenshot': ''},
+        {'path': '/api', 'passed': False, 'reason': 'HTTP 500', 'screenshot': ''},
+    ]
+    path = run_tests.write_result('TestProject', [], checks, 2.0, tmp_path / 'results')
+    assert json.loads(path.read_text())['passed'] is False
+
+
+# ──────────────────────────────────────────────
+# create_fix_task
+# ──────────────────────────────────────────────
+
+def test_create_fix_task_writes_json(tmp_path):
+    failed = [
+        {'path': '/dashboard', 'reason': "text 'Portfolio' not found", 'screenshot': 'dash.png'},
+        {'path': '/api',       'reason': 'HTTP 500',                   'screenshot': 'api.png'},
+    ]
+    pending_dir = tmp_path / 'pending'
+    task_id = run_tests.create_fix_task('TestProject', failed, pending_dir)
+
+    task_files = list(pending_dir.glob('*.json'))
+    assert len(task_files) == 1
+
+    task = json.loads(task_files[0].read_text())
+    assert task['id'] == task_id
+    assert task['id'].startswith('test-fix-')
+    assert task['type'] == 'test_fix'
+    assert task['priority'] == 'high'
+    assert '2' in task['description']
+    assert len(task['context']['failed_checks']) == 2
+    assert task['context']['failed_checks'][0]['path'] == '/dashboard'
+    assert 'dash.png' in task['context']['screenshot_paths']

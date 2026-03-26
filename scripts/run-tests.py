@@ -158,3 +158,47 @@ def run_browser_checks(
         browser.close()
 
     return results
+
+
+def write_result(
+    project: str,
+    health_results: list,
+    check_results: list,
+    elapsed: float,
+    results_dir: Path,
+) -> Path:
+    """Write test result JSON. Creates results_dir if missing. Returns path to file."""
+    results_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.datetime.utcnow().strftime('%Y%m%d-%H%M%S')
+    result = {
+        'project':         project,
+        'timestamp':       datetime.datetime.utcnow().isoformat() + 'Z',
+        'elapsed_seconds': round(elapsed, 1),
+        'health':          health_results,
+        'checks':          check_results,
+        'passed':          all(r['passed'] for r in health_results + check_results),
+    }
+    path = results_dir / f'test-{project}-{ts}.json'
+    path.write_text(json.dumps(result, indent=2))
+    return path
+
+
+def create_fix_task(project: str, failed_checks: list, tasks_dir: Path) -> str:
+    """Write a test_fix task JSON to tasks_dir. Returns the task ID string."""
+    tasks_dir.mkdir(parents=True, exist_ok=True)
+    ts      = datetime.datetime.utcnow().strftime('%Y%m%d-%H%M%S')
+    task_id = f'test-fix-{ts}'
+    desc_parts = [f'{c["path"]} ({c["reason"]})' for c in failed_checks]
+    task = {
+        'id':          task_id,
+        'type':        'test_fix',
+        'priority':    'high',
+        'description': f'Fix {len(failed_checks)} failing check(s): {", ".join(desc_parts)}',
+        'created_at':  datetime.datetime.utcnow().isoformat() + 'Z',
+        'context': {
+            'failed_checks':    [{'path': c['path'], 'reason': c['reason']} for c in failed_checks],
+            'screenshot_paths': [c['screenshot'] for c in failed_checks if c.get('screenshot')],
+        },
+    }
+    (tasks_dir / f'{task_id}.json').write_text(json.dumps(task, indent=2))
+    return task_id
