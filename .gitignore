@@ -39,3 +39,8 @@ desktop.ini
 
 # Jupyter
 .ipynb_checkpoints/
+
+# .claudio ephemeral state (pending/ and active/ are not committed; done/, failed/, results/, agents/, archive/ are)
+.claudio/registry.json
+.claudio/tasks/*/pending/
+.claudio/tasks/*/active/

@@ -97,3 +97,52 @@ npm run lint     # ESLint
 - Follow root CLAUDE.md orchestration rules
 - Use `superpowers:test-driven-development` for all new features
 - Port 9000 is hardcoded — do not change without updating all references
+
+---
+
+### Claudio Agent Startup Checklist
+
+When starting as a Claudio project agent (opened by `scripts/spawn-agent.ps1`):
+
+1. **Register:** `pwsh D:/CLAUDIO/scripts/agent-checkin.ps1 -Project ClaudeTrader -Status active`
+2. **Read learnings journal:** Read `D:/CLAUDIO/.claudio/agents/ClaudeTrader/learnings.md` before any work.
+3. **Check tasks:** Scan `D:/CLAUDIO/.claudio/tasks/ClaudeTrader/pending/` — pick highest-priority task (high > normal > low).
+4. **If task found:**
+   - Move task JSON from `pending/` to `active/`
+   - Update registry: `agent-checkin.ps1 -Project ClaudeTrader -Status active -CurrentTask <id>`
+   - `pwsh D:/CLAUDIO/scripts/telegram-notify.ps1 "<b>ClaudeTrader</b> Starting: <title>"`
+   - For `feature`/`bugfix`/`maintenance` → create git worktree (see Git Worktree Pattern below)
+   - For `review`/`research` → work in project dir, write report to `D:/CLAUDIO/.claudio/results/ClaudeTrader/<id>.json`
+   - Write result JSON to `D:/CLAUDIO/.claudio/results/ClaudeTrader/<task-id>.json`
+   - Move task JSON from `active/` to `done/`
+   - **Append learnings:** Add non-obvious discoveries to `D:/CLAUDIO/.claudio/agents/ClaudeTrader/learnings.md`
+   - **Store in claude-mem:** Record key decisions via claude-mem MCP tools
+   - `pwsh D:/CLAUDIO/scripts/telegram-notify.ps1 "<b>ClaudeTrader</b> Done: <title> ✓"`
+   - `agent-checkin.ps1 -Project ClaudeTrader -Status idle -CompleteTask <id>`
+   - Run `/compact` to keep context lean
+5. **If no tasks:** `agent-checkin.ps1 -Project ClaudeTrader -Status idle` + send Telegram idle message
+6. **Poll:** Use `/loop 30s` skill, or await Queen prompt when work arrives
+7. **On failure:** Move task to `failed/` with error details → `telegram-notify.ps1 "<b>ClaudeTrader</b> ✗ Failed: <title>"` → escalate per Memory-First Rule in root CLAUDE.md
+8. **Session runs indefinitely.** Compaction + learnings journal + claude-mem preserve all knowledge.
+
+### Escalation from this agent
+
+Before escalating: (1) CLAUDE.md rules → (2) claude-mem search → (3) project docs.
+Only then: write to `failed/` with `"blocked": true` and send Telegram: `"<b>ClaudeTrader</b> needs decision: <question>"`
+
+### Git Worktree Pattern (feature/bugfix/maintenance tasks)
+
+```bash
+# From project directory D:/CLAUDIO/Projects/ClaudeTrader
+git worktree add "D:/CLAUDIO/.worktrees/ClaudeTrader/<task-id>" feature/<name>-$(date +%Y%m%d)
+cd "D:/CLAUDIO/.worktrees/ClaudeTrader/<task-id>"
+
+# ... implement, test, commit ...
+
+# Merge from the project directory — worktrees are locked to their branch
+cd "D:/CLAUDIO/Projects/ClaudeTrader"
+git merge --no-ff feature/<name>-<date>
+git push
+git worktree remove "D:/CLAUDIO/.worktrees/ClaudeTrader/<task-id>"
+git branch -d feature/<name>-<date>
+```
