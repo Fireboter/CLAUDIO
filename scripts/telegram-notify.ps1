@@ -1,6 +1,9 @@
 # telegram-notify.ps1 — Send a one-way message to the configured Telegram chat
-# Usage: pwsh scripts/telegram-notify.ps1 "*ClaudeTrader* Done: task-001 ✓"
+# Usage: pwsh scripts/telegram-notify.ps1 "<b>ClaudeTrader</b> Done: task-001 ✓"
 # Reads credentials from .env at repo root (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
+# Exit codes:
+#   0 — message sent, or network/API failure (non-fatal by design — must never block agent work)
+#   1 — configuration error (.env missing or credentials not set)
 
 param(
   [Parameter(Mandatory=$true)]
@@ -34,14 +37,20 @@ try {
   $body = @{
     chat_id    = $chatId
     text       = $Message
-    parse_mode = "Markdown"
+    parse_mode = "HTML"
   }
   $response = Invoke-RestMethod `
     -Uri "https://api.telegram.org/bot$token/sendMessage" `
     -Method Post `
     -Body ($body | ConvertTo-Json) `
-    -ContentType "application/json"
-  Write-Host "Telegram sent: $Message"
+    -ContentType "application/json" `
+    -TimeoutSec 10 `
+    -Verbose:$false
+  if ($response.ok) {
+    Write-Host "Telegram sent: $Message"
+  } else {
+    Write-Warning "Telegram API error: $($response.description)"
+  }
 } catch {
   Write-Warning "Telegram send failed: $($_.Exception.Message)"
   # Do not exit 1 — notification failure must never block agent work
