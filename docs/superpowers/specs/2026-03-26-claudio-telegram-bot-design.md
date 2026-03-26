@@ -111,7 +111,7 @@ Single file, three logical sections:
 - Define `CLAUDIO_ROOT = Path(__file__).parent.parent` (portable, no hardcoding)
 - Define `SCREENSHOTS_DIR = CLAUDIO_ROOT / ".claudio" / "screenshots"`
 - Define `SESSION_FILE = CLAUDIO_ROOT / ".claudio" / "telegram-session.json"`
-- Session timeout: 30 minutes
+- No session timeout — bot and conversation state persist indefinitely (PC is always on)
 
 **2. Conversation state**
 
@@ -120,7 +120,7 @@ In-memory state (not persisted between bot restarts):
 state = {
     "active": False,           # True while waiting for user reply
     "history": [],             # List of {"role": "user"|"assistant", "content": str}
-    "waiting_since": None,     # datetime | None — for timeout check
+    "waiting_since": None,     # datetime | None — informational only, no timeout enforced
     "processing": False,       # True while claude subprocess is running
 }
 ```
@@ -145,11 +145,7 @@ async def handle_message(update, context):
         # (queuing logic: append to pending_messages list)
         return
 
-    # Check timeout: if waiting >30min, auto-expire
-    if state["active"] and state["waiting_since"]:
-        if (datetime.now() - state["waiting_since"]).seconds > 1800:
-            state = reset_state()
-            await update.message.reply_text("⏰ Previous conversation timed out. Starting fresh.")
+    # No timeout — conversation state persists indefinitely until <<<DONE>>> or bot restart
 
     user_text = update.message.text
     await update.message.reply_text("⏳ Working on it...")
@@ -275,9 +271,9 @@ async def handle_screenshots(text: str, update, context) -> str:
     return text
 ```
 
-**8. Long-running task keepalive**
+**8. Long-running task behaviour**
 
-A background asyncio task sends "⏳ Still working..." every 5 minutes while `state["processing"]` is True.
+No keepalive messages. Silence until Claude produces output (question or final answer). The initial "⏳ Working on it..." is the only acknowledgment — after that, nothing until Claude is done or needs input.
 
 ---
 
@@ -373,13 +369,13 @@ Two additions to the root `CLAUDE.md`:
 | Claude subprocess crashes (non-zero exit) | Send stderr excerpt to Telegram, clear state |
 | Claude hangs >5 minutes | Kill process, "Timed out" message, clear state |
 | No output from Claude | Same as hang |
-| Long-running task (>5 min still processing) | Send "⏳ Still working..." every 5 min |
+| Long-running task | Silence until done — only "⏳ Working on it..." at the start |
 | Response >4096 chars | Split at paragraph boundaries, send as multiple messages |
 | `<<<SCREENSHOT:>>>` — file missing | Warning message, continue with text |
 | `<<<SCREENSHOT:>>>` — file >10MB | Send as document instead of photo |
 | Rapid messages while processing | Queue them, process after current task completes |
 | No `<<<WAITING>>>` or `<<<DONE>>>` marker | Treat as done — clear conversation state |
-| Session waiting >30 min with no reply | Auto-expire: next message starts a fresh conversation |
+| Session waiting with no reply | No timeout — conversation persists until you reply or bot restarts |
 | Bot restart while conversation active | State cleared; user re-sends instruction |
 
 ---
