@@ -188,7 +188,13 @@ def create_fix_task(project: str, failed_checks: list, tasks_dir: Path) -> str:
     tasks_dir.mkdir(parents=True, exist_ok=True)
     ts      = datetime.datetime.utcnow().strftime('%Y%m%d-%H%M%S')
     task_id = f'test-fix-{ts}'
-    desc_parts = [f'{c["path"]} ({c["reason"]})' for c in failed_checks]
+    def _label(c):
+        return c.get('path') or c.get('cmd', '?')
+
+    def _reason(c):
+        return c.get('reason') or c.get('output', '')
+
+    desc_parts = [f'{_label(c)} ({_reason(c)})' for c in failed_checks]
     task = {
         'id':          task_id,
         'type':        'test_fix',
@@ -196,7 +202,7 @@ def create_fix_task(project: str, failed_checks: list, tasks_dir: Path) -> str:
         'description': f'Fix {len(failed_checks)} failing check(s): {", ".join(desc_parts)}',
         'created_at':  datetime.datetime.utcnow().isoformat() + 'Z',
         'context': {
-            'failed_checks':    [{'path': c['path'], 'reason': c['reason']} for c in failed_checks],
+            'failed_checks':    [{'path': _label(c), 'reason': _reason(c)} for c in failed_checks],
             'screenshot_paths': [c['screenshot'] for c in failed_checks if c.get('screenshot')],
         },
     }

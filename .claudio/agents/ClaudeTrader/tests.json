@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "stack": "nextjs",
+  "base_url": "http://localhost:3000",
+  "startup": {
+    "cmd": "npm run dev",
+    "cwd": "Projects/ClaudeTrader",
+    "ready_timeout": 60
+  },
+  "health": [
+    { "cmd": "npm run build", "cwd": "Projects/ClaudeTrader" }
+  ],
+  "checks": [
+    { "path": "/",      "expect_status": 200, "expect_text": "ClaudeTrader", "screenshot": "home" },
+    { "path": "/login", "expect_status": 200, "screenshot": "login" }
+  ]
+}

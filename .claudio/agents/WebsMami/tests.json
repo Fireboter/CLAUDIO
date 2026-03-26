@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "stack": "php",
+  "base_url": "REPLACE_WITH_WEBSMAMI_URL",
+  "startup": null,
+  "health": [],
+  "checks": [
+    { "path": "/", "expect_status": 200, "screenshot": "home" }
+  ]
+}
