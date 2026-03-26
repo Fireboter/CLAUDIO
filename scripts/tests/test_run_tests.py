@@ -256,3 +256,51 @@ def test_create_fix_task_writes_json(tmp_path):
     assert len(task['context']['failed_checks']) == 2
     assert task['context']['failed_checks'][0]['path'] == '/dashboard'
     assert 'dash.png' in task['context']['screenshot_paths']
+
+
+# ──────────────────────────────────────────────
+# build_telegram_message
+# ──────────────────────────────────────────────
+
+def test_telegram_message_all_pass():
+    checks = [
+        {'path': '/',          'passed': True, 'reason': None},
+        {'path': '/dashboard', 'passed': True, 'reason': None},
+    ]
+    msg = run_tests.build_telegram_message('TestProject', checks, [], 14.0, None)
+    assert msg.startswith('✅')
+    assert 'TestProject' in msg
+    assert '2/2' in msg
+    assert '14s' in msg
+
+
+def test_telegram_message_with_failures():
+    checks = [
+        {'path': '/dashboard', 'passed': False, 'reason': "text 'Portfolio' not found"},
+        {'path': '/',          'passed': True,  'reason': None},
+    ]
+    msg = run_tests.build_telegram_message('TestProject', checks, [], 5.0, 'test-fix-123')
+    assert msg.startswith('🔴')
+    assert '1/2' in msg
+    assert '/dashboard' in msg
+    assert "text 'Portfolio' not found" in msg
+    assert 'test-fix-123' in msg
+
+
+def test_telegram_message_health_failure():
+    health = [{'cmd': 'npm run build', 'passed': False, 'reason': 'exit 1'}]
+    msg = run_tests.build_telegram_message('TestProject', [], health, 3.0, 'test-fix-456')
+    assert '🔴' in msg
+    assert 'test-fix-456' in msg
+
+
+# ──────────────────────────────────────────────
+# send_telegram
+# ──────────────────────────────────────────────
+
+def test_send_telegram_skips_when_no_credentials(monkeypatch, capsys):
+    monkeypatch.setattr(run_tests, 'TELEGRAM_TOKEN', '')
+    monkeypatch.setattr(run_tests, 'TELEGRAM_CHAT', '')
+    run_tests.send_telegram('hello', [])
+    out = capsys.readouterr().out.lower()
+    assert 'missing' in out or 'skip' in out

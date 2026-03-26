@@ -202,3 +202,56 @@ def create_fix_task(project: str, failed_checks: list, tasks_dir: Path) -> str:
     }
     (tasks_dir / f'{task_id}.json').write_text(json.dumps(task, indent=2))
     return task_id
+
+
+def build_telegram_message(
+    project: str,
+    check_results: list,
+    health_results: list,
+    elapsed: float,
+    task_id: str | None,
+) -> str:
+    """Return a human-readable Telegram message for pass or fail outcome."""
+    all_results = health_results + check_results
+    total    = len(all_results)
+    failed   = [r for r in all_results if not r['passed']]
+    n_failed = len(failed)
+
+    if n_failed == 0:
+        return f'✅ {project} — {total}/{total} checks passed ({round(elapsed)}s)'
+
+    lines = [f'🔴 {project} — {n_failed}/{total} checks FAILED', '']
+    for r in all_results:
+        mark   = '✗' if not r['passed'] else '✓'
+        path   = r.get('path') or r.get('cmd', '?')
+        reason = f' — {r["reason"]}' if r.get('reason') else ''
+        lines.append(f'{mark} {path}{reason}')
+
+    if task_id:
+        lines.extend(['', f'Fix task queued: {task_id}'])
+
+    return '\n'.join(lines)
+
+
+def send_telegram(message: str, screenshot_paths: list):
+    """Send Telegram message + photo attachments. Skips silently if credentials missing."""
+    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
+        print('[telegram] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID missing — skipping')
+        return
+
+    import asyncio
+    import telegram
+
+    async def _send():
+        bot = telegram.Bot(token=TELEGRAM_TOKEN)
+        await bot.send_message(chat_id=TELEGRAM_CHAT, text=message)
+        for path in screenshot_paths:
+            p = Path(path)
+            if p.exists():
+                with open(p, 'rb') as f:
+                    await bot.send_photo(chat_id=TELEGRAM_CHAT, photo=f)
+
+    try:
+        asyncio.run(_send())
+    except Exception as e:
+        print(f'[telegram] send failed: {e}')
