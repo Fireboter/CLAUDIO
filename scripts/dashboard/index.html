@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claudio Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>CLAUDIO</h1>
+    <div class="header-right">
+      <span id="last-updated">Not yet updated</span>
+      <span id="status-dot" class="dot disconnected"></span>
+    </div>
+  </header>
+
+  <div id="offline-banner" style="display:none">
+    Dashboard server offline — run <code>pwsh scripts/start-dashboard.ps1</code>
+  </div>
+
+  <main>
+    <section>
+      <h2>Agents</h2>
+      <div id="agent-cards" class="agent-grid"></div>
+    </section>
+
+    <section>
+      <h2>Task Queues</h2>
+      <table id="task-table">
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Pending</th>
+            <th>Active</th>
+            <th>Done</th>
+            <th>Failed</th>
+          </tr>
+        </thead>
+        <tbody id="task-table-body"></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Recent Completions</h2>
+      <ul id="completions-list"></ul>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal-overlay" style="display:none">
+    <div id="modal">
+      <div id="modal-header">
+        <div>
+          <span id="modal-title"></span>
+          <span id="modal-status"></span>
+        </div>
+        <button id="modal-close" onclick="closeModal()">&#x2715;</button>
+      </div>
+      <div id="modal-tabs">
+        <button class="tab-btn" data-tab="config">Config</button>
+        <button class="tab-btn" data-tab="learnings">Learnings</button>
+        <button class="tab-btn" data-tab="claude-md">CLAUDE.md</button>
+        <button class="tab-btn" data-tab="tasks">Tasks</button>
+      </div>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
