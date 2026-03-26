@@ -1,0 +1,10 @@
+{
+  "project": "ClaudeSEO",
+  "branch_prefix": "feature",
+  "base_branch": "main",
+  "polling_interval_seconds": 30,
+  "auto_merge": false,
+  "auto_push": false,
+  "require_tests_pass": false,
+  "compact_after_each_task": true
+}

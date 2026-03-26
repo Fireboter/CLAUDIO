@@ -1,0 +1,10 @@
+{
+  "project": "ClaudeTrader",
+  "branch_prefix": "feature",
+  "base_branch": "main",
+  "polling_interval_seconds": 30,
+  "auto_merge": true,
+  "auto_push": true,
+  "require_tests_pass": true,
+  "compact_after_each_task": true
+}
