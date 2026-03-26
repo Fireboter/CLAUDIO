@@ -67,6 +67,11 @@
             "type": "command",
             "command": "cmd /c node %CLAUDE_PROJECT_DIR%/.claude/helpers/auto-memory-hook.mjs import",
             "timeout": 8000
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"%CLAUDE_PROJECT_DIR%/scripts/ensure-telegram-bot.ps1\"",
+            "timeout": 10000
           }
         ]
       }
