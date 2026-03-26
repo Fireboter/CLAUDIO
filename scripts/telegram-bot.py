@@ -28,8 +28,9 @@ REGISTRY_FILE = CLAUDIO_ROOT / ".claudio" / "registry.json"
 
 load_dotenv(CLAUDIO_ROOT / ".env")
 
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+TELEGRAM_BOT_TOKEN   = os.getenv("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID     = os.getenv("TELEGRAM_CHAT_ID", "")
+TELEGRAM_THREAD_CLAUDIO = int(os.getenv("TELEGRAM_THREAD_CLAUDIO", "0")) or None
 
 if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
     print("ERROR: TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set in .env", file=sys.stderr)
@@ -180,6 +181,7 @@ MAX_PHOTO_BYTES = 10 * 1024 * 1024  # 10 MB Telegram limit for photos
 
 async def handle_screenshots(text: str, update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     """Send each <<<SCREENSHOT: path>>> as a Telegram photo/document, remove markers from text."""
+    thread_id = getattr(update.message, 'message_thread_id', None)
     for match in SCREENSHOT_RE.finditer(text):
         path = Path(match.group(1).strip())
         if path.exists():
@@ -187,16 +189,15 @@ async def handle_screenshots(text: str, update: Update, context: ContextTypes.DE
                 file_size = path.stat().st_size
                 with open(path, "rb") as f:
                     if file_size > MAX_PHOTO_BYTES:
-                        await context.bot.send_document(
-                            chat_id=update.effective_chat.id,
-                            document=f,
-                            filename=path.name,
-                        )
+                        kwargs = {"chat_id": update.effective_chat.id, "document": f, "filename": path.name}
+                        if thread_id:
+                            kwargs["message_thread_id"] = thread_id
+                        await context.bot.send_document(**kwargs)
                     else:
-                        await context.bot.send_photo(
-                            chat_id=update.effective_chat.id,
-                            photo=f,
-                        )
+                        kwargs = {"chat_id": update.effective_chat.id, "photo": f}
+                        if thread_id:
+                            kwargs["message_thread_id"] = thread_id
+                        await context.bot.send_photo(**kwargs)
             except Exception as e:
                 await update.message.reply_text(f"⚠️ Screenshot found but failed to send: {e}")
         else:
@@ -299,6 +300,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Security: only accept messages from the configured chat
     if str(update.effective_chat.id) != TELEGRAM_CHAT_ID:
         return
+
+    # In a forum group: only process commands sent in the Claudio topic thread
+    if TELEGRAM_THREAD_CLAUDIO:
+        incoming_thread = getattr(update.message, 'message_thread_id', None)
+        if incoming_thread != TELEGRAM_THREAD_CLAUDIO:
+            return  # message is in an agent output thread — ignore
 
     if update.message is None or update.message.text is None:
         return

@@ -23,6 +23,13 @@ load_dotenv(CLAUDIO_ROOT / '.env')
 TELEGRAM_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_CHAT  = os.environ.get('TELEGRAM_CHAT_ID', '')
 
+# Per-agent topic thread IDs (Forum Group routing)
+TELEGRAM_THREADS = {
+    'ClaudeTrader': os.environ.get('TELEGRAM_THREAD_CLAUDETRADER', ''),
+    'WebsMami':     os.environ.get('TELEGRAM_THREAD_WEBSMAMI', ''),
+    'ClaudeSEO':    os.environ.get('TELEGRAM_THREAD_CLAUDESEO', ''),
+}
+
 
 def load_config(project: str, claudio_root: Path | None = None) -> dict | None:
     """Load .claudio/agents/{project}/tests.json. Returns None if missing."""
@@ -239,8 +246,8 @@ def build_telegram_message(
     return '\n'.join(lines)
 
 
-def send_telegram(message: str, screenshot_paths: list):
-    """Send Telegram message + photo attachments. Skips silently if credentials missing."""
+def send_telegram(message: str, screenshot_paths: list, project: str | None = None):
+    """Send Telegram message + photos to the project's topic thread (or main chat)."""
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
         print('[telegram] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID missing — skipping')
         return
@@ -248,14 +255,23 @@ def send_telegram(message: str, screenshot_paths: list):
     import asyncio
     import telegram
 
+    thread_str = TELEGRAM_THREADS.get(project or '', '') if project else ''
+    thread_id  = int(thread_str) if thread_str else None
+
     async def _send():
-        bot = telegram.Bot(token=TELEGRAM_TOKEN)
-        await bot.send_message(chat_id=TELEGRAM_CHAT, text=message)
+        bot    = telegram.Bot(token=TELEGRAM_TOKEN)
+        kwargs = {'chat_id': TELEGRAM_CHAT, 'text': message}
+        if thread_id:
+            kwargs['message_thread_id'] = thread_id
+        await bot.send_message(**kwargs)
         for path in screenshot_paths:
             p = Path(path)
             if p.exists():
                 with open(p, 'rb') as f:
-                    await bot.send_photo(chat_id=TELEGRAM_CHAT, photo=f)
+                    photo_kwargs = {'chat_id': TELEGRAM_CHAT, 'photo': f}
+                    if thread_id:
+                        photo_kwargs['message_thread_id'] = thread_id
+                    await bot.send_photo(**photo_kwargs)
 
     try:
         asyncio.run(_send())
@@ -326,7 +342,7 @@ def run_project(project: str) -> bool | None:
 
     message         = build_telegram_message(project, check_results, health_results, elapsed, task_id)
     all_screenshots = [r['screenshot'] for r in health_results + check_results if r.get('screenshot')]
-    send_telegram(message, all_screenshots)
+    send_telegram(message, all_screenshots, project=project)
 
     passed = not bool(all_failed)
     print(f'[{project}] {"PASS" if passed else "FAIL"} ({round(elapsed)}s)')

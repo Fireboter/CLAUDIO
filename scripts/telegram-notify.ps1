@@ -7,7 +7,8 @@
 
 param(
   [Parameter(Mandatory=$true)]
-  [string]$Message
+  [string]$Message,
+  [string]$Agent = ''   # optional: ClaudeTrader | WebsMami | ClaudeSEO | Claudio
 )
 
 $claudioRoot = Split-Path $PSScriptRoot -Parent
@@ -33,12 +34,16 @@ if (-not $token -or -not $chatId) {
   exit 1
 }
 
+$threadEnvKey = if ($Agent) { "TELEGRAM_THREAD_$($Agent.ToUpper())" } else { '' }
+$threadId = if ($threadEnvKey) { [System.Environment]::GetEnvironmentVariable($threadEnvKey, 'Process') } else { '' }
+
 try {
   $body = @{
     chat_id    = $chatId
     text       = $Message
     parse_mode = "HTML"
   }
+  if ($threadId) { $body['message_thread_id'] = [int]$threadId }
   $response = Invoke-RestMethod `
     -Uri "https://api.telegram.org/bot$token/sendMessage" `
     -Method Post `
