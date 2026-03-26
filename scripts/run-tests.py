@@ -255,3 +255,103 @@ def send_telegram(message: str, screenshot_paths: list):
         asyncio.run(_send())
     except Exception as e:
         print(f'[telegram] send failed: {e}')
+
+
+def run_project(project: str) -> bool | None:
+    """Orchestrate a full test run for one project. Returns True/False/None (skipped)."""
+    config = load_config(project)
+    if config is None:
+        print(f'[{project}] no tests.json — skipping')
+        return None
+    if not config.get('enabled', True):
+        print(f'[{project}] disabled — skipping')
+        return None
+
+    base_url = config['base_url']
+    if 'REPLACE_WITH_' in base_url:
+        print(f'[{project}] base_url is placeholder — skipping')
+        return None
+
+    start_time     = time.time()
+    health_results = []
+    check_results  = []
+    server_proc    = None
+
+    try:
+        health_results = run_health_checks(config.get('health', []), CLAUDIO_ROOT)
+        health_failed  = [r for r in health_results if not r['passed']]
+
+        if health_failed:
+            print(f'[{project}] health checks failed — skipping browser checks')
+        else:
+            if config.get('startup'):
+                server_proc = start_server(
+                    config['startup'], CLAUDIO_ROOT, config.get('stack'), base_url
+                )
+            check_results = run_browser_checks(
+                base_url, config.get('checks', []), project, SCREENSHOTS_DIR
+            )
+
+    except Exception as e:
+        print(f'[{project}] error: {e}')
+        for check in config.get('checks', []):
+            stem = check.get('screenshot', 'error')
+            check_results.append({
+                'path':       check['path'],
+                'passed':     False,
+                'reason':     str(e),
+                'screenshot': str(SCREENSHOTS_DIR / f'test-{project}-{stem}.png'),
+            })
+
+    finally:
+        stop_server(server_proc)
+
+    elapsed     = time.time() - start_time
+    result_path = write_result(project, health_results, check_results, elapsed, RESULTS_DIR)
+    print(f'[{project}] result written to {result_path}')
+
+    all_failed = [r for r in health_results + check_results if not r['passed']]
+
+    task_id = None
+    if all_failed:
+        pending_dir = TASKS_DIR / project / 'pending'
+        task_id     = create_fix_task(project, all_failed, pending_dir)
+        print(f'[{project}] fix task queued: {task_id}')
+
+    message         = build_telegram_message(project, check_results, health_results, elapsed, task_id)
+    all_screenshots = [r['screenshot'] for r in health_results + check_results if r.get('screenshot')]
+    send_telegram(message, all_screenshots)
+
+    passed = not bool(all_failed)
+    print(f'[{project}] {"PASS" if passed else "FAIL"} ({round(elapsed)}s)')
+    return passed
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Claudio test runner')
+    group  = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--project', help='Run tests for one project')
+    group.add_argument('--all', action='store_true', dest='run_all',
+                       help='Run tests for all projects that have a tests.json')
+    args = parser.parse_args()
+
+    agents_dir = CLAUDIO_ROOT / '.claudio' / 'agents'
+    if args.run_all:
+        projects = [
+            d.name for d in agents_dir.iterdir()
+            if d.is_dir() and (d / 'tests.json').exists()
+        ]
+    else:
+        projects = [args.project]
+
+    results      = {proj: run_project(proj) for proj in sorted(projects)}
+    failed_projs = [p for p, ok in results.items() if ok is False]
+
+    if failed_projs:
+        print(f'\nFAILED: {", ".join(failed_projs)}')
+        sys.exit(1)
+    print('\nAll tests passed (or skipped).')
+
+
+if __name__ == '__main__':
+    main()

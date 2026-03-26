@@ -304,3 +304,70 @@ def test_send_telegram_skips_when_no_credentials(monkeypatch, capsys):
     run_tests.send_telegram('hello', [])
     out = capsys.readouterr().out.lower()
     assert 'missing' in out or 'skip' in out
+
+
+# ──────────────────────────────────────────────
+# run_project (orchestration)
+# ──────────────────────────────────────────────
+
+def test_run_project_no_config(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(run_tests, 'CLAUDIO_ROOT', tmp_path)
+    result = run_tests.run_project('MissingProject')
+    assert result is None
+    assert 'no tests.json' in capsys.readouterr().out
+
+
+def test_run_project_disabled(tmp_path, monkeypatch):
+    monkeypatch.setattr(run_tests, 'CLAUDIO_ROOT', tmp_path)
+    config_dir = tmp_path / '.claudio' / 'agents' / 'DisabledProj'
+    config_dir.mkdir(parents=True)
+    (config_dir / 'tests.json').write_text(json.dumps({
+        'enabled': False, 'stack': 'php',
+        'base_url': 'http://example.com',
+        'startup': None, 'health': [], 'checks': [],
+    }))
+    assert run_tests.run_project('DisabledProj') is None
+
+
+def test_run_project_placeholder_url(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(run_tests, 'CLAUDIO_ROOT', tmp_path)
+    config_dir = tmp_path / '.claudio' / 'agents' / 'PlaceholderProj'
+    config_dir.mkdir(parents=True)
+    (config_dir / 'tests.json').write_text(json.dumps({
+        'enabled': True, 'stack': 'php',
+        'base_url': 'REPLACE_WITH_URL',
+        'startup': None, 'health': [], 'checks': [],
+    }))
+    assert run_tests.run_project('PlaceholderProj') is None
+    assert 'placeholder' in capsys.readouterr().out.lower()
+
+
+def test_run_project_all_pass(local_server, tmp_path, monkeypatch):
+    monkeypatch.setattr(run_tests, 'CLAUDIO_ROOT',    tmp_path)
+    monkeypatch.setattr(run_tests, 'SCREENSHOTS_DIR', tmp_path / 'screenshots')
+    monkeypatch.setattr(run_tests, 'RESULTS_DIR',     tmp_path / 'results')
+    monkeypatch.setattr(run_tests, 'TASKS_DIR',       tmp_path / 'tasks')
+    monkeypatch.setattr(run_tests, 'TELEGRAM_TOKEN',  '')   # disable Telegram
+
+    config_dir = tmp_path / '.claudio' / 'agents' / 'LiveProj'
+    config_dir.mkdir(parents=True)
+    (config_dir / 'tests.json').write_text(json.dumps({
+        'enabled': True, 'stack': 'php',
+        'base_url': local_server,
+        'startup': None, 'health': [],
+        'checks': [
+            {'path': '/', 'expect_status': 200,
+             'expect_text': 'TestApp Hello', 'screenshot': 'home'}
+        ],
+    }))
+
+    result = run_tests.run_project('LiveProj')
+    assert result is True
+
+    result_files = list((tmp_path / 'results').glob('*.json'))
+    assert len(result_files) == 1
+    assert json.loads(result_files[0].read_text())['passed'] is True
+
+    # No fix task queued when all pass
+    pending_dir = tmp_path / 'tasks' / 'LiveProj' / 'pending'
+    assert not pending_dir.exists() or not list(pending_dir.glob('*.json'))
