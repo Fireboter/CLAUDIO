@@ -6,5 +6,6 @@
   "auto_merge": true,
   "auto_push": true,
   "require_tests_pass": false,
-  "compact_after_each_task": true
+  "compact_after_each_task": true,
+  "max_recent_completions": 5
 }
