@@ -32,6 +32,10 @@ WINDOW_HINTS = ['CLAUDIO', 'claudio', 'D:\\CLAUDIO']
 # Minimum idle time (seconds) before injecting — avoids interrupting active typing
 IDLE_THRESHOLD = 3.0
 
+# Seconds to wait between terminal spawn attempts (avoid spawning floods)
+SPAWN_COOLDOWN = 45.0
+CLAUDIO_DIR = str(CLAUDIO_ROOT)
+
 
 def log(msg: str):
     ts = datetime.now(timezone.utc).strftime('%H:%M:%S')
@@ -74,42 +78,63 @@ def read_pending() -> list:
 
 def find_claudio_window():
     """
-    Return (hwnd, title) of the Windows Terminal hosting this Claudio session.
+    Return (hwnd, title) of the Windows Terminal hosting a live Claudio/Claude session.
 
     Strategy:
-    1. Find a running claude.exe process with CLAUDIO in its cwd/cmdline.
-    2. Walk the process tree up to WindowsTerminal.exe — get that PID.
-    3. Find the hwnd owned by that WindowsTerminal PID.
-    4. Fallback: any visible WindowsTerminal.exe window.
+    1. Find a process where name OR cmdline contains 'claude' AND
+       (cwd OR cmdline) contains 'CLAUDIO'.
+       Checks both because Windows may deny cwd access, and claude can be node-hosted.
+    2. Walk the process tree up to WindowsTerminal.exe.
+    3. Return the hwnd of that WT window.
+
+    Returns None if no live Claude session is found — caller must spawn a new terminal.
     """
     try:
         import win32gui
         import win32process
         import psutil
 
-        # --- Step 1 & 2: find WindowsTerminal PID via claude.exe process tree ---
         target_wt_pid = None
+
         for proc in psutil.process_iter(['pid', 'name', 'cwd', 'cmdline']):
             try:
-                if proc.info['name'] and 'claude' in proc.info['name'].lower():
-                    cwd = proc.info['cwd'] or ''
-                    if 'CLAUDIO' in cwd.upper():
-                        # Walk up to WindowsTerminal
-                        p = proc
-                        while p:
+                name    = (proc.info.get('name') or '').lower()
+                cwd     = (proc.info.get('cwd') or '').upper()
+                cmdline = ' '.join(proc.info.get('cmdline') or []).upper()
+
+                # Only match the actual Claude Code process (node or claude binary),
+                # NOT launcher processes like cmd.exe / powershell that have 'claude'
+                # in their arguments but aren't the REPL itself.
+                # cmd.exe running "wt ... claude ..." would otherwise be matched,
+                # causing injection into a bare shell that executes the text as commands.
+                _is_launcher = any(x in name for x in ('cmd', 'powershell', 'wt', 'python', 'sh'))
+                is_claude = (not _is_launcher) and (
+                    'claude' in name
+                    or ('node' in name and 'claude' in cmdline.lower())
+                )
+                in_claudio  = 'CLAUDIO' in cwd or 'CLAUDIO' in cmdline
+
+                if is_claude and in_claudio:
+                    # Walk up the process tree to find WindowsTerminal
+                    p = proc
+                    while p:
+                        try:
                             if 'windowsterminal' in p.name().lower():
                                 target_wt_pid = p.pid
                                 break
-                            try:
-                                p = p.parent()
-                            except Exception:
-                                break
+                            p = p.parent()
+                        except Exception:
+                            break
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 pass
+
             if target_wt_pid:
                 break
 
-        # --- Step 3: get hwnd for that PID ---
+        if not target_wt_pid:
+            return None  # No live Claude session — caller should spawn a new terminal
+
+        # --- Find the hwnd owned by that WindowsTerminal PID ---
         found = []
 
         def cb(hwnd, _):
@@ -120,21 +145,14 @@ def find_claudio_window():
                 return
             try:
                 _, pid = win32process.GetWindowThreadProcessId(hwnd)
-                if target_wt_pid and pid == target_wt_pid:
-                    found.append((hwnd, title, True))
-                elif 'windowsterminal' in (psutil.Process(pid).name() or '').lower():
-                    found.append((hwnd, title, False))
+                if pid == target_wt_pid:
+                    found.append((hwnd, title))
             except Exception:
                 pass
 
         win32gui.EnumWindows(cb, None)
-
-        # Prefer exact PID match, then any WT window
-        exact = [x for x in found if x[2]]
-        if exact:
-            return (exact[0][0], exact[0][1])
         if found:
-            return (found[0][0], found[0][1])
+            return found[0]
 
     except ImportError:
         pass
@@ -187,9 +205,10 @@ def inject_trigger(hwnd, title: str, messages: list):
         win32gui.SetForegroundWindow(hwnd)
         time.sleep(0.5)
 
-        # Clear any partial input on the current line
-        pyautogui.hotkey('ctrl', 'c')
-        time.sleep(0.3)
+        # Press Escape to dismiss any autocomplete/menu — safe alternative to ctrl+c
+        # (ctrl+c sends SIGINT which can kill Claude Code entirely)
+        pyautogui.press('escape')
+        time.sleep(0.2)
 
         # Use clipboard for reliable Unicode pasting
         import win32clipboard
@@ -217,22 +236,65 @@ def write_pid():
 
 
 def already_running() -> bool:
-    if not PID_FILE.exists():
-        return False
+    """
+    Check if ANY other telegram-daemon instance is running by scanning all processes.
+    More robust than PID-file-only check: avoids race conditions when multiple
+    sessions start simultaneously, each spawning a daemon.
+    """
+    my_pid = os.getpid()
     try:
-        pid = int(PID_FILE.read_text().strip())
-        if pid == os.getpid():
-            return False
-        # Check if that PID is still a telegram-daemon process
         result = subprocess.run(
             ['powershell', '-NoProfile', '-Command',
-             f'(Get-Process -Id {pid} -ErrorAction SilentlyContinue).CommandLine'],
-            capture_output=True, text=True, timeout=5
+             'Get-CimInstance Win32_Process'
+             ' | Where-Object {$_.Name -like "python*" -and $_.CommandLine -like "*telegram-daemon.py*"}'
+             ' | Select-Object ProcessId | ConvertTo-Json -Compress'],
+            capture_output=True, text=True, timeout=10
         )
-        if 'telegram-daemon' in result.stdout:
-            return True
+        raw = result.stdout.strip()
+        if raw:
+            data = json.loads(raw)
+            if isinstance(data, dict):
+                data = [data]
+            other = [int(d['ProcessId']) for d in data
+                     if d.get('ProcessId') and int(d['ProcessId']) != my_pid]
+            if other:
+                return True
     except Exception:
         pass
+    return False
+
+
+def spawn_claudio_terminal():
+    """
+    Open a new Windows Terminal tab in D:\\CLAUDIO running claude --dangerously-skip-permissions
+    directly (no cmd wrapper). When Claude exits, the tab closes automatically — preventing a
+    bare shell from being mistaken for a live Claudio session on the next poll cycle.
+    """
+    # Run claude directly; WT closes the tab when the process exits
+    cmd = [
+        'wt', '-w', '0', 'new-tab',
+        '--startingDirectory', CLAUDIO_DIR,
+        '--', 'claude', '--dangerously-skip-permissions'
+    ]
+    try:
+        subprocess.Popen(cmd, creationflags=subprocess.CREATE_NO_WINDOW)
+        log(f"Spawned new Windows Terminal tab in {CLAUDIO_DIR}")
+        return True
+    except FileNotFoundError:
+        pass
+    except Exception as e:
+        log(f"spawn_claudio_terminal failed: {e}")
+        return False
+
+    # wt not in PATH — try well-known location
+    try:
+        wt_path = os.path.expandvars(r'%LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe')
+        cmd[0] = wt_path
+        subprocess.Popen(cmd, creationflags=subprocess.CREATE_NO_WINDOW)
+        log(f"Spawned new Windows Terminal tab (via full path) in {CLAUDIO_DIR}")
+        return True
+    except Exception as e2:
+        log(f"spawn_claudio_terminal fallback failed: {e2}")
     return False
 
 
@@ -246,6 +308,8 @@ def main():
     log(f"Inbox: {INBOX_FILE}")
 
     last_inject = 0.0
+    last_spawn  = 0.0
+    SPAWN_LOAD_WAIT = 12.0  # seconds to wait after spawning before trying to inject
 
     while True:
         try:
@@ -253,8 +317,10 @@ def main():
             if pending:
                 idle = get_last_input_idle()
                 now = time.time()
-                # Don't inject more often than every 5 seconds
-                if idle >= IDLE_THRESHOLD and (now - last_inject) >= 5.0:
+                # Don't inject more often than every 5 seconds,
+                # and don't inject right after a spawn (Claude needs time to load)
+                recently_spawned = (now - last_spawn) < SPAWN_LOAD_WAIT
+                if idle >= IDLE_THRESHOLD and (now - last_inject) >= 5.0 and not recently_spawned:
                     win = find_claudio_window()
                     if win:
                         hwnd, title = win
@@ -268,7 +334,15 @@ def main():
                             # The hook will surface remaining ones via TELEGRAM_CONTEXT.
                             _mark_injected(pending)
                     else:
-                        log("Claudio window not found — messages will be picked up on next prompt")
+                        # No live Claude session — spawn one if cooldown allows.
+                        # The newly spawned session will pick up pending messages
+                        # via the CLAUDE.md startup inbox check.
+                        if (now - last_spawn) >= SPAWN_COOLDOWN:
+                            log("No active Claudio terminal — spawning a new one")
+                            if spawn_claudio_terminal():
+                                last_spawn = now
+                        else:
+                            log("Claudio window not found — messages queued, will surface on next prompt")
                 elif idle < IDLE_THRESHOLD:
                     log(f"User active ({idle:.1f}s idle) — waiting before inject")
         except Exception as e:
