@@ -59,3 +59,31 @@ def test_load_config_returns_dict(tmp_path):
     result = run_tests.load_config('TestProject', claudio_root=tmp_path)
     assert result['enabled'] is True
     assert result['base_url'] == 'http://example.com'
+
+
+# ──────────────────────────────────────────────
+# run_health_checks
+# ──────────────────────────────────────────────
+
+def test_run_health_checks_empty(tmp_path):
+    assert run_tests.run_health_checks([], tmp_path) == []
+
+
+def test_run_health_checks_pass(tmp_path):
+    health = [{'cmd': 'python -c "import sys; sys.exit(0)"', 'cwd': '.'}]
+    results = run_tests.run_health_checks(health, tmp_path)
+    assert len(results) == 1
+    assert results[0]['passed'] is True
+    assert results[0]['cmd'] == health[0]['cmd']
+
+
+def test_run_health_checks_fail(tmp_path):
+    health = [{'cmd': 'python -c "import sys; sys.exit(1)"', 'cwd': '.'}]
+    results = run_tests.run_health_checks(health, tmp_path)
+    assert results[0]['passed'] is False
+
+
+def test_run_health_checks_captures_output(tmp_path):
+    health = [{'cmd': 'python -c "print(\'hello health\')"', 'cwd': '.'}]
+    results = run_tests.run_health_checks(health, tmp_path)
+    assert 'hello health' in results[0]['output']

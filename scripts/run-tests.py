@@ -32,3 +32,19 @@ def load_config(project: str, claudio_root: Path | None = None) -> dict | None:
         return None
     with open(path) as f:
         return json.load(f)
+
+
+def run_health_checks(health: list, claudio_root: Path) -> list[dict]:
+    """Run shell commands that must exit 0. Returns list of {cmd, passed, output}."""
+    results = []
+    for h in health:
+        cwd = claudio_root / h.get('cwd', '.')
+        proc = subprocess.run(
+            h['cmd'], shell=True, cwd=cwd, capture_output=True, text=True
+        )
+        results.append({
+            'cmd':    h['cmd'],
+            'passed': proc.returncode == 0,
+            'output': proc.stdout + proc.stderr,
+        })
+    return results
