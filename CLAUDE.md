@@ -36,8 +36,31 @@ Run these steps at the start of EVERY session:
    done
    ```
 
-5. **Brief** — if interactive session: summarize pending tasks, open branches, last actions
-   — if autonomous (user away): run `npx ruflo issues list` to check queued escalations
+5. **Read agent registry**
+   ```bash
+   cat D:/CLAUDIO/.claudio/registry.json
+   ```
+   Report: which agents are `active` / `idle` / `offline` and current tasks.
+
+6. **Check pending work**
+   ```bash
+   ls D:/CLAUDIO/.claudio/tasks/*/pending/
+   ```
+   Report: pending task count per project.
+
+7. **Surface completed work since last session**
+   ```bash
+   # List result files newer than 24 hours
+   find D:/CLAUDIO/.claudio/results -name "*.json" -newer D:/CLAUDIO/.claudio/registry.json
+   ```
+   Summarize: what each agent accomplished since last session (read the JSON files).
+
+8. **Brief** — tell the user:
+   - Which agents are active/idle/offline
+   - What tasks are pending (and which project)
+   - What was completed since last session
+   - Any failed tasks needing attention
+   - Example: "ClaudeTrader: active on task-001. WebsMami: idle. ClaudeSEO: offline. 1 pending task (WebsMami). 3 completed yesterday."
 
 ---
 
