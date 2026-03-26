@@ -79,10 +79,13 @@ D:\CLAUDIO\
     agents\
       ClaudeTrader\
         config.json                  # Agent config — TRACKED
+        learnings.md                 # Accumulated project insights — TRACKED (never deleted)
       WebsMami\
         config.json
+        learnings.md
       ClaudeSEO\
         config.json
+        learnings.md
   scripts\
     spawn-agent.ps1                  # Open Windows Terminal for a project
     queue-task.ps1                   # Queen helper: write a task file
@@ -208,8 +211,8 @@ Registry stores only `recent_completions` (last 5) — full history is in `tasks
   "auto_merge": true,
   "auto_push": true,
   "require_tests_pass": true,
-  "max_tasks_before_restart": 5,
-  "context_compact_after_each_task": true
+  "compact_after_each_task": true,
+  "learnings_journal": "D:/CLAUDIO/.claudio/agents/ClaudeTrader/learnings.md"
 }
 ```
 
@@ -262,20 +265,23 @@ This section is appended to the `## Claudio — Project Context` block of each p
 When starting as a Claudio project agent (opened by spawn-agent.ps1):
 
 1. **Register:** Write `status: "active"` and current timestamp to `D:/CLAUDIO/.claudio/registry.json`
-2. **Check tasks:** Scan `D:/CLAUDIO/.claudio/tasks/<Project>/pending/` — pick highest-priority task
-3. **If task found:**
+2. **Read learnings journal:** Read `D:/CLAUDIO/.claudio/agents/<Project>/learnings.md` — this contains hard-won project insights from past tasks. Do this before starting any work.
+3. **Check tasks:** Scan `D:/CLAUDIO/.claudio/tasks/<Project>/pending/` — pick highest-priority task
+4. **If task found:**
    - Move task JSON to `active/`
    - Send Telegram: "Starting: <task title>"
    - For `feature`/`bugfix`: create git worktree → branch → code → test → merge → push
    - For `review`/`research`: work in project dir, write report to `results/`
    - Write result JSON to `D:/CLAUDIO/.claudio/results/<Project>/`
    - Move task to `done/`
+   - **Write learnings:** Append any non-obvious discoveries to `learnings.md` (codebase quirks, patterns, anti-patterns, environment facts not in any doc)
+   - **Record to claude-mem:** Store key decisions or discoveries via claude-mem MCP tools
    - Send Telegram: "Done: <task title> ✓"
-   - Run `/compact` to summarize context
-   - Check `max_tasks_before_restart` in agent config — if reached, notify Queen and exit
-4. **If no tasks:** Write `status: "idle"` to registry, send Telegram: "<Project> agent idle"
-5. **Poll:** Use the `/loop 30s` skill to check for new tasks periodically while session is open. Alternatively, Queen sends a "check tasks" prompt when new work arrives — the agent need not loop if Queen is active.
-6. **On failure:** Move task to `failed/` with error details, send Telegram alert, escalate per Memory-First Rule
+   - Run `/compact` to summarize context (keeps window lean without losing continuity)
+5. **If no tasks:** Write `status: "idle"` to registry, send Telegram: "<Project> agent idle"
+6. **Poll:** Use the `/loop 30s` skill to check for new tasks periodically while session is open. Alternatively, Queen sends a "check tasks" prompt when new work arrives — the agent need not loop if Queen is active.
+7. **On failure:** Move task to `failed/` with error details, send Telegram alert, escalate per Memory-First Rule
+8. **Session continues indefinitely.** No scheduled restart. Compaction + learnings journal + claude-mem preserve all knowledge across many tasks.
 
 ### Escalation trigger (from this project agent)
 Before escalating to Queen: exhausted (1) CLAUDE.md rules (2) claude-mem search (3) project docs.
@@ -334,23 +340,53 @@ git branch -d feature/<name>-<date>
 
 ## Context Compaction Strategy
 
-Long-running agent sessions accumulate context. Two-layer defense:
+Long-running agent sessions accumulate context. The goal is to keep the context window lean **without losing hard-won working knowledge**. Session restarts are avoided — they discard conversational working memory (codebase quirks, non-obvious patterns, environment facts) that aren't written anywhere else.
 
-**Layer 1 — Per-task compaction:**
-After completing each task, the agent runs `/compact` (Claude Code's built-in compaction). This summarizes the conversation so far. The summary is stored in claude-mem for cross-session retrieval.
+### What survives session boundaries (never lost)
+- CLAUDE.md — always reloaded fresh
+- All files on disk, git history
+- claude-mem — cross-session semantic memory
+- `.claudio/results/` — completed task summaries
+- `.claudio/agents/<Project>/learnings.md` — accumulated project insights (see below)
 
-**Layer 2 — Session restart limit:**
-`max_tasks_before_restart` in `agents/<Project>/config.json` (default: 5). After reaching the limit:
-- Agent writes a "session closing" result entry
-- Agent sends Telegram: "<Project> agent restarting for context hygiene"
-- Agent exits (terminal stays open, waiting for Queen to re-spawn if needed)
-- Queen re-spawns a fresh session, which loads CLAUDE.md clean with no accumulated context
+### What dies with a restart (the real cost)
+Conversational working memory: codebase quirks discovered mid-task, subtle patterns, environment facts not yet documented. This is why session restart is **not used** as a compaction strategy.
 
-**Registry compaction:**
+### Layer 1 — Per-task compaction (`/compact`)
+After completing each task, the agent runs `/compact`. This replaces the detailed conversation with a compact summary (~2-5k tokens), keeping the window lean. Because the summary includes what was done and decided, the agent retains functional continuity across many tasks without bloat.
+
+### Layer 2 — Learnings Journal
+After each task, the agent writes any non-obvious discoveries to:
+```
+.claudio/agents/<Project>/learnings.md
+```
+
+This file is **tracked in git** and read at agent startup (step 1.5 in the startup checklist). It externalizes working memory so it survives compaction and session gaps.
+
+**What goes in the learnings journal:**
+- Codebase quirks (e.g., "auth middleware requires X header, not documented anywhere")
+- Non-obvious patterns to follow (e.g., "all DB queries use the QueryBuilder wrapper, never raw SQL")
+- Anti-patterns discovered (e.g., "don't use Y component — deprecated, causes Z")
+- Environment peculiarities (e.g., "npm run dev fails if port 9000 is in use — check first")
+- Decisions that weren't obvious from code/docs
+
+**What does NOT go in the learnings journal:** anything already in CLAUDE.md, task results, or git history.
+
+### Layer 3 — Claude-mem recording
+After each significant decision or discovery, the agent stores a record via `mcp__plugin_claude-mem_mcp-search__` tools. Fresh sessions or Queen can semantic-search these.
+
+### Emergency exit (edge case only)
+If the context window becomes genuinely unusable despite compaction (very rare — large file reads on multiple tasks):
+- Agent writes current state + remaining work to the learnings journal
+- Agent writes a `partial` result entry for the current task
+- Agent sends Telegram: "<Project> session exiting — context limits reached, state saved to learnings journal"
+- Agent exits. Queen re-spawns when ready; fresh session reads learnings journal and continues.
+
+This is **not scheduled** — only happens if the agent detects degraded reasoning.
+
+### Registry and file compaction
 `recent_completions` keeps last 5 entries. Full history is in `tasks/done/` and `results/`.
-
-**Task archive:**
-`scripts/archive-tasks.ps1` moves `tasks/done/` files older than 30 days to `tasks/archive/`. Run by Queen once a week (can be added to session startup).
+`scripts/archive-tasks.ps1` moves `tasks/done/` files older than 30 days to `tasks/archive/`. Run by Queen once a week.
 
 ---
 
@@ -408,6 +444,7 @@ This is additive. The project CLAUDE.md sections and spawn scripts remain unchan
 - [ ] Create `.claudio/` directory structure with all subdirs + placeholder `.gitkeep` files
 - [ ] Write `registry.json` initial state (all agents offline)
 - [ ] Write `agents/ClaudeTrader/config.json`, `agents/WebsMami/config.json`, `agents/ClaudeSEO/config.json`
+- [ ] Create `agents/ClaudeTrader/learnings.md`, `agents/WebsMami/learnings.md`, `agents/ClaudeSEO/learnings.md` (empty initial files with header)
 - [ ] Write `scripts/spawn-agent.ps1`
 - [ ] Write `scripts/queue-task.ps1`
 - [ ] Write `scripts/telegram-notify.ps1`
@@ -430,8 +467,11 @@ This is additive. The project CLAUDE.md sections and spawn scripts remain unchan
 | Create | `.claudio/` full directory tree |
 | Create | `.claudio/registry.json` |
 | Create | `.claudio/agents/ClaudeTrader/config.json` |
+| Create | `.claudio/agents/ClaudeTrader/learnings.md` |
 | Create | `.claudio/agents/WebsMami/config.json` |
+| Create | `.claudio/agents/WebsMami/learnings.md` |
 | Create | `.claudio/agents/ClaudeSEO/config.json` |
+| Create | `.claudio/agents/ClaudeSEO/learnings.md` |
 | Create | `scripts/spawn-agent.ps1` |
 | Create | `scripts/queue-task.ps1` |
 | Create | `scripts/telegram-notify.ps1` |
