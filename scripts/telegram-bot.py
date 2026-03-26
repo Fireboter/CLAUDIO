@@ -10,7 +10,7 @@ import json
 import os
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -83,7 +83,7 @@ def write_session_file():
             "waiting_since": state["waiting_since"].isoformat() if state["waiting_since"] else None,
             "processing": state["processing"],
             "turn_count": len(state["history"]),
-            "last_updated": datetime.utcnow().isoformat() + "Z",
+            "last_updated": datetime.now(timezone.utc).isoformat(),
         }
         with open(SESSION_FILE, "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2)
@@ -265,7 +265,7 @@ async def dispatch_output(raw_output: str, update: Update, context: ContextTypes
 
     if waiting:
         state["active"] = True
-        state["waiting_since"] = datetime.utcnow()
+        state["waiting_since"] = datetime.now(timezone.utc)
     else:
         # <<<DONE>>> or no marker — clear conversation
         state.update(reset_state())
