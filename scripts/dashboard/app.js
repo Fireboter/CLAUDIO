@@ -93,7 +93,7 @@ function renderAgentCards() {
           <div><span class="label">Beat:</span>   ${escapeHtml(beat)}</div>
           <div><span class="label">Done today:</span> ${escapeHtml(String(done))}</div>
         </div>
-        <button class="btn-detail" onclick="openModal('${escapeHtml(name)}')">View Details &#x25b8;</button>
+        <button class="btn-detail" onclick="openModal(${JSON.stringify(name)})">View Details &#x25b8;</button>
       </div>`;
   }).join('');
 }
@@ -219,27 +219,45 @@ function loadTab(tab, agentName) {
   const content = document.getElementById('modal-content');
   content.innerHTML = '<p class="loading">Loading&#x2026;</p>';
 
+  const expectedTab = tab;  // capture for stale-fetch check
+
   if (tab === 'config') {
     fetchJSON(`/.claudio/agents/${agentName}/config.json`)
       .then(data => {
+        if (activeTab !== expectedTab) return;
         const rows = Object.entries(data).map(([k, v]) =>
           `<tr><td class="key">${escapeHtml(k)}</td><td>${escapeHtml(JSON.stringify(v))}</td></tr>`
         ).join('');
         content.innerHTML = `<table class="kv-table"><tbody>${rows}</tbody></table>`;
       })
-      .catch(() => { content.innerHTML = '<p class="empty">(not found)</p>'; });
+      .catch(() => {
+        if (activeTab !== expectedTab) return;
+        content.innerHTML = '<p class="empty">(not found)</p>';
+      });
 
   } else if (tab === 'learnings') {
     fetchText(`/.claudio/agents/${agentName}/learnings.md`)
-      .then(text => { content.innerHTML = `<pre>${escapeHtml(text)}</pre>`; })
-      .catch(() => { content.innerHTML = '<p class="empty">(not found)</p>'; });
+      .then(text => {
+        if (activeTab !== expectedTab) return;
+        content.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
+      })
+      .catch(() => {
+        if (activeTab !== expectedTab) return;
+        content.innerHTML = '<p class="empty">(not found)</p>';
+      });
 
   } else if (tab === 'claude-md') {
     const path = CLAUDE_MD_PATHS[agentName];
     if (!path) { content.innerHTML = '<p class="empty">(path not configured)</p>'; return; }
     fetchText(`/${path}`)
-      .then(text => { content.innerHTML = `<pre>${escapeHtml(text)}</pre>`; })
-      .catch(() => { content.innerHTML = '<p class="empty">(not found)</p>'; });
+      .then(text => {
+        if (activeTab !== expectedTab) return;
+        content.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
+      })
+      .catch(() => {
+        if (activeTab !== expectedTab) return;
+        content.innerHTML = '<p class="empty">(not found)</p>';
+      });
 
   } else if (tab === 'tasks') {
     renderTasksTab(agentName);
