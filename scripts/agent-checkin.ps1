@@ -52,7 +52,7 @@ if (Test-Path $registryPath) {
   }
 }
 
-$now    = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ssZ')
+$now    = ([System.DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ'))
 $agent  = $reg.agents.$Project
 
 $agent.status         = $Status
@@ -66,7 +66,7 @@ if ($PSBoundParameters.ContainsKey('CurrentBranch')) {
 }
 
 # Handle task completion: prepend task ID to recent_completions, keep last $maxRecent
-if ($CompleteTask) {
+if ($PSBoundParameters.ContainsKey('CompleteTask') -and $CompleteTask) {
   $keepCount = $maxRecent - 1
   $list = @($CompleteTask) + @($agent.recent_completions | Select-Object -First $keepCount)
   $agent.recent_completions    = $list
