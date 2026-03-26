@@ -78,3 +78,30 @@ $reg.updated_at = $now
 $reg | ConvertTo-Json -Depth 5 | Set-Content $registryPath -Encoding UTF8
 
 Write-Host "[$Project] status=$Status heartbeat=$now"
+
+# Write tasks-summary.json for all agents (consumed by the dashboard)
+$taskSummaryPath = Join-Path $claudioRoot ".claudio\tasks-summary.json"
+$summary = [PSCustomObject]@{ updated_at = $now; agents = [PSCustomObject]@{} }
+foreach ($agentName in @('ClaudeTrader', 'WebsMami', 'ClaudeSEO')) {
+  $tasksBase  = Join-Path $claudioRoot ".claudio\tasks\$agentName"
+  $agentEntry = [PSCustomObject]@{
+    counts = [PSCustomObject]@{}
+    tasks  = [PSCustomObject]@{}
+  }
+  foreach ($s in @('pending', 'active', 'done', 'failed')) {
+    $dir      = Join-Path $tasksBase $s
+    $taskList = @()
+    if (Test-Path $dir) {
+      Get-ChildItem $dir -Filter '*.json' |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 20 |
+        ForEach-Object {
+          try { $taskList += (Get-Content $_.FullName -Raw | ConvertFrom-Json) } catch {}
+        }
+    }
+    $agentEntry.counts | Add-Member -NotePropertyName $s -NotePropertyValue $taskList.Count -Force
+    $agentEntry.tasks  | Add-Member -NotePropertyName $s -NotePropertyValue $taskList       -Force
+  }
+  $summary.agents | Add-Member -NotePropertyName $agentName -NotePropertyValue $agentEntry -Force
+}
+$summary | ConvertTo-Json -Depth 8 | Set-Content $taskSummaryPath -Encoding UTF8
