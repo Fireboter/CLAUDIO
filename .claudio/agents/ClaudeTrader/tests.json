@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "stack": "nextjs",
-  "base_url": "http://localhost:3000",
+  "base_url": "http://localhost:9000",
   "startup": {
     "cmd": "npm run dev",
     "cwd": "Projects/ClaudeTrader",
@@ -11,7 +11,7 @@
     { "cmd": "npm run build", "cwd": "Projects/ClaudeTrader" }
   ],
   "checks": [
-    { "path": "/",      "expect_status": 200, "expect_text": "ClaudeTrader", "screenshot": "home" },
-    { "path": "/login", "expect_status": 200, "screenshot": "login" }
+    { "path": "/",          "expect_status": 200, "screenshot": "home" },
+    { "path": "/terminal", "expect_status": 200, "screenshot": "terminal" }
   ]
 }

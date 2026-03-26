@@ -91,9 +91,10 @@ def start_server(
 ) -> subprocess.Popen:
     """Start local dev server; block until ready. Returns Popen handle."""
     cwd  = claudio_root / startup['cwd']
+    # Merge stderr into stdout so Next.js startup messages (written to stderr) are readable
     proc = subprocess.Popen(
         startup['cmd'], shell=True, cwd=cwd,
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
     )
     _wait_for_ready(base_url, proc, startup.get('ready_timeout', 30), stack)
     return proc
