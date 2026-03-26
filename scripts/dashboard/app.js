@@ -113,10 +113,10 @@ function renderTaskTable() {
     const fClass = (typeof f === 'number' && f > 0) ? 'count-failed' : '';
     return `<tr>
       <td>${escapeHtml(name)}</td>
-      <td>${p}</td>
-      <td>${a}</td>
-      <td class="${dClass}">${d}</td>
-      <td class="${fClass}">${f}</td>
+      <td>${escapeHtml(String(p))}</td>
+      <td>${escapeHtml(String(a))}</td>
+      <td class="${dClass}">${escapeHtml(String(d))}</td>
+      <td class="${fClass}">${escapeHtml(String(f))}</td>
     </tr>`;
   }).join('');
 }
