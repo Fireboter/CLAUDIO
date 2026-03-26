@@ -1,10 +1,17 @@
 {
   "enabled": true,
   "stack": "php",
-  "base_url": "REPLACE_WITH_CLAUDESEO_URL",
-  "startup": null,
-  "health": [],
+  "base_url": "http://localhost:8000",
+  "startup": {
+    "cmd": "php -S localhost:8000 router.php",
+    "cwd": "Work (Rechtecheck)/ClaudeSEO/public",
+    "ready_timeout": 15
+  },
+  "health": [
+    { "cmd": "php -l public/index.php", "cwd": "Work (Rechtecheck)/ClaudeSEO" }
+  ],
   "checks": [
-    { "path": "/", "expect_status": 200, "screenshot": "home" }
+    { "path": "/",                                 "expect_status": 200, "screenshot": "claudeseo-home" },
+    { "path": "/experten-service/unsere-services", "expect_status": 200, "screenshot": "claudeseo-services" }
   ]
 }

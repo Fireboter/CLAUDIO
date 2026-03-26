@@ -124,7 +124,7 @@ def run_browser_checks(
         page = browser.new_page()
 
         for check in checks:
-            url             = base_url.rstrip('/') + check['path']
+            url             = (check.get('base_url') or base_url).rstrip('/') + check['path']
             stem            = check['screenshot']
             screenshot_path = screenshots_dir / f'test-{project}-{stem}.png'
 
