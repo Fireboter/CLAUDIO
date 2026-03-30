@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rechtecheck.de/sitemap.xml

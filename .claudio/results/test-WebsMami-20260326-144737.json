@@ -1,0 +1,141 @@
+{
+  "project": "WebsMami",
+  "timestamp": "2026-03-26T14:47:37.404347Z",
+  "elapsed_seconds": 48.5,
+  "health": [],
+  "checks": [
+    {
+      "path": "/",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-home.png"
+    },
+    {
+      "path": "/shop",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-shop.png"
+    },
+    {
+      "path": "/cart",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-cart.png"
+    },
+    {
+      "path": "/pages/contact",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-contact.png"
+    },
+    {
+      "path": "/admin/login",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-admin-login.png"
+    },
+    {
+      "path": "/admin/",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-admin-dashboard.png"
+    },
+    {
+      "path": "/admin/products",
+      "passed": false,
+      "reason": "Page.goto: Timeout 15000ms exceeded.\nCall log:\n  - navigating to \"https://kokett.ad/admin/products\", waiting until \"networkidle\"\n",
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-admin-products.png"
+    },
+    {
+      "path": "/admin/orders",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-admin-orders.png"
+    },
+    {
+      "path": "/admin/collections",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-admin-collections.png"
+    },
+    {
+      "path": "/admin/contacts",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-admin-contacts.png"
+    },
+    {
+      "path": "/admin/settings",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-kokett-admin-settings.png"
+    },
+    {
+      "path": "/",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-home.png"
+    },
+    {
+      "path": "/shop",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-shop.png"
+    },
+    {
+      "path": "/cart",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-cart.png"
+    },
+    {
+      "path": "/pages/contact",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-contact.png"
+    },
+    {
+      "path": "/admin/login",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-admin-login.png"
+    },
+    {
+      "path": "/admin/",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-admin-dashboard.png"
+    },
+    {
+      "path": "/admin/products",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-admin-products.png"
+    },
+    {
+      "path": "/admin/orders",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-admin-orders.png"
+    },
+    {
+      "path": "/admin/collections",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-admin-collections.png"
+    },
+    {
+      "path": "/admin/contacts",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-admin-contacts.png"
+    },
+    {
+      "path": "/admin/settings",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-WebsMami-bawywear-admin-settings.png"
+    }
+  ],
+  "passed": false
+}

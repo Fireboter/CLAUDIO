@@ -174,6 +174,39 @@ def get_last_input_idle() -> float:
         return 999.0
 
 
+def _force_foreground(hwnd):
+    """
+    Bring hwnd to foreground from a background process.
+    Uses the AttachThreadInput trick, which is the standard Windows workaround
+    for SetForegroundWindow's focus-steal restriction.
+    Returns True on success.
+    """
+    import ctypes
+    import win32process
+    import win32gui
+
+    SW_RESTORE = 9
+    ctypes.windll.user32.ShowWindow(hwnd, SW_RESTORE)
+    time.sleep(0.1)
+
+    # Get thread IDs
+    fg_hwnd = ctypes.windll.user32.GetForegroundWindow()
+    fg_thread, _ = win32process.GetWindowThreadProcessId(fg_hwnd) if fg_hwnd else (0, 0)
+    target_thread, _ = win32process.GetWindowThreadProcessId(hwnd)
+
+    attached = False
+    if fg_thread and fg_thread != target_thread:
+        attached = bool(ctypes.windll.user32.AttachThreadInput(fg_thread, target_thread, True))
+
+    ctypes.windll.user32.BringWindowToTop(hwnd)
+    result = win32gui.SetForegroundWindow(hwnd)
+
+    if attached:
+        ctypes.windll.user32.AttachThreadInput(fg_thread, target_thread, False)
+
+    return result is not None
+
+
 def inject_trigger(hwnd, title: str, messages: list):
     """
     Bring the window to foreground, type the Telegram message as a prompt,
@@ -196,13 +229,14 @@ def inject_trigger(hwnd, title: str, messages: list):
         log(f"Injecting into window: {title!r}")
         log(f"Prompt: {prompt[:80]!r}")
 
-        # Restore if minimized
-        SW_RESTORE = 9
-        ctypes.windll.user32.ShowWindow(hwnd, SW_RESTORE)
-        time.sleep(0.15)
+        # Bring to foreground using AttachThreadInput trick
+        if not _force_foreground(hwnd):
+            log("SetForegroundWindow failed — retrying with keybd_event unlock")
+            # Alternative: simulate Alt key press to unlock foreground lock
+            ctypes.windll.user32.keybd_event(0x12, 0, 0, 0)       # VK_MENU down
+            ctypes.windll.user32.keybd_event(0x12, 0, 0x0002, 0)   # VK_MENU up (KEYEVENTF_KEYUP)
+            win32gui.SetForegroundWindow(hwnd)
 
-        # Bring to foreground
-        win32gui.SetForegroundWindow(hwnd)
         time.sleep(0.5)
 
         # Press Escape to dismiss any autocomplete/menu — safe alternative to ctrl+c

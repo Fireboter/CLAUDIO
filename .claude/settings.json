@@ -20,6 +20,17 @@
             "timeout": 5000
           }
         ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd /c python \"%CLAUDE_PROJECT_DIR%/scripts/telegram-ask-hook.py\"",
+            "timeout": 8000,
+            "statusMessage": "Forwarding question to Telegram..."
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -51,6 +62,15 @@
             "type": "command",
             "command": "cmd /c node %CLAUDE_PROJECT_DIR%/.claude/helpers/hook-handler.cjs route",
             "timeout": 10000
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd /c python \"%CLAUDE_PROJECT_DIR%/scripts/telegram-forward-hook.py\"",
+            "timeout": 30000
           }
         ]
       }
@@ -92,8 +112,19 @@
         "hooks": [
           {
             "type": "command",
+            "command": "cmd /c echo stop-hook-fired >> \"D:\\CLAUDIO\\.claudio\\stop-debug.txt\" 2>&1",
+            "timeout": 3000
+          },
+          {
+            "type": "command",
             "command": "cmd /c node %CLAUDE_PROJECT_DIR%/.claude/helpers/auto-memory-hook.mjs sync",
             "timeout": 10000
+          },
+          {
+            "type": "command",
+            "command": "cmd /c python \"%CLAUDE_PROJECT_DIR%/scripts/telegram-stop-hook.py\"",
+            "timeout": 20000,
+            "statusMessage": "Forwarding to Telegram..."
           }
         ]
       }
@@ -167,15 +198,18 @@
     "command": "sh -c 'exec node \"${CLAUDE_PROJECT_DIR:-.}/.claude/helpers/statusline.cjs\"'"
   },
   "permissions": {
+    "defaultMode": "bypassPermissions",
     "allow": [
-      "Bash(npx @claude-flow*)",
-      "Bash(npx claude-flow*)",
-      "Bash(node .claude/*)",
-      "mcp__claude-flow__:*"
-    ],
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)"
+      "Bash(*)",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)",
+      "MultiEdit(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "LS(*)",
+      "Agent(*)",
+      "mcp__*"
     ]
   },
   "attribution": {

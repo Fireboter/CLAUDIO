@@ -1,0 +1,260 @@
+{
+  "messages": [
+    {
+      "id": "cb9f7b5a",
+      "text": "Where/how can I see this window on myd ektop?",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T15:36:56.214736+00:00",
+      "processed": true
+    },
+    {
+      "id": "506c0d34",
+      "text": "DAEMON TEST: Can you see this message? Reply with your current task.",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T15:48:31.851621+00:00",
+      "processed": true
+    },
+    {
+      "id": "590e7b78",
+      "text": "REALTIME TEST: Message injected at Thu Mar 26 16:50:34     2026. Does this appear in the terminal?",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T15:50:34.514076+00:00",
+      "processed": true
+    },
+    {
+      "id": "a6292950",
+      "text": "INJECTION TEST v2: If you see this in your terminal, the daemon is working!",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T15:52:39.893898+00:00",
+      "processed": true
+    },
+    {
+      "id": "2f58838a",
+      "text": "This is a test, run the Claudio localhost on the desktop browser",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T15:59:55.043695+00:00",
+      "processed": true
+    },
+    {
+      "id": "3438263a",
+      "text": "Show me if my Kokett.ad is working",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T16:02:19.597853+00:00",
+      "processed": true
+    },
+    {
+      "id": "944f775a",
+      "text": "Show me the Kokett.ad page is working",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T16:17:13.587053+00:00",
+      "processed": true
+    },
+    {
+      "id": "9f5f8c8f",
+      "text": "Can you run a Backtest on my ClaudeTrader and send me a picture of the results",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T16:25:16.946785+00:00",
+      "processed": true
+    },
+    {
+      "id": "fcb0d9bd",
+      "text": "Found it. migrate_db_bawywear.py was run and copied all kokett's products/collections into the bawywear database. The bawywear config is already correct — it's a data cleanup needed.\n\nPlan: Create and run a cleanup script that:\n- Connects ONLY to bbdd.bawywear.com (bawywear DB, never touches kokett)\n- Deletes: CollectionGroup, Collection, Product, ProductImage, ProductVariant, ProductNovedades, Order, OrderItem, CartReservation, DiscountCode, NewsletterSubscriber, ContactSubmission\n- Keeps: SiteSettings (page settings) intact\n\nThis will permanently delete from the bawywear remote DB. Kokett is completely untouched.\n\nwrite and run the cleanup script",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T16:38:11.822801+00:00",
+      "processed": true
+    },
+    {
+      "id": "03efd259",
+      "text": "y",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:03:47.166154+00:00",
+      "processed": true
+    },
+    {
+      "id": "493a7953",
+      "text": "y",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:04:15.835511+00:00",
+      "processed": true
+    },
+    {
+      "id": "9a2f607b",
+      "text": "lets test the approval hook!",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:07:27.699166+00:00",
+      "processed": true
+    },
+    {
+      "id": "465253b7",
+      "text": "y",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:13:31.969749+00:00",
+      "processed": true
+    },
+    {
+      "id": "ff4717d3",
+      "text": "Hello this is a test",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:14:23.012022+00:00",
+      "processed": true
+    },
+    {
+      "id": "df160cda",
+      "text": "Run Claudio terminal",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:16:25.348576+00:00",
+      "processed": true
+    },
+    {
+      "id": "0d6996ff",
+      "text": "y",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:28:29.781532+00:00",
+      "processed": true
+    },
+    {
+      "id": "1f8fa9a4",
+      "text": "y",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:30:21.597887+00:00",
+      "processed": true
+    },
+    {
+      "id": "63afe28d",
+      "text": "y",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:30:37.787096+00:00",
+      "processed": true
+    },
+    {
+      "id": "1b39e98c",
+      "text": "y",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T17:31:17.742141+00:00",
+      "processed": true
+    },
+    {
+      "id": "9190b4a9",
+      "text": "run claude terminal and send a picture",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T20:25:34.520293+00:00",
+      "processed": true
+    },
+    {
+      "id": "7af5f20c",
+      "text": "Claude terminal ran, but you did not inject the prompt into it",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T20:28:02.672829+00:00",
+      "processed": true
+    },
+    {
+      "id": "95b1ee70",
+      "text": "Y",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T21:08:12.882576+00:00",
+      "processed": true
+    },
+    {
+      "id": "d0d1db5a",
+      "text": "I want to change our allowing system, I just want you to run with all permissions. Believe in you😘",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T21:10:07.732592+00:00",
+      "processed": true
+    },
+    {
+      "id": "b2d3d5bd",
+      "text": "Install these repos: https://github.com/transilienceai/communitytools , https://github.com/anthropics/claude-code/blob/main/plugins/plugin-dev/skills/mcp-integration/SKILL.md?plain=1\n  to my clade code",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T21:31:11.497404+00:00",
+      "processed": true
+    },
+    {
+      "id": "c759c428",
+      "text": "I want to create new project, set the directoy up with everything necessary. It will be a Website Hosted on Hetzner, it will shown an own Landing Page of Our \"Company called PaGen showing how we effecciently and professionaly we do websites and mainten them (with a ticket service for new features in case any customer wants sth new)\", and we will have an admin Page with websites templates for any kind of companies that dont have an website yet on internet: for example online shops, restaurants,...   (We will work on templates one by one on the future). This Templates wont be be only Home Page it wil be everything, DB, all kind of Directories, Email setup, Payment setup (in case needed and customer friendly). Use as example for an online shop sth like Kokett (which could be almost a template and designs for each template for an online shop and also has lots of settings). The Idea is to send the customer link to our subdirectory using its example domain as url slug (which should be available as domain) and the template with working buttons,... and access to the admin page where he can setup products. The Idea is I want you running a terminal for a bot which will look on Google Maps for companies without Website, send them a template, and in case they like it and buy it they get automatically an domain with their domain,db,everything set up.",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-26T22:08:47.233797+00:00",
+      "processed": true
+    },
+    {
+      "id": "b76edac6",
+      "text": "run terminal",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-27T02:29:09.149703+00:00",
+      "processed": true
+    },
+    {
+      "id": "dd0aaead",
+      "text": "I want to start brainstorming subsystem 2",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-27T13:12:03.583592+00:00",
+      "processed": true
+    },
+    {
+      "id": "ee9d61a3",
+      "text": "Use visual companion",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-27T13:33:03.158226+00:00",
+      "processed": true
+    },
+    {
+      "id": "33d40968",
+      "text": "Lest test it, write me down all Subsystems we had for the PaGen Project, We were going to plan nr 2, the Templates",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-27T14:11:59.407293+00:00",
+      "processed": true
+    },
+    {
+      "id": "6f58b2bf",
+      "text": "Lest test it, write me down all Subsystems we had for the PaGen Project, We were going to plan nr 2, the Templates",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-27T14:59:35.922188+00:00",
+      "processed": true
+    },
+    {
+      "id": "847c5272",
+      "text": "Run terminal",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-27T15:14:17.441951+00:00",
+      "processed": true
+    },
+    {
+      "id": "f5b3e23b",
+      "text": "Lest test it, write me down all Subsystems we had for the PaGen Project, We were going to plan nr 2, the Templates",
+      "from": "Adrian",
+      "thread_id": 13,
+      "timestamp": "2026-03-27T15:15:49.870581+00:00",
+      "processed": true
+    }
+  ]
+}

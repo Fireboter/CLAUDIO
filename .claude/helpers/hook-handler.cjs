@@ -99,9 +99,30 @@ const handlers = {
             m.processed = true;
           });
           fs.writeFileSync(inboxPath, JSON.stringify(inbox, null, 2));
+          // Write flag so Stop hook knows this turn was Telegram-triggered
+          try {
+            const flagPath = path.join(helpersDir, '..', '..', '.claudio', 'telegram-session.json');
+            fs.writeFileSync(flagPath, JSON.stringify({
+              session_id: hookInput.session_id || '',
+              timestamp: new Date().toISOString()
+            }));
+          } catch (e) { /* non-fatal */ }
         }
       }
     } catch (e) { /* inbox read errors are non-fatal */ }
+
+    // Always write current-session.json so Stop hook can find session_id
+    // even when Stop hook stdin doesn't carry it (Windows quirk).
+    try {
+      if (hookInput.session_id) {
+        const curSessionPath = path.join(helpersDir, '..', '..', '.claudio', 'current-session.json');
+        fs.writeFileSync(curSessionPath, JSON.stringify({
+          session_id: hookInput.session_id,
+          transcript_path: hookInput.transcript_path || '',
+          timestamp: new Date().toISOString()
+        }));
+      }
+    } catch (e) { /* non-fatal */ }
     // ─────────────────────────────────────────────────────────────────────
 
     // Inject ranked intelligence context before routing

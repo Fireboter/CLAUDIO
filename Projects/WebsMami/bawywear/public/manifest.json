@@ -1,0 +1,11 @@
+{
+  "name": "Bawywear",
+  "short_name": "Bawywear",
+  "theme_color": "#FFB800",
+  "background_color": "#FFB800",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    { "src": "/assets/icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

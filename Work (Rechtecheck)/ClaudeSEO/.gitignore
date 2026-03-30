@@ -1,0 +1,5 @@
+vendor/
+config/api_keys.php
+config/gsc_credentials.json
+logs/*.log
+*.lock

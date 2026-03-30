@@ -1,0 +1,27 @@
+{
+  "project": "ClaudeTrader",
+  "timestamp": "2026-03-26T14:19:25.259860Z",
+  "elapsed_seconds": 21.8,
+  "health": [
+    {
+      "cmd": "npm run build",
+      "passed": true,
+      "output": "\n> claude-trader@0.1.0 build\n> next build --webpack\n\n   \u00e2\u2013\u00b2 Next.js 16.0.4 (webpack)\n   - Environments: .env.local\n\n   Creating an optimized production build ...\n \u00e2\u0153\u201c Compiled successfully in 1984.9ms\n   Running TypeScript ...\n   Collecting page data using 15 workers ...\n   Generating static pages using 15 workers (0/4) ...\n   Generating static pages using 15 workers (1/4) \n   Generating static pages using 15 workers (2/4) \n   Generating static pages using 15 workers (3/4) \n \u00e2\u0153\u201c Generating static pages using 15 workers (4/4) in 828.6ms\n   Finalizing page optimization ...\n   Collecting build traces ...\n\nRoute (app)\n\u00e2\u201d\u0152 \u00e2\u2014\u2039 /\n\u00e2\u201d\u0153 \u00e2\u2014\u2039 /_not-found\n\u00e2\u201d\u201d \u00e2\u2014\u2039 /terminal\n\n\n\u00e2\u2014\u2039  (Static)  prerendered as static content\n\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`\n"
+    }
+  ],
+  "checks": [
+    {
+      "path": "/",
+      "passed": false,
+      "reason": "Server process exited unexpectedly",
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-ClaudeTrader-home.png"
+    },
+    {
+      "path": "/login",
+      "passed": false,
+      "reason": "Server process exited unexpectedly",
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-ClaudeTrader-login.png"
+    }
+  ],
+  "passed": false
+}

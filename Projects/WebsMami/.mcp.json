@@ -1,0 +1,46 @@
+{
+  "mcpServers": {
+    "claude-flow": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@claude-flow/cli@latest",
+        "mcp",
+        "start"
+      ],
+      "env": {
+        "npm_config_update_notifier": "false",
+        "CLAUDE_FLOW_MODE": "v3",
+        "CLAUDE_FLOW_HOOKS_ENABLED": "true",
+        "CLAUDE_FLOW_TOPOLOGY": "mesh",
+        "CLAUDE_FLOW_MAX_AGENTS": "5",
+        "CLAUDE_FLOW_MEMORY_BACKEND": "memory"
+      },
+      "autoStart": false
+    },
+    "figma": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "figma-developer-mcp", "--stdio"],
+      "env": {
+        "FIGMA_API_KEY": "figd_j9Nnd4GjCjULPxszPP-Cz9lQHuoMDdctjh_QOq94"
+      }
+    },
+    "playwright": {
+      "command": "cmd",
+      "args": ["/c", "npx", "@playwright/mcp@latest"]
+    },
+    "browsermcp": {
+      "command": "cmd",
+      "args": ["/c", "npx", "@browsermcp/mcp@latest"]
+    },
+    "fetch": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-fetch"]
+    },
+    "openpencil": {
+      "url": "http://localhost:3100/mcp"
+    }
+  }
+}

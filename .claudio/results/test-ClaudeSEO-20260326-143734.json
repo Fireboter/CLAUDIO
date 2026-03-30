@@ -1,0 +1,27 @@
+{
+  "project": "ClaudeSEO",
+  "timestamp": "2026-03-26T14:37:34.278032Z",
+  "elapsed_seconds": 4.2,
+  "health": [
+    {
+      "cmd": "php -l public/index.php",
+      "passed": true,
+      "output": "No syntax errors detected in public/index.php\n"
+    }
+  ],
+  "checks": [
+    {
+      "path": "/",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-ClaudeSEO-claudeseo-home.png"
+    },
+    {
+      "path": "/experten-service/unsere-services",
+      "passed": true,
+      "reason": null,
+      "screenshot": "D:\\CLAUDIO\\.claudio\\screenshots\\test-ClaudeSEO-claudeseo-services.png"
+    }
+  ],
+  "passed": true
+}

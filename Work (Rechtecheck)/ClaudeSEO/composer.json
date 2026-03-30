@@ -1,0 +1,10 @@
+{
+    "name": "rechtecheck/claudeseo",
+    "description": "Automated legal SEO page generator for Rechtecheck.de",
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "classmap": ["lib/"]
+    }
+}

@@ -1,0 +1,414 @@
+id,name,description,parent_id
+1,Anwaltshaftung,,0
+2,Architektenrecht,,0
+3,Asylrecht,,0
+4,Baurecht,,0
+5,Bankrecht,,0
+6,Beamtenrecht,,0
+7,Behindertenrecht,,0
+8,Betäubungsmittelstrafrecht,,0
+9,Bußgeld,,0
+10,Compliance,,0
+11,Diesel,,0
+12,Erbrecht,,0
+13,Fluggastrecht,,0
+14,Gesellschaftsrecht,,0
+15,IT-Recht,,0
+16,Inkassorecht,,0
+17,Insolvenzrecht,,0
+18,Markenrecht,,0
+19,Medizinrecht,,0
+20,Mietrecht,,0
+21,Migrationsrecht,,0
+22,Nachbarrecht,,0
+23,Patentrecht,,0
+24,Pflegerecht,,0
+25,Reiserecht,,0
+26,Schadensersatzrecht,,0
+27,Scheidungsrecht,,0
+28,Schmerzensgeldrecht,,0
+29,Schulrecht,,0
+30,Sozialrecht,,0
+31,Steuerrecht,,0
+32,Steuerstrafrecht,,0
+33,Strafrecht,,0
+34,Unternehmenskrise,,0
+35,Unternehmensrecht,,0
+36,Urheberrecht,,0
+37,Versicherungsrecht,,0
+38,Vertragsrecht,,0
+39,Verwaltungsrecht,,0
+40,Wirtschaftsrecht,,0
+41,Fristversäumnis,"Sie haben eine gesetzliche Frist verpasst, weil Ihr Anwalt Sie nicht rechtzeitig informiert oder gehandelt hat. Dies könnte zum Verlust Ihrer Rechtsansprüche oder zu anderen rechtlichen Nachteilen führen, weshalb Sie möglicherweise Anspruch auf Schadensersatz haben.",1
+42,"Falsche Rechtsberatung","Ihr Anwalt hat Ihnen eine falsche Rechtsberatung gegeben, die zu finanziellen Verlusten oder anderen negativen Konsequenzen geführt hat. In diesem Fall könnten Sie Schadensersatz für die erlittenen Verluste geltend machen, da die Beratung nicht dem erwarteten Fachwissen entsprach.",1
+43,Dokumentationsfehler,"Ihr Anwalt hat wichtige Dokumente fehlerhaft erstellt oder eingereicht, was zu rechtlichen Nachteilen für Sie führte. Eine unzureichende Dokumentation kann Ansprüche auf Schadenersatz nach sich ziehen, da dies Ihre rechtliche Position geschwächt hat.",1
+44,"Verletzung der Schweigepflicht","Ihr Anwalt hat vertrauliche Informationen ohne Ihre Zustimmung weitergegeben, was zu einem Vertrauensbruch und möglichen Schäden geführt hat. Sie könnten Anspruch auf Schadensersatz haben, wenn durch diese Handlung Ihre Interessen beeinträchtigt wurden.",1
+45,"Unzureichende Vertretung","Sie fühlen, dass Ihr Anwalt Sie vor Gericht oder in Verhandlungen nicht angemessen vertreten hat, was zu einem nachteiligen Ausgang führte. Möglicherweise besteht ein Anspruch auf Schadenersatz, wenn die Vertretung nicht dem Standard professioneller Rechtsanwälte entsprach.",1
+46,Interessenkonflikt,"Ihr Anwalt hat Sie in einer Angelegenheit vertreten, in der er gleichzeitig auch die Interessen der Gegenseite oder eines anderen Klienten mit gegensätzlichen Zielen verfolgt hat. Ein solcher Interessenkonflikt kann die Unparteilichkeit beeinträchtigen und Schadensersatzansprüche begründen.",1
+47,"Überhöhte Gebühren","Ihr Anwalt hat Ihnen Gebühren in Rechnung gestellt, die über das gesetzlich zulässige Maß oder die vereinbarte Vergütung hinausgehen. Wenn Sie zu viel bezahlt haben, können Sie die Rückerstattung der überhöhten Beträge fordern.",1
+48,"Verzug bei der Fallbearbeitung","Ihr Anwalt hat die Bearbeitung Ihres Falles unnötig verzögert, wodurch Ihnen Fristen oder rechtliche Möglichkeiten verloren gegangen sind. Solche Verzögerungen können zu finanziellen Einbußen führen, für die der Anwalt haftbar gemacht werden kann.",1
+49,"Mangelnde Aufklärung","Ihr Anwalt hat Sie nicht ausreichend über die Risikos, Erfolgsaussichten oder Kosten eines rechtlichen Vorgehens aufgeklärt. Eine mangelhafte Aufklärung kann dazu führen, dass Sie Entscheidungen treffen, die Ihnen schaden, was Schadensersatzansprüche rechtfertigen kann.",1
+50,"Verlust von Beweismitteln","Ihr Anwalt hat Beweismittel, die für Ihren Fall entscheidend waren, verloren oder nicht rechtzeitig gesichert. Der Verlust von Beweisen kann den Ausgang eines Verfahrens negativ beeinflussen und somit einen Haftungsfall darstellen.",1
+51,"Anwaltshaftung (Allgemeine Beratung)","Sie haben allgemeine Fragen zur Haftung von Rechtsanwälten oder benötigen Unterstützung bei der Prüfung von möglichen Fehlern in Ihrer rechtlichen Vertretung. Wir beraten Sie umfassend zu Ihren Rechten und den nächsten Schritten in Ihrem individuellen Fall.",1
+52,"Mangelhafte Bauausführung","Wenn das Bauprojekt nicht gemäß den genehmigten Plänen oder den anerkannten Regeln der Technik umgesetzt wurde, können Mängelansprüche gegenüber dem Architekten oder den Baufirmen bestehen.",2
+53,"Überschreitung der Baukosten","Architekten sind verpflichtet, die Baukosten im Rahmen der vereinbarten Grenzen zu halten. Eine unverhältnismäßige Kostenüberschreitung kann zu Haftungsansprüchen führen, wenn der Architekt seine Aufklärungspflichten verletzt hat.",2
+54,Planungsfehler,"Fehler in der Entwurfs- oder Ausführungsplanung können schwerwiegende Folgen für die Statik, Funktionalität oder Ästhetik eines Gebäudes haben und begründen oft Schadensersatzansprüche gegen den Planer.",2
+55,"Ablehnung Asylantrag","Wenn Ihr Asylantrag abgelehnt wurde, stehen Sie vor einer rechtlichen Herausforderung. Sie haben das Recht, gegen diese Entscheidung Widerspruch einzulegen. Ein Anwalt kann Sie durch den Prozess führen und Ihre Chancen auf Erfolg bewerten.",3
+56,"Widerruf des Schutzstatus","Ihr Schutzstatus als Asylberechtigter könnte widerrufen werden. Dies geschieht oft nach Änderungen Ihrer persönlichen Umstände oder der Lage in Ihrem Herkunftsland. Juristische Beratung ist essentiell, um Ihre Rechte zu wahren.",3
+57,"Bauvertrag Mängel festgestellt","Sie haben einen Bauvertrag abgeschlossen und nun Mängel am Bauwerk festgestellt. Es ist wichtig, diese rechtzeitig zu melden und zu klären, ob Nachbesserungen oder Schadensersatzansprüche geltend gemacht werden können.",4
+58,"Baugenehmigung Ablehnung erhalten","Ihre Baugenehmigung wurde abgelehnt, und Sie verstehen die Gründe nicht oder halten sie für ungerechtfertigt. In diesem Fall können Sie Widerspruch einlegen oder die Entscheidung gerichtlich überprüfen lassen.",4
+59,"Unzulässige Kontogebühren","Banken erheben oft Gebühren, die durch die Rechtsprechung (z. B. BGH-Urteile) für unzulässig erklärt wurden. Sie können diese zu Unrecht gezahlten Beträge zurückfordern.",5
+60,Disziplinarverfahren,"Ein Disziplinarverfahren gegen einen Beamten kann schwerwiegende Folgen für die Karriere und die Altersversorgung haben. Wir unterstützen Sie bei der Abwehr von Vorwürfen und der Wahrung Ihrer Rechte im Verfahren.",6
+61,Versetzungswiderspruch,"Gegen eine ungewollte Versetzung oder Abordnung können Beamte Widerspruch einlegen. Wir prüfen die Rechtmäßigkeit der Maßnahme und helfen Ihnen, Ihre Interessen gegenüber dem Dienstherrn zu vertreten.",6
+62,Ruhestandsversetzung,"Fragen zur vorzeitigen Versetzung in den Ruhestand, sei es wegen Dienstunfähigkeit oder auf Antrag, erfordern eine genaue Prüfung der versorgungsrechtlichen Konsequenzen.",6
+63,"Leistungsbewertung Anfechten","Eine ungerechte dienstliche Beurteilung kann das berufliche Fortkommen behindern. Sie haben das Recht, eine Korrektur oder die Entfernung der Bewertung aus der Personalakte zu verlangen.",6
+64,Beihilfeansprüche,"Streitigkeiten über die Übernahme von Krankheitskosten durch die Beihilfe sind häufig. Wir unterstützen Sie bei der Durchsetzung Ihrer Ansprüche gegenüber der Beihilfestelle.",6
+65,"Dienstunfähigkeit Feststellung","Die Feststellung der Dienstunfähigkeit ist ein komplexer Prozess, der oft medizinische Gutachten erfordert. Wir begleiten Sie rechtlich, um eine faire Beurteilung sicherzustellen.",6
+66,"Beförderungsauswahl Widerspruch","Wenn Sie bei einer Beförderung übergangen wurden, können Sie die Auswahlentscheidung im Wege des Konkurrentenrechtsschutzes überprüfen lassen.",6
+67,"Dienstzeugnis Korrektur","Auch Beamte haben Anspruch auf ein faires und wohlwollendes Dienstzeugnis. Bei Unstimmigkeiten über den Inhalt helfen wir Ihnen bei der Durchsetzung von Korrekturen.",6
+68,"Mobbing am Arbeitsplatz","Beamte, die von Mobbing durch Vorgesetzte oder Kollegen betroffen sind, können Schutzmaßnahmen des Dienstherrn einfordern oder Schadensersatzansprüche prüfen.",6
+69,"Nebentätigkeit Genehmigung","Die Ausübung einer Nebentätigkeit muss oft genehmigt werden. Wir beraten Sie zu den Voraussetzungen und helfen bei der Durchsetzung Ihres Anspruchs auf Genehmigung.",6
+70,"Beamtenrecht (Allgemeine Beratung)","Wir beraten Beamte und Anwärter in allen Fragen des öffentlichen Dienstrechts, von der Ernennung über die Besoldung bis hin zur Versorgung.",6
+71,"Antrag auf Schwerbehinderung","Die Feststellung eines Grades der Behinderung (GdB) ist die Basis for viele Nachteilsausgleiche. Wir unterstützen Sie bei der Antragstellung und im Widerspruchsverfahren gegen zu niedrige Einstufungen.",7
+72,"Ablehnung von Leistungen","Werden Ihnen Leistungen zur Teilhabe oder Hilfsmittel von der Krankenkasse oder dem Sozialamt verweigert? Wir helfen Ihnen, Ihre gesetzlichen Ansprüche durchzusetzen.",7
+73,"Probleme am Arbeitsplatz","Menschen mit Behinderung genießen besonderen Kündigungsschutz und haben Anspruch auf eine behindertengerechte Gestaltung des Arbeitsplatzes. Wir verteidigen Ihre Rechte gegenüber dem Arbeitgeber.",7
+74,"Zugang zu Bildungseinrichtungen","Inklusion in Schule und Studium ist ein gesetzliches Recht. Wir unterstützen Sie dabei, die notwendigen Fördermaßnahmen und Barrierefreiheit in Bildungseinrichtungen zu sichern.",7
+75,Wohnraumanpassung,"Für den barrierefreien Umbau der Wohnung gibt es oft Zuschüsse. Wir beraten Sie zu Förderprogrammen und helfen bei Streitigkeiten mit Vermietern oder Kostenträgern.",7
+76,Sozialleistungsansprüche,"Fragen zu Erwerbsminderungsrente, Grundsicherung oder Blindengeld erfordern oft juristischen Rat, um die komplexen Voraussetzungen der Sozialgesetzbücher zu erfüllen.",7
+77,"Diskriminierung im Alltag","Das Allgemeine Gleichbehandlungsgesetz (AGG) schützt vor Benachteiligung wegen einer Behinderung. Wir helfen Ihnen, sich gegen Diskriminierung zu wehren und Entschädigungen zu fordern.",7
+78,"Nachteilsausgleich in der Schule","Schüler mit Behinderung haben Anspruch auf individuelle Unterstützung, wie z. B. Zeitverlängerung bei Prüfungen. Wir setzen diese Rechte gegenüber der Schulleitung durch.",7
+79,"Beantragung von Pflegegrad","Die Einstufung in einen Pflegegrad durch den MDK ist oft fehlerhaft. Wir unterstützen Sie im Widerspruchsverfahren, um die Ihnen zustehenden Pflegeleistungen zu erhalten.",7
+80,Kündigungsschutz,"Der besondere Kündigungsschutz für Schwerbehinderte erfordert die Zustimmung des Integrationsamtes. Wir prüfen, ob eine Kündigung unter diesen Voraussetzungen wirksam ist.",7
+81,"Zugang zu sozialen Diensten","Wir unterstützen Sie bei der Beantragung und Durchsetzung von Assistenzleistungen oder anderen sozialen Diensten, die Ihre selbstbestimmte Lebensführung ermöglichen.",7
+82,"Barrierefreiheit im öffentlichen Raum","Behörden und öffentliche Einrichtungen müssen barrierefrei zugänglich sein. Wir beraten Sie zu Ihren Rechten auf gleichberechtigte Teilhabe am öffentlichen Leben.",7
+83,"Behindertenrecht (Allgemeine Beratung)","Umfassende juristische Begleitung für Menschen mit Behinderung und deren Angehörige in allen Lebensbereichen, in denen rechtliche Unterstützung benötigt wird.",7
+84,"Besitz von Betäubungsmitteln","Schon der Besitz geringer Mengen Drogen kann ein Strafverfahren nach sich ziehen. Ein erfahrener Anwalt prüft Möglichkeiten zur Verfahrenseinstellung oder Strafmilderung.",8
+85,"Handel mit Betäubungsmitteln","Der Vorwurf des Drogenhandels wiegt schwer und kann hohe Freiheitsstrafen zur Folge haben. Eine effektive Verteidigungsstrategie ist hier unerlässlich.",8
+86,"Anbau von Cannabis","Trotz Teil-Legalisierung gibt es beim Anbau von Cannabis strenge Regeln. Verstöße gegen Mengenbeschränkungen oder Sicherheitsvorgaben können weiterhin strafbar sein.",8
+87,"Fahren unter Drogeneinfluss","Drogen am Steuer führen oft zum Entzug der Fahrerlaubnis und zur Anordnung einer MPU. Wir beraten Sie zur Verteidigung gegen Bußgelder und zum Erhalt Ihres Führerscheins.",8
+88,"Drogenkonsum am Arbeitsplatz","Konsum am Arbeitsplatz kann eine fristlose Kündigung rechtfertigen. Wir prüfen die arbeitsrechtliche Zulässigkeit von Maßnahmen und verteidigen Ihre Interessen.",8
+89,"Import von Betäubungsmitteln","Die Einfuhr von Drogen aus dem Ausland wird oft als bandenmäßiger Handel gewertet. Hier drohen besonders harte Strafen, die eine spezialisierte Verteidigung erfordern.",8
+90,"Drogenkonsum bei Minderjährigen","Bei Verstößen von Jugendlichen steht der Erziehungsgedanke im Vordergrund. Wir setzen uns für Lösungen ein, die die berufliche Zukunft des Betroffenen nicht gefährden.",8
+91,"Verschreibungspflichtige Medikamente","Auch der Missbrauch oder illegale Handel mit Medikamenten fällt unter das BtMG. Wir klären die rechtliche Lage und verteidigen Sie gegen entsprechende Vorwürfe.",8
+92,"Verdacht auf Drogenproduktion","Schon die Vorbereitung der Herstellung von Drogen ist strafbar. Wir prüfen die Beweislast und stellen sicher, dass Ihre Beschuldigtenrechte gewahrt bleiben.",8
+93,"Betäubungsmittelstrafrecht (Allgemeine Beratung)","Professionelle Hilfe in allen Phasen eines Betäubungsmittelverfahrens, von der Durchsuchung über die Vernehmung bis hin zur Hauptverhandlung.",8
+94,Geschwindigkeitsüberschreitung,"Blitzerfotos sind oft fehlerhaft oder Messgeräte nicht korrekt geeicht. Wir prüfen Ihren Bußgeldbescheid auf Fehler, um Fahrverbote und Punkte in Flensburg abzuwenden.",9
+95,Rotlichtverstoß,"Ein Rotlichtverstoß kann teuer werden und den Führerschein kosten. Wir prüfen, ob die Gelbphase zu kurz war oder andere Entlastungsgründe vorliegen.",9
+96,"Alkohol am Steuer","Bei Fahrten unter Alkoholeinfluss drohen empfindliche Strafen. Wir beraten Sie zur Verteidigung im Ordnungswidrigkeiten- oder Strafverfahren und zur MPU-Prävention.",9
+97,"Handy am Steuer","Schon das bloße Halten eines Mobiltelefons kann ein Bußgeld nach sich ziehen. Wir klären, ob in Ihrem Fall eine Ausnahme vorliegt oder der Vorwurf unbegründet ist.",9
+98,Fahrerflucht,"Das unerlaubte Entfernen vom Unfallort ist kein Kavaliersdelikt. Wir unterstützen Sie dabei, die rechtlichen Folgen zu minimieren und Ihren Führerschein zu schützen.",9
+99,"Unzulässige Fahrzeugmodifikation","Tuning ohne Eintragung kann zum Erlöschen der Betriebserlaubnis führen. Wir beraten Sie bei Bußgeldern wegen technischer Veränderungen an Ihrem Fahrzeug.",9
+100,Abstandsmessung,"Abstandsverstöße auf der Autobahn werden oft durch Videoaufzeichnungen belegt. Wir prüfen die Messmethode und die Identifizierbarkeit des Fahrers.",9
+101,Falschparken,"Knöllchen und Abschleppkosten sind ärgerlich. Wir prüfen die Rechtmäßigkeit von Parkverboten und helfen Ihnen bei der Abwehr unberechtigter Abschleppgebühren.",9
+102,"Überladung des Fahrzeugs","Besonders bei Transporten kann es schnell zur Überladung kommen. Wir beraten Sie zu den rechtlichen Folgen und möglichen Einspruchsmöglichkeiten gegen Bußgelder.",9
+103,"Missachtung von Verkehrszeichen","Ob Vorfahrt missachtet oder Stoppschild übersehen – wir prüfen die Umstände des Verstoßes und setzen uns für eine Reduzierung der Sanktionen ein.",9
+104,"Bußgeldbescheid erhalten","Haben Sie einen Bußgeldbescheid erhalten? Wir prüfen die Fristen und Erfolgsaussichten eines Einspruchs, um Punkte, Bußgelder und Fahrverbote zu vermeiden.",9
+105,"Bußgeld (Allgemeine Beratung)","Wir unterstützen Sie in allen Fragen des Verkehrsordnungswidrigkeitenrechts und helfen Ihnen, Ihre Mobilität zu erhalten.",9
+106,"Compliance und Haftungsvermeidung","Unternehmen müssen gesetzliche Regeln einhalten, um Haftungsrisiken für die Geschäftsführung zu minimieren. Wir beraten Sie bei der rechtssicheren Organisation Ihres Betriebs.",10
+107,"CMS Implementierung","Ein Compliance Management System (CMS) schützt Ihr Unternehmen vor Rechtsverstößen. Wir unterstützen Sie bei der Konzeption und Einführung maßgeschneiderter Kontrollsysteme.",10
+108,"Einhaltung des NIS2","Die neue NIS2-Richtlinie stellt hohe Anforderungen an die Cybersicherheit. Wir helfen Ihnen, die gesetzlichen Vorgaben zum Schutz Ihrer IT-Infrastruktur umzusetzen.",10
+109,"StaRUG-Anforderungen befolgen","Das StaRUG verpflichtet Unternehmen zur Früherkennung von Krisen. Wir beraten Sie bei der Implementierung von Systemen zur rechtzeitigen Identifizierung von Insolvenzrisiken.",10
+110,LKSG-Konformität,"Das Lieferkettensorgfaltspflichtengesetz (LKSG) fordert soziale und ökologische Standards in der Lieferkette. Wir unterstützen Sie bei der Erfüllung dieser komplexen Nachweispflichten.",10
+111,"Aufbau von Compliance-Strukturen","Wir helfen Ihnen bei der Erstellung von Richtlinien (Codes of Conduct) und der Schulung von Mitarbeitern, um eine Integritätskultur in Ihrem Unternehmen zu verankern.",10
+112,"Monitoring und Reporting","Regelmäßige Überprüfungen und Berichte sind essenziell für die Wirksamkeit von Compliance-Maßnahmen. Wir beraten Sie bei der Gestaltung effizienter Überwachungsprozesse.",10
+113,Abgasskandal,"Millionen Fahrzeuge sind von Manipulationen der Abgasreinigung betroffen. Wir helfen Ihnen, Schadensersatzansprüche gegen die Hersteller durchzusetzen oder das Fahrzeug zurückzugeben.",11
+114,"Wohnmobil Abgasskandal","Auch viele Wohnmobile auf Basis von Fiat Ducato oder Mercedes Sprinter sind betroffen. Wir klären Ihre Rechte auf Entschädigung bei manipulierten Freizeitfahrzeugen.",11
+115,"Diesel-Fahrverbote umgehen","In vielen Städten drohen Fahrverbote für ältere Diesel. Wir prüfen, ob Sie durch Schadensersatzklagen eine Rückgabe des Fahrzeugs oder eine Hardware-Nachrüstung erreichen können.",11
+116,"Testament verfassen","Ein rechtssicheres Testament vermeidet Streit unter den Erben. Wir beraten Sie bei der Gestaltung Ihres letzten Willens, um Ihre Wünsche präzise und wirksam festzulegen.",12
+117,"Erbschaft ausschlagen","Wenn ein Nachlass überschuldet ist, sollten Sie das Erbe ausschlagen. Wir beraten Sie zu den wichtigen Fristen und den formalen Anforderungen beim Nachlassgericht.",12
+118,"Pflichtteil einfordern","Nahe Angehörige haben oft Anspruch auf einen Pflichtteil, wenn sie im Testament übergangen wurden. Wir helfen Ihnen bei der Berechnung und Durchsetzung Ihres Geldanspruchs.",12
+119,"Erbengemeinschaft regeln","Gemeinsames Erben führt oft zu Konflikten. Wir unterstützen Sie bei der Auseinandersetzung der Erbengemeinschaft und der gerechten Verteilung des Nachlasses.",12
+120,"Testament anfechten","Bestehen Zweifel an der Testierfähigkeit des Erblassers oder liegen Formfehler vor? Wir prüfen die Voraussetzungen for eine Testamentsanfechtung.",12
+121,Nachlassverwaltung,"Die Sicherung und Verwaltung des Erbes kann komplex sein. Wir unterstützen Erben und Testamentsvollstrecker bei der ordnungsgemäßen Abwicklung des Nachlasses.",12
+122,"Erbschaftsteuer optimieren","Frühzeitige Schenkungen oder die Nutzung von Freibeträgen können die Steuerlast senken. Wir beraten Sie zur steuerlich vorteilhaften Gestaltung Ihrer Regelungen.",12
+123,"Vermächtnis erhalten","Ein Vermächtnis gibt Ihnen Anspruch auf einen bestimmten Gegenstand oder Geldbetrag aus dem Erbe. Wir helfen Ihnen, diesen Anspruch gegenüber den Erben geltend zu machen.",12
+124,"Digitales Erbe sichern","Accounts, Kryptowährungen und digitale Daten gehören zum Nachlass. Wir beraten Sie zur Vorsorge und zum Zugriff auf das digitale Erbe im Todesfall.",12
+125,Immobilienerbschaft,"Häuser und Wohnungen im Nachlass erfordern oft schnelle Entscheidungen über Nutzung, Verkauf oder Vermietung. Wir klären die erbrechtlichen und grundbuchrechtlichen Fragen.",12
+126,"Erbrecht (Allgemeine Beratung)","Umfassende Unterstützung in allen Fragen des Erbrechts, von der Vorsorgevollmacht bis zur gerichtlichen Vertretung in Erbstreitigkeiten.",12
+127,"Flugverspätung Entschädigung","Bei einer Flugverspätung von mehr als drei Stunden haben Sie oft Anspruch auf eine Entschädigung von bis zu 600 Euro pro Person, sofern keine außergewöhnlichen Umstände vorliegen.",13
+128,Flugausfall,"Wurde Ihr Flug kurzfristig annulliert? Die Airline muss Ihnen eine Ersatzbeförderung anbieten und unter Umständen eine Ausgleichszahlung leisten.",13
+129,Nichtbeförderung,"Wenn Ihnen trotz gültigem Ticket der Boarding verweigert wurde (z. B. wegen Überbuchung), steht Ihnen sofortige Unterstützung und eine finanzielle Entschädigung zu.",13
+130,Gepäckverlust,"Bei verspätetem, beschädigtem oder verlorenem Gepäck haben Sie Anspruch auf Schadensersatz für notwendige Ersatzkäufe oder den Wertverlust Ihres Eigentums.",13
+131,"Änderung der Gesellschafterstruktur","Der Ein- oder Austritt von Gesellschaftern erfordert präzise vertragliche Regelungen und oft notarielle Beurkundungen. Wir beraten Sie bei der rechtssicheren Gestaltung von Anteilsübertragungen.",14
+132,Geschäftsführerwechsel,"Die Bestellung oder Abberufung eines Geschäftsführers muss formal korrekt erfolgen und im Handelsregister angemeldet werden. Wir unterstützen Sie bei den notwendigen Beschlüssen und Verträgen.",14
+133,Kapitalerhöhung,"Zur Finanzierung von Wachstum oder zur Sanierung kann eine Kapitalerhöhung notwendig sein. Wir beraten Sie zu den verschiedenen Formen und den rechtlichen Anforderungen bei der Umsetzung.",14
+134,Unternehmensnachfolge,"Die Übergabe eines Unternehmens an die nächste Generation oder einen externen Käufer erfordert langfristige Planung und Berücksichtigung von gesellschafts- und erbrechtlichen Aspekten.",14
+135,"Auseinandersetzung unter Gesellschaftern","Streitigkeiten im Gesellschafterkreis können das Unternehmen lähmen. Wir unterstützen Sie bei der außergerichtlichen Konfliktlösung oder der Durchsetzung Ihrer Rechte in gerichtlichen Verfahren.",14
+136,"Umwandlung der Gesellschaftsform","Ob Wechsel von OHG zu GmbH oder Verschmelzung von Unternehmen – wir begleiten Sie bei allen Umwandlungsvorgängen nach dem Umwandlungsgesetz.",14
+137,"Liquidation der GmbH","Die Beendigung einer Gesellschaft erfordert ein geregeltes Liquidationsverfahren. Wir beraten Liquidatoren bei der Erfüllung ihrer Pflichten und der ordnungsgemäßen Abwicklung.",14
+138,"Schutz von Geschäftsgeheimnissen","Know-how ist das Kapital jedes Unternehmens. Wir unterstützen Sie bei der Erstellung von Vertraulichkeitsvereinbarungen (NDA) und der Durchsetzung von Ansprüchen bei Geheimnisverrat.",14
+139,"Compliance und Haftungsvermeidung","Geschäftsführer haften oft persönlich für Verstöße. Wir helfen Ihnen beim Aufbau von Compliance-Strukturen zur Vermeidung von Haftungsrisiken.",14
+140,"Gesellschaftsrechtliche Streitigkeiten","Ob Anfechtung von Beschlüssen oder Klagen gegen Geschäftsführer – wir vertreten Ihre Interessen in komplexen gesellschaftsrechtlichen Auseinandersetzungen.",14
+141,"Gesellschaftsrecht (Allgemeine Beratung)","Umfassende juristische Unterstützung für Unternehmer und Gesellschaften in allen Phasen, von der Gründung bis zur Abwicklung.",14
+142,Urheberrechtsverletzung,"Die unbefugte Nutzung von Texten, Bildern oder Software im Internet kann teure Abmahnungen zur Folge haben. Wir helfen Ihnen bei der Abwehr oder Durchsetzung von Urheberansprüchen.",15
+143,Datenschutzverstoß,"Verstöße gegen die DSGVO können zu hohen Bußgeldern führen. Wir beraten Sie zur datenschutzkonformen Gestaltung Ihrer Website und zum Umgang mit Datenpannen.",15
+144,"Vertragsbruch Software-Lizenz","Streitigkeiten über den Umfang von Nutzungsrechten an Software sind häufig. Wir prüfen Ihre Lizenzverträge und vertreten Sie bei Vertragsverletzungen.",15
+145,"Online-Kauf Betrug","Ware bezahlt, aber nie erhalten? Oder Fake-Shops aufgesessen? Wir unterstützen Sie bei der Rückforderung Ihres Geldes und der Erstattung von Strafanzeigen.",15
+146,"Unzulässige AGB","Klauseln in Allgemeinen Geschäftsbedingungen müssen transparent und fair sein. Wir prüfen AGB auf ihre Wirksamkeit und mahnen unzulässige Bestimmungen ab.",15
+147,Identitätsdiebstahl,"Wenn Fremde unter Ihrem Namen Bestellungen aufgeben oder Accounts nutzen, müssen Sie schnell handeln. Wir helfen Ihnen bei der Schadensbegrenzung und der Kommunikation mit Betroffenen.",15
+148,"Verletzung von Bildrechten","Die Veröffentlichung von Fotos ohne Einwilligung der abgebildeten Personen oder des Urhebers ist rechtswidrig. Wir setzen Ihre Unterlassungs- und Schadensersatzansprüche durch.",15
+149,"Unautorisierte Kontozugriffe","Wurde Ihr Online-Banking oder Social-Media-Account gehackt? Wir beraten Sie zur Haftung der Anbieter und unterstützen Sie bei der Wiederherstellung Ihres Zugangs.",15
+150,"Verleumdung im Internet","Rufschädigende Kommentare oder Bewertungen können Ihre Existenz bedrohen. Wir fordern die Löschung unzulässiger Inhalte und setzen Schadensersatzansprüche durch.",15
+151,"Probleme mit Online-Dienstleistern","Ob Hosting, Cloud-Services oder SaaS – bei Leistungsstörungen oder unberechtigten Kündigungen durch Provider setzen wir Ihre vertraglichen Rechte durch.",15
+152,"Ungültige Online-Verträge","Wurde Ihnen am Telefon oder per Klick ein Abo untergeschoben? Wir prüfen die Wirksamkeit des Vertragsschlusses und erklären für Sie den Widerruf oder die Anfechtung.",15
+153,"Missbrauch von Markenrechten","Die Nutzung geschützter Marken als Keywords (AdWords) oder in Domains kann Markenrechte verletzen. Wir beraten Sie zur rechtssicheren Nutzung und bei Abmahnungen.",15
+154,"IT-Recht (Allgemeine Beratung)","Juristische Begleitung for Internetnutzer und Online-Händler in allen Fragen des digitalen Rechts- und Geschäftsverkehrs.",15
+155,"Online Account gesperrt","Wurde Ihr Account bei Amazon, eBay oder Facebook ohne Grund gesperrt? Wir fordern die Freischaltung und prüfen Schadensersatzansprüche wegen entgangener Verkäufe.",15
+156,"IT-Ausfall am 19.7.2024 (Crowdstrike)","Der weltweite IT-Ausfall durch ein fehlerhaftes Software-Update hat massive Schäden verursacht. Wir prüfen Ihre Ansprüche auf Schadensersatz gegen verantwortliche Dienstleister.",15
+157,"Unberechtigte Forderung","Haben Sie eine Rechnung für Leistungen erhalten, die Sie nie bestellt haben? Wir unterstützen Sie bei der Abwehr dieser unbegründeten Forderungen.",16
+158,"Fristsetzung beim Schuldner","Wenn Ihr Vertragspartner nicht zahlt, ist die rechtssichere Inverzugsetzung entscheidend for spätere Verzugsschäden. Wir übernehmen das Mahnwesen für Sie.",16
+159,"Unklare Rechnungsposten","Enthält Ihre Rechnung Positionen, die Sie nicht nachvollziehen können? Wir prüfen die Abrechnung auf ihre Übereinstimmung mit dem zugrunde liegenden Vertrag.",16
+160,"Inkasso trotz Zahlung","Werden Sie von Inkassobüros kontaktiert, obwohl Sie die Rechnung bereits beglichen haben? Wir stellen die Kommunikation ein und klären das Missverständnis auf.",16
+161,"Drohung mit rechtlichen Schritten","Inkassounternehmen drohen oft vorschnell mit Pfändungen oder Gerichtsverfahren. Wir prüfen die Berechtigung dieser Drohungen und schützen Sie vor unzulässigem Druck.",16
+162,"Hohe Inkassogebühren","Inkassokosten sind oft überhöht und verstoßen gegen geltendes Recht. Wir prüfen die Gebührenrechnungen und wehren unzulässige Kostenschübe ab.",16
+163,"Fehlende Zahlungserinnerungen","Ohne vorherige Mahnung dürfen meist keine Inkassokosten berechnet werden. Wir prüfen, ob Sie wirksam in Verzug gesetzt wurden.",16
+164,"Mehrfache Forderungen für dieselbe Schuld","Fordern verschiedene Stellen dasselbe Geld von Ihnen? Wir bringen Klarheit in die Forderungsaufstellung und vermeiden Doppelzahlungen.",16
+165,"Unberechtigte Schufa-Eintragung","Inkassounternehmen drohen oft mit Schufa-Einträgen. Ohne rechtskräftigen Titel oder Anerkenntnis ist dies oft unzulässig. Wir fordern die Löschung unberechtigter Daten.",16
+166,"Forderung nach Verjährung","Viele Forderungen sind bereits verjährt, werden aber dennoch weiter eingetrieben. Wir prüfen die Verjährungsfristen und erheben die Einrede der Verjährung.",16
+167,"Unverständliche Gebührenstruktur","Wir analysieren komplexe Forderungsmanagement-Kosten und stellen sicher, dass Sie nur das bezahlen, was rechtlich wirklich geschuldet ist.",16
+168,"Inkassorecht (Allgemeine Beratung)","Unterstützung sowohl for Gläubiger beim Forderungseinzug als auch for Schuldner bei der Abwehr unberechtigter Inkassomaßnahmen.",16
+169,Zahlungsunfähigkeit,"Wenn die fälligen Schulden nicht mehr beglichen werden können, liegt Zahlungsunfähigkeit vor. Dies ist ein Insolvenzeröffnungsgrund, den wir für Sie prüfen.",17
+170,Überschuldung,"Wenn das Vermögen die bestehenden Verbindlichkeiten nicht mehr deckt, kann eine Überschuldung vorliegen. Wir beraten Geschäftsführer zu ihren Pflichten zur Insolvenzantragstellung.",17
+171,Pfändungsschutz,"Im Falle einer Insolvenz müssen Sie wissen, welche Vermögenswerte geschützt sind. Wir beraten Sie zum P-Konto und zu pfändungsfreien Gegenständen.",17
+172,Restschuldbefreiung,"Das Ziel der Privatinsolvenz ist die Restschuldbefreiung nach drei Jahren. Wir begleiten Sie durch das Verfahren, damit Sie danach schuldenfrei neu starten können.",17
+173,Insolvenzanfechtung,"Insolvenzverwalter fordern oft Geld zurück, das kurz vor der Insolvenz gezahlt wurde. Wir wehren unberechtigte Anfechtungsansprüche for Sie ab.",17
+174,Verfahrenskostenhilfe,"Auch ein Insolvenzverfahren kostet Geld. Wir prüfen, ob Sie Anspruch auf Stundung der Verfahrenskosten haben, damit die Insolvenz überhaupt durchgeführt werden kann.",17
+175,Gläubigerversammlung,"Als Gläubiger in einem Insolvenzverfahren haben Sie Mitwirkungsrechte. Wir vertreten Ihre Interessen in der Gläubigerversammlung, um Ihre Quote zu maximieren.",17
+176,Unternehmensinsolvenz,"Wir beraten Firmen bei der Einleitung von Insolvenzverfahren und prüfen Sanierungsmöglichkeiten wie das Schutzschirmverfahren oder die Eigenverwaltung.",17
+177,Schuldnerberatung,"Vor einem Insolvenzantrag muss oft ein außergerichtlicher Einigungsversuch unternommen werden. Wir unterstützen Sie bei Verhandlungen mit Ihren Gläubigern.",17
+178,Verbraucherinsolvenzverfahren,"Wir führen Privatpersonen sicher durch das Verfahren der Regel- oder Verbraucherinsolvenz bis hin zur erfolgreichen Entschuldung.",17
+179,Insolvenzrecht,"Umfassende Beratung in allen Phasen der finanziellen Krise, zur Vermeidung von Haftung und zur Sicherung eines wirtschaftlichen Neuanfangs.",17
+180,"Markenname verletzt","Wird Ihr geschützter Name von Wettbewerbern genutzt? Wir mahnen die Verletzung ab und fordern Unterlassung sowie Schadensersatz für Sie.",18
+181,"Fälschungen aufgespürt","Wir unterstützen Sie beim Vorgehen gegen Produktpiraterie und Plagiate, um den Ruf und den Wert Ihrer Marke zu schützen.",18
+182,"Markenanmeldung abgelehnt","Das Markenamt hat Ihre Anmeldung wegen fehlender Unterscheidungskraft oder bestehender älterer Rechte zurückgewiesen? Wir prüfen die Erfolgsaussichten eines Widerspruchs.",18
+183,"Markennutzung durch Dritte","Die Verwendung Ihrer Marke in Metatags oder als Keyword ist oft unzulässig. Wir beraten Sie zu den Grenzen des erlaubten Gebrauchs durch Wettbewerber.",18
+184,"Lizenzvertrag verhandeln","Sie möchten Ihre Marke lizenzieren oder selbst eine Markenlizenz erwerben? Wir gestalten die Verträge so, dass Ihre Rechte und Einnahmen gesichert sind.",18
+185,"Markenschutz erweitern","Möchten Sie Ihre Marke international schützen oder das Waren- und Dienstleistungsverzeichnis erweitern? Wir übernehmen die strategische Markenanmeldung für Sie.",18
+186,"Widerspruch gegen Marke","Wurde eine neue Marke angemeldet, die Ihrer zu ähnlich ist? Wir legen for Sie Widerspruch beim Markenamt ein, um Verwechslungsgefahren zu vermeiden.",18
+187,"Markenstrategie entwickeln","Ein starkes Markenportfolio braucht Planung. Wir beraten Sie beim Aufbau und der Verteidigung Ihrer Markenwerte im In- und Ausland.",18
+188,"Verletzung geistigen Eigentums","Neben Marken schützen wir auch Ihre Designs und Geschäftskennzeichen gegen unbefugte Nachahmung und Ausbeutung durch Dritte.",18
+189,Domainrecht-Streitigkeiten,"Wird eine Domain genutzt, die Ihre Markenrechte verletzt? Wir fordern die Übertragung oder Löschung der Domain in Domain-Streitverfahren (z. B. ADR).",18
+190,Markenrechtsverletzung,"Sie haben selbst eine Abmahnung wegen angeblicher Markenrechtsverletzung erhalten? Wir prüfen die Berechtigung und wehren unberechtigte Forderungen ab.",18
+191,"Missbrauch von Markenrechten","Die unfaire Ausnutzung fremder Markenreputation ist wettbewerbswidrig. Wir gehen rechtlich gegen Trittbrettfahrer vor, die von Ihrem Markenerfolg profitieren wollen.",18
+192,"Markenrecht (Allgemeine Beratung)","Ihr Partner für alle Fragen rund um Namen, Logos und Designs – von der ersten Recherche bis zur weltweiten Verteidigung.",18
+193,"Allergan Implantate","Patientinnen mit strukturierten Brustimplantaten von Allergan haben bei bestimmten Krebsdiagnosen oder Komplikationen oft Anspruch auf Entschädigung.",19
+194,"Allgemeine Behandlungsfehler","Ob Fehldiagnose, falsche Medikation oder Operationsfehler – wir unterstützen Sie bei der Prüfung der Beweislage und der Durchsetzung von Schadensersatz.",19
+195,Geburtsschaden,"Fehler während der Geburt können lebenslange Folgen haben. Wir helfen betroffenen Familien, die finanzielle Absicherung durch hohe Schmerzensgelder und Renten zu sichern.",19
+196,"Schmerzensgeld nach Arztfehler","Die Höhe des Schmerzensgeldes hängt stark von der Dauer und Schwere der Beeinträchtigung ab. Wir nutzen Spezialdatenbanken, um das Maximum für Sie herauszuholen.",19
+197,Arzthaftung,"Ärzte haften für Verstöße gegen den medizinischen Standard. Wir klären die Haftungsfragen und fordern Schadensersatz für krankheitsbedingte Verdienstausfälle oder Mehrbedarf.",19
+198,Produkthaftungsrecht,"Mangelhafte Medizinprodukte wie fehlerhafte Herzschrittmacher oder Prothesen können schwere Schäden verursachen. Wir machen Ansprüche gegen die Hersteller geltend.",19
+199,"Mietminderung bei Mängeln","Wenn Ihre Wohnung Mängel aufweist (z. B. Schimmel, defekte Heizung), haben Sie das Recht, die Miete angemessen zu mindern, bis der Mangel behoben ist.",20
+200,"Kündigung des Mietvertrags","Ob Eigenbedarfskündigung des Vermieters oder Ihre eigene Kündigung – wir beraten Sie zu Fristen, Formvorschriften und der Wirksamkeit von Kündigungsschreiben.",20
+201,"Rückforderung der Kaution","Der Vermieter muss die Kaution nach Auszug zeitnah abrechnen und zurückzahlen. Wir helfen Ihnen gegen unberechtigte Einbehalte wegen angeblicher Schäden.",20
+202,"Nebenkostenabrechnung prüfen","Viele Betriebskostenabrechnungen sind fehlerhaft. Wir prüfen Ihre Abrechnung auf unzulässige Posten und helfen Ihnen bei der Abwehr von Nachforderungen.",20
+203,"Wohnungsmängel melden","Damit Sie Ihre Rechte wahren, müssen Mängel unverzüglich und korrekt angezeigt werden. Wir unterstützen Sie bei der rechtssicheren Kommunikation mit dem Vermieter.",20
+204,"Verlängerung des Mietvertrags","Fragen zur Fortsetzung eines Zeitmietvertrags oder zur Verlängerung bei Härtefällen erfordern eine genaue rechtliche Prüfung der vertraglichen Grundlagen.",20
+205,"Untermiete genehmigen lassen","Unter bestimmten Voraussetzungen haben Mieter einen Anspruch auf die Erlaubnis zur Untervermietung. Wir helfen Ihnen, diesen Anspruch gegenüber dem Vermieter durchzusetzen.",20
+206,"Lärmbelästigung durch Nachbarn","Ständiger Lärm beeinträchtigt die Wohnqualität. Wir beraten Sie zu Ihren Rechten auf Mietminderung und den Möglichkeiten, den Lärm rechtlich zu unterbinden.",20
+207,"Renovierungsarbeiten klären","Wer muss beim Auszug renovieren? Wir prüfen Ihre Schönheitsreparaturklausel auf Wirksamkeit und bewahren Sie vor unnötigen Kosten.",20
+208,"Hausordnung durchsetzen","Verstöße gegen die Hausordnung können das Zusammenleben stören. Wir beraten Sie zu den Grenzen der Hausordnung und zur Durchsetzung Ihrer Rechte.",20
+209,"Mietrechtliche Probleme","Ob Mieterhöhung, Modernisierung oder Streit über die Tierhaltung – wir unterstützen Sie in allen mietrechtlichen Auseinandersetzungen.",20
+210,"Mietpreisbremse prüfen","Ist Ihre Miete zu hoch? Wir prüfen, ob die Mietpreisbremse in Ihrer Region gilt und fordern zu viel gezahlte Miete für Sie zurück.",20
+211,"Visum beantragen","Ob für Arbeit, Studium oder Besuch – wir unterstützen Sie bei der Auswahl des richtigen Visums und der Vorbereitung aller notwendigen Unterlagen für die Botschaft.",21
+212,"Aufenthaltstitel verlängern","Die rechtzeitige Verlängerung ist entscheidend für Ihren legalen Aufenthalt. Wir begleiten Sie zum Termin bei der Ausländerbehörde und klären die Voraussetzungen.",21
+213,Familiennachzug,"Sie möchten Ihren Ehepartner oder Ihre Kinder nach Deutschland holen? Wir helfen Ihnen bei der Durchsetzung Ihres Rechts auf Familieneinheit.",21
+214,"Asylantrag stellen","Wir beraten Sie zum Asylverfahren in Deutschland, bereiten Sie auf die Anhörung vor und vertreten Sie gegenüber dem BAMF.",21
+215,"Arbeitsgenehmigung erhalten","Der Zugang zum Arbeitsmarkt ist oft an Bedingungen geknüpft. Wir prüfen Ihre Möglichkeiten und unterstützen Sie bei der Beantragung der Arbeitserlaubnis.",21
+216,"Abschiebung verhindern","Bei drohender Abschiebung ist Eile geboten. Wir prüfen rechtliche Abschiebungshindernisse und stellen Eilanträge bei Gericht zur Sicherung Ihres Verbleibs.",21
+217,"Staatsbürgerschaft beantragen","Die Einbürgerung ist der letzte Schritt der Integration. Wir beraten Sie zu den Voraussetzungen wie Aufenthaltsdauer, Sprachkenntnisse und Lebensunterhaltssicherung.",21
+218,"Abschiebehaft vermeiden","Abschiebehaft darf nur unter strengen Bedingungen angeordnet werden. Wir setzen uns für Ihre Freiheit ein und prüfen die Rechtmäßigkeit der Inhaftierung.",21
+219,"Blaue Karte EU beantragen","Für hochqualifizierte Fachkräfte bietet die Blue Card attraktive Bedingungen. Wir unterstützen Sie bei der Beantragung und dem Nachweis der erforderlichen Gehaltsschwellen.",21
+220,"Duldung erhalten","Wenn eine Abschiebung vorübergehend nicht möglich ist, haben Sie Anspruch auf eine Duldung. Wir klären Ihren Status und prüfen Wege zu einem Aufenthaltstitel.",21
+221,"Einbürgerungstest bestehen","Wir beraten Sie zum Ablauf der Einbürgerung und helfen Ihnen bei formalen Hürden auf dem Weg zum deutschen Pass.",21
+222,"Widerruf des Schutzstatus","Das BAMF prüft regelmäßig, ob Schutzgründe noch bestehen. Wir verteidigen Ihren Status in Widerrufsverfahren.",21
+223,"Grenzbebauung prüfen","Darf der Nachbar seine Garage direkt an die Grenze bauen? Wir prüfen die Bauordnung Ihres Bundeslandes und setzen Ihre Abstandsrechte durch.",22
+224,"Überhängende Äste","Äste oder Wurzeln vom Nachbargrundstück stören? Wir beraten Sie zum Selbsthilferecht und zur Durchsetzung der Beseitigung durch den Nachbarn.",22
+225,"Lärm durch Nachbarn","Rasensprenger am Sonntag oder laute Partys? Wir klären die rechtlichen Ruhezeiten und helfen Ihnen, Frieden in der Nachbarschaft zu sichern.",22
+226,Grenzstreitigkeiten,"Wo genau verläuft die Grenze? Wir unterstützen Sie bei der Klärung von Grenzverläufen und der Durchsetzung von Grenzfeststellungen.",22
+227,"Sichtschutz beanstanden","Eine zu hohe Mauer oder ein unschöner Zaun kann die Belichtung Ihres Gartens beeinträchtigen. Wir prüfen, was nach dem Nachbarrechtsgesetz zulässig ist.",22
+228,"Eingriff in Privatsphäre","Überwachungskameras am Nachbarhaus, die Ihr Grundstück filmen, sind oft unzulässig. Wir fordern die Entfernung oder Anpassung der Kameras für Sie.",22
+229,"Unzulässige Tierhaltung","Hundegebell oder Geruchsbelästigung durch Tiere muss nicht grenzenlos hingenommen werden. Wir klären die rechtlichen Grenzen der Tierhaltung in Wohngebieten.",22
+230,"Beeinträchtigung durch Bäume","Schattenwurf oder Laubfall durch große Bäume des Nachbarn führen oft zu Streit. Wir prüfen Ihre Ansprüche auf Rückschnitt oder Entschädigung.",22
+231,"Probleme mit dem Gartenzaun","Wer muss den Zaun bezahlen und wie muss er aussehen? Wir klären die Einfriedungspflichten in Ihrem Bundesland.",22
+232,"Wasserablauf vom Nachbargrundstück","Fließt Regenwasser vom Nachbarn auf Ihr Grundstück und verursacht Schäden? Wir fordern bauliche Maßnahmen zur ordnungsgemäßen Entwässerung.",22
+233,Patentanmeldung,"Wir begleiten Sie von der Erfindungsmeldung bis zur Einreichung beim Patentamt, um Ihre Innovation weltweit rechtlich abzusichern.",23
+234,Patentverletzung,"Wird Ihre Erfindung kopiert? Wir mahnen Verletzer ab und setzen Ihre Ansprüche auf Unterlassung, Auskunft und Schadensersatz durch.",23
+235,"Patentschutz prüfen","Wir führen Recherchen zum Stand der Technik durch, um die Patentfähigkeit Ihrer Idee zu bewerten und Kollisionen mit älteren Rechten zu vermeiden.",23
+236,Patentlaufzeit,"Wir überwachen die Zahlungen der Jahresgebühren und beraten Sie zu Verlängerungsmöglichkeiten oder der Umwandlung in ein Gebrauchsmuster.",23
+237,Lizenzvertrag,"Möchten Sie Ihre Erfindung vermarkten? Wir gestalten Lizenzverträge, die Ihre Einnahmen sichern und die Nutzungsrechte präzise definieren.",23
+238,Patentanfechtung,"Wir gehen gegen Patente von Wettbewerbern vor, die zu Unrecht erteilt wurden, um Ihren geschäftlichen Handlungsspielraum zu sichern.",23
+239,Patentportfoliomanagement,"Wir unterstützen Unternehmen bei der strategischen Verwaltung ihrer Patente, um den maximalen ökonomischen Nutzen aus ihren Innovationen zu ziehen.",23
+240,Arbeitnehmererfindung,"Wer hat die Rechte an einer Erfindung, die im Job gemacht wurde? Wir klären die Inanspruchnahme und die angemessene Vergütung für den Erfinder.",23
+241,Patentstrategie,"Wir entwickeln mit Ihnen eine langfristige IP-Strategie, um Ihre Marktposition durch gezielten Patentschutz abzusichern.",23
+242,"Internationales Patent","Ob europäisches Patent oder PCT-Anmeldung – wir koordinieren Ihren weltweiten Schutz über unser Netzwerk von Korrespondenzanwälten.",23
+243,"Pflegegrad Ablehnung","Wurde Ihr Antrag auf einen Pflegegrad abgelehnt oder wurden Sie zu niedrig eingestuft? Wir legen Widerspruch ein und begleiten Sie im Klageverfahren.",24
+244,"Kostenübernahme Streitigkeiten","Streit mit der Pflegekasse über die Finanzierung von Hilfsmitteln oder Pflegesachleistungen? Wir setzen Ihre gesetzlichen Ansprüche durch.",24
+245,"Pflegedienstleister Wechsel","Probleme mit dem aktuellen Pflegedienst oder Heim? Wir beraten Sie zur Kündigung von Pflegeverträgen und zum Wechsel zu einem besseren Anbieter.",24
+246,"Wohnraumanpassung Konflikt","Wird der Zuschuss für den Badumbau verweigert? Wir klären die medizinische Notwendigkeit und fordern die Kostenübernahme durch die Kasse.",24
+247,"Einstufungsgutachten Anfechtung","Gutachten des MDK sind oft oberflächlich. Wir prüfen das Gutachten auf Fehler und fordern eine erneute Begutachtung unter Berücksichtigung aller Einschränkungen.",24
+248,"Erhöhung des Pflegegrads","Wenn sich der Zustand verschlechtert, muss der Pflegegrad angepasst werden. Wir unterstützen Sie bei der Beantragung einer Höherstufung.",24
+249,"Rückforderung von Leistungen","Fordert die Pflegekasse Geld zurück, weil angeblich kein Pflegebedarf mehr besteht? Wir wehren unberechtigte Rückforderungen ab.",24
+250,"Angehörigenpflege Unterstützung","Pflegende Angehörige haben Anspruch auf Beratung, Rentenbeiträge und Pflegegeld. Wir informieren Sie über Ihre Rechte und helfen bei der Beantragung.",24
+251,"Schwerbehinderung Anerkennung","Wir unterstützen Sie bei der Feststellung des Grads der Behinderung (GdB) und den damit verbundenen Merkzeichen für Nachteilsausgleiche.",24
+252,"Pflegehilfsmittel Streit","Ob Rollstuhl, Pflegebett oder Inkontinenzmaterial – wir setzen Ihren Anspruch auf die notwendige Versorgung gegenüber der Krankenkasse durch.",24
+253,"Pflegerecht (Allgemeine Beratung)","Umfassende Unterstützung für Pflegebedürftige und ihre Familien in allen Fragen der Pflegeversicherung und des Heimrechts.",24
+254,Flugannullierung,"Wurde Ihr Flug gestrichen? Wir fordern für Sie die Ticket-Rückerstattung oder eine kostenlose Umbuchung sowie eine finanzielle Entschädigung.",25
+255,"Reisemangel im Hotel","Baulärm am Pool, Ungeziefer im Zimmer oder fehlende Klimaanlage? Wir setzen Ihre Ansprüche auf Minderung des Reisepreises nach der Frankfurter Tabelle durch.",25
+256,Pauschalreise-Stornierung,"Möchten Sie von einer Reise zurücktreten? Wir prüfen die Rechtmäßigkeit von Stornogebühren und helfen Ihnen, unnötige Kosten zu vermeiden.",25
+257,Gepäckverlust,"Wenn der Koffer am Ziort fehlt, haben Sie Anspruch auf Ersatzkäufe. Wir fordern den Schadensersatz für Sie beim Reiseveranstalter oder der Airline ein.",25
+258,Visaprobleme,"Wurde Ihnen die Einreise verweigert oder gab es Probleme mit den Reisedokumenten? Wir klären die Haftung des Reiseveranstalters bei mangelhafter Aufklärung.",25
+259,Reiseabbruch,"Mussten Sie Ihren Urlaub vorzeitig beenden (z. B. wegen Krankheit oder Katastrophen)? Wir unterstützen Sie bei der Rückerstattung nicht genutzter Leistungen.",25
+260,"Überbuchung der Unterkunft","Ist das gebuchte Hotel voll und man will Sie in ein schlechteres Hotel umquartieren? Wir fordern ein gleichwertiges Ersatzhotel und eine Entschädigung für Sie.",25
+261,"Reisevertrag Unklarheiten","Versteckte Kosten oder kurzfristige Programmänderungen? Wir prüfen, ob die Vertragsanpassungen des Veranstalters rechtlich zulässig sind.",25
+262,Reisekrankheit,"Haben Sie sich am Buffet mit Salmonellen infiziert oder gab es Hygienemängel? Wir setzen Schmerzensgeldansprüche wegen Verletzung der Sorgfaltspflichten durch.",25
+263,Reiseversicherungsansprüche,"Verweigert die Reiserücktrittsversicherung die Zahlung? Wir prüfen die Versicherungsbedingungen und fordern die zustehende Leistung ein.",25
+264,"Unfall mit Fahrzeug","Nach einem Verkehrsunfall regulieren wir für Sie den Sachschaden, den Wertverlust und fordern Schmerzensgeld sowie Verdienstausfall bei Verletzungen.",26
+265,"Produktmangel Schadensersatz","Hat ein defektes Gerät einen Brand oder eine Verletzung verursacht? Wir halten den Hersteller nach dem Produkthaftungsgesetz schadensersatzpflichtig.",26
+266,"Arbeitsunfall Entschädigung","Bei Unfällen im Job oder auf dem Weg dorthin klären wir Ansprüche gegen Berufsgenossenschaften und die Haftung des Arbeitgebers bei Pflichtverletzungen.",26
+267,"Haftpflichtschaden geltend","Hat jemand Ihr Eigentum beschädigt? Wir setzen Ihre Ansprüche gegen den Verursacher und dessen Haftpflichtversicherung effektiv durch.",26
+268,"Mieterschäden Ersatzforderung","Verlangt Ihr Vermieter beim Auszug Geld für angebliche Schäden? Wir wehren unberechtigte Forderungen ab und schützen Ihre Kaution.",26
+269,"Reisemängel Entschädigung","Neben der Minderung des Reisepreises können Sie bei vertaner Urlaubszeit oft zusätzlich einen Schadensersatz in Geld fordern.",26
+270,Persönlichkeitsrechtsverletzung,"Bei übler Nachrede, Mobbing oder Verletzung von Bildrechten fordern wir Unterlassung und eine angemessene Geldentschädigung für Sie.",26
+271,"Arzthaftung bei Behandlungsfehler","Arztfehler können existenzbedrohend sein. Wir unterstützen Sie bei der Durchsetzung von Schadensersatz für Pflegemehrbedarf und entgangene Gewinne.",26
+272,"Baumängel an Eigenheim","Fehler beim Hausbau führen zu massiven Wertminderungen. Wir fordern Schadensersatz von Bauunternehmen und Architekten für die Beseitigung der Mängel.",26
+273,"Datenschutzverletzung Ansprüche","Bei Datenlecks oder unbefugter Weitergabe Ihrer Daten können Ihnen immaterielle Schadensersatzansprüche gegen Unternehmen zustehen.",26
+274,Ehescheidung,"Wir begleiten Sie durch das Scheidungsverfahren, klären das Trennungsjahr und bereiten den Scheidungsantrag professionell vor.",27
+275,Sorgerechtsstreit,"Das Wohl der Kinder steht an erster Stelle. Wir unterstützen Sie bei der Regelung des Sorgerechts und der Aufenthaltsbestimmung für Ihre Kinder.",27
+276,Unterhaltsforderungen,"Wir berechnen für Sie Trennungsunterhalt, nachehelichen Unterhalt und Kindesunterhalt nach der Düsseldorfer Tabelle und setzen diese Ansprüche durch.",27
+277,Vermögensaufteilung,"Wer bekommt das Haus, das Auto oder die Rücklagen? Wir regeln den Zugewinnausgleich und sorgen für eine faire Teilung des gemeinsamen Vermögens.",27
+278,Vaterschaftsanerkennung,"Wir beraten Sie zur rechtlichen Vaterschaft, zur Anerkennung oder zur Anfechtung, um klare Familienverhältnisse und Unterhaltspflichten zu schaffen.",27
+279,Adoption,"Der Weg zum Wunschkind ist rechtlich hürdenreich. Wir begleiten Sie durch das Adoptionsverfahren, von der Eignungsprüfung bis zum Beschluss des Familiengerichts.",27
+280,Ehevertrag,"Mit einem Ehevertrag können Sie Vermögen und Unterhalt für den Fall einer Scheidung vorsorglich regeln und so langwierige Streitigkeiten vermeiden.",27
+281,Umgangsrecht,"Wir helfen Ihnen, eine verlässliche Umgangsregelung für die Kinder zu finden, damit der Kontakt zu beiden Elternteilen gewahrt bleibt.",27
+282,"Namensänderung nach Scheidung","Wir beraten Sie zu den Möglichkeiten der Wiederannahme Ihres Geburtsnamens oder der Beibehaltung des Ehenamens nach dem Scheidungsurteil.",27
+283,"Schutz vor häuslicher Gewalt","In Notfällen erwirken wir für Sie Kontaktverbote und Wohnungszuweisungen nach dem Gewaltschutzgesetz, um Ihre Sicherheit und die Ihrer Kinder zu garantieren.",27
+284,Verkehrsunfall,"Nach einem Autounfall haben Sie bei Verletzungen oft Anspruch auf Schmerzensgeld. Wir unterstützen Sie bei der Durchsetzung Ihrer Forderungen gegenüber der gegnerischen Versicherung.",28
+285,Arbeitsunfall,"Erleiden Sie einen Unfall am Arbeitsplatz oder auf dem Weg dorthin, klären wir Ihre Ansprüche auf Schmerzensgeld und die Haftung von Arbeitgeber oder Berufsgenossenschaft.",28
+286,"Medizinischer Behandlungsfehler","Fehlbehandlungen durch Ärzte können lebenslange Folgen haben. Wir fordern für Sie Schmerzensgeld, das die Schwere Ihrer Beeinträchtigung angemessen widerspiegelt.",28
+287,Produktmangel,"Hat ein fehlerhaftes Produkt zu einer Verletzung geführt? Wir halten den Hersteller für die körperlichen und seelischen Folgen haftbar.",28
+288,"Übergriff oder Gewalttat","Opfer von Straftaten haben Anspruch auf Entschädigung. Wir unterstützen Sie dabei, Schmerzensgeld vom Täter oder über das Opferentschädigungsgesetz zu erhalten.",28
+289,Tierbiss,"Wurden Sie von einem Hund gebissen? Der Halter haftet oft verschuldensunabhängig. Wir setzen Ihre Schmerzensgeldansprüche für die erlittenen Verletzungen durch.",28
+290,Sportunfall,"Bei Unfällen im Sport (z. B. Skiunfall) klären wir, ob eine Pflichtverletzung anderer vorlag und fordern Schmerzensgeld für Ihre Genesung.",28
+291,Diskriminierung,"Schwere Diskriminierung kann zu einer Entschädigung in Geld (immaterieller Schadensersatz) führen. Wir verteidigen Ihre Würde und setzen Ihre Rechte durch.",28
+292,"Verletzung der Privatsphäre","Die unbefugte Veröffentlichung privater Daten oder Bilder kann einen Anspruch auf Geldentschädigung wegen Verletzung des allgemeinen Persönlichkeitsrechts begründen.",28
+293,"Falsche Verdächtigung","Unschuldig einer Straftat bezichtigt? Wenn dies Ihren Ruf oder Ihre Gesundheit schädigt, fordern wir eine angemessene finanzielle Wiedergutmachung für Sie.",28
+294,"Schmerzensgeldrecht (Allgemeine Beratung)","Umfassende Unterstützung bei der Bewertung der Schmerzensgeldhöhe und der Durchsetzung Ihrer Ansprüche auf Basis aktueller Schmerzensgeldtabellen.",28
+295,"Schulplatz ablehnen","Wurde Ihr Wunsch auf eine bestimmte Schule abgelehnt? Wir prüfen die Kapazitätsberechnungen und unterstützen Sie im Widerspruchsverfahren oder bei der Schulplatzklage.",29
+296,Notenwiderspruch,"Sind Sie mit einer Zeugnisnote oder einer Prüfungsbewertung nicht einverstanden? Wir prüfen die Einhaltung der Bewertungsvorschriften und fordern eine Neubewertung.",29
+297,"Mobbing in der Schule","Die Schule hat eine Fürsorgepflicht für Ihre Kinder. Wenn Mobbing nicht unterbunden wird, fordern wir Schutzmaßnahmen und notfalls Schadensersatz.",29
+298,Schulexklusion,"Soll Ihr Kind von der Schule verwiesen oder zeitweise ausgeschlossen werden? Wir prüfen die Verhältnismäßigkeit dieser Ordnungsmaßnahme und verteidigen das Recht auf Bildung.",29
+299,Schulwechsel,"Probleme beim Wechsel der Schule oder des Schulzweigs? Wir beraten Sie zu den rechtlichen Möglichkeiten und begleiten den Übergang.",29
+300,"Sonderpädagogischer Bedarf","Streit über die Feststellung eines sonderpädagogischen Förderbedarfs oder die Zuweisung zu einer Förderschule? Wir unterstützen Sie bei der Durchsetzung inklusiver Beschulung.",29
+301,Datenschutzverletzungen,"Umgang mit sensiblen Schülerdaten auf Portalen oder in der Verwaltung erfordert Sorgfalt. Wir beraten Sie bei Verstößen gegen das informationelle Selbstbestimmungsrecht.",29
+302,Anwesenheitspflicht,"Fragen zur Schulpflicht, zu Beurlaubungen oder zum Umgang mit Schulverweigerung klären wir unter Berücksichtigung der geltenden Schulgesetze.",29
+303,Unterrichtsausschluss,"Kurzfristige Suspendierungen vom Unterricht greifen tief in die Schullaufbahn ein. Wir prüfen die Rechtmäßigkeit und fordern die sofortige Wiederaufnahme des Schulbesuchs.",29
+304,Prüfungsanfechtung,"Fehler im Prüfungsverfahren (z. B. Lärm, ungeeignete Aufgaben) können zur Ungültigkeit der Prüfung führen. Wir fechten das Ergebnis für Sie an.",29
+305,"Ablehnung von Leistungen","Ob Bürgergeld, Wohngeld oder Arbeitslosengeld – wenn Ihr Antrag abgelehnt wurde, prüfen wir den Bescheid und legen fristgerecht Widerspruch für Sie ein.",30
+306,"Überprüfung des Bescheids","Sozialbescheide sind oft fehlerhaft berechnet. Wir führen eine detaillierte Überprüfung durch und fordern die Ihnen zustehenden Beträge nach.",30
+307,"Rückforderung von Leistungen","Verlangt das Amt Geld von Ihnen zurück, weil Sie angeblich zu viel erhalten haben? Wir prüfen die Rechtmäßigkeit der Rückforderung und wehren unberechtigte Ansprüche ab.",30
+308,"Antrag auf Erwerbsminderungsrente","Können Sie aus gesundheitlichen Gründen nicht mehr arbeiten? Wir unterstützen Sie beim schwierigen Antragsprozess und im Streit mit der Rentenversicherung.",30
+309,"Schwierigkeiten bei der Pflegestufe","Wir helfen Ihnen bei der Einstufung in den richtigen Pflegegrad, damit Sie die notwendige Unterstützung für die Pflege zuhause oder im Heim erhalten.",30
+310,"Probleme mit der Krankenkasse","Wird die Krankengeldzahlung eingestellt oder eine Hilfsmittelversorgung abgelehnt? Wir setzen Ihre Leistungsansprüche gegenüber der Kasse durch.",30
+311,"Widerspruch gegen Sanktionen","Werden Ihnen Leistungen wegen angeblicher Pflichtverletzungen gekürzt? Wir prüfen die Verhältnismäßigkeit der Sanktionen und fordern die ungekürzte Auszahlung.",30
+312,"Beantragung von Sozialhilfe","Wir beraten Sie zur Hilfe zum Lebensunterhalt oder zur Grundsicherung im Alter und helfen bei der Durchsetzung Ihrer Ansprüche gegenüber dem Sozialamt.",30
+313,"Unstimmigkeiten bei Elterngeld","Die Berechnung des Elterngeldes ist komplex. Wir prüfen, ob alle Einkünfte korrekt berücksichtigt wurden, um Ihre finanzielle Unterstützung für die Familie zu maximieren.",30
+314,"Kürzung der Grundsicherung","Wird Ihre Grundsicherung wegen angeblicher Haushaltsgemeinschaften oder Einkommensanrechnungen gekürzt? Wir klären die Sachlage und verteidigen Ihre Existenzgrundlage.",30
+315,Fristversäumnis,"Haben Sie die Abgabefrist für Ihre Steuererklärung verpasst oder eine Zahlungsfrist versäumt? Wir helfen Ihnen bei der Wiedereinsetzung in den vorigen Stand oder bei Anträgen auf Fristverlängerung.",31
+316,"Unklare Steuerbescheide","Weicht der Steuerbescheid von Ihrer Erklärung ab? Wir prüfen die Abweichungen, erläutern Ihnen die Gründe und legen bei Fehlern des Finanzamts Einspruch ein.",31
+317,"Selbstständige Einkünfte","Die Besteuerung von Freelancern und Gewerbetreibenden bietet viele Gestaltungsspielräume. Wir beraten Sie zur richtigen Gewinnermittlung und zur Abzugsfähigkeit von Betriebsausgaben.",31
+318,"Kapitalerträge versteuern","Fragen zur Abgeltungsteuer auf Zinsen, Dividenden oder Aktiengewinne klären wir unter Berücksichtigung aktueller Freibeträge und Anrechnungsregeln.",31
+319,Immobilienveräußerung,"Wann ist der Verkauf eines Hauses steuerfrei (Spekulationsfrist)? Wir beraten Sie zur Vermeidung von Steuerfallen bei privaten Veräußerungsgeschäften.",31
+320,Erbschaftssteuer,"Wir helfen Ihnen bei der Erstellung der Erbschaftsteuererklärung und beraten Sie zur Nutzung von Freibeträgen und Verschonungsregeln für Betriebsvermögen.",31
+321,Betriebsprüfung,"Kündigt sich das Finanzamt zur Prüfung an? Wir begleiten Sie durch die Betriebsprüfung, prüfen die Feststellungen und führen die Schlussbesprechung.",31
+322,Umsatzsteuerproblematik,"Vorsteuerabzug, Kleinunternehmerregelung oder innergemeinschaftliche Lieferungen – wir bringen Klarheit in Ihre Umsatzsteuerpflichten und vermeiden Nachzahlungen.",31
+323,Auslandseinkünfte,"Haben Sie Wohnsitze oder Einkünfte in verschiedenen Ländern? Wir beraten Sie zur Vermeidung von Doppelbesteuerung und zur Einhaltung internationaler Meldepflichten.",31
+324,Doppelbesteuerung,"Wir prüfen Doppelbesteuerungsabkommen (DBA), um sicherzustellen, dass Sie Ihre Steuern nur dort zahlen, wo es rechtlich zwingend erforderlich ist.",31
+325,Existenzgründung,"Von der Wahl der Rechtsform bis zur steuerlichen Erfassung beim Finanzamt – wir unterstützen Gründer dabei, von Anfang an die richtigen steuerlichen Weichen zu stellen.",31
+326,"Steuerrecht (Allgemeine Beratung)","Ihre Experten für vorausschauende Steuergestaltung und die rechtliche Vertretung gegenüber Finanzbehörden und Finanzgerichten.",31
+327,"Unvollständige Steuererklärung","Haben Sie versehentlich Einkünfte vergessen? Wir beraten Sie zur Berichtigung gemäß § 153 AO, um strafrechtliche Konsequenzen zu vermeiden.",32
+328,"Verdacht auf Steuerhinterziehung","Gegen Sie wird wegen Steuerhinterziehung ermittelt? Wir übernehmen Ihre Verteidigung, prüfen die Vorwürfe und arbeiten auf eine Einstellung des Verfahrens hin.",32
+329,"Betriebsprüfung durch das Finanzamt","Wenn aus einer normalen Prüfung ein Steuerstrafverfahren wird, ist sofortiges Handeln nötig. Wir schützen Ihre Rechte im Übergang vom Steuer- zum Strafrecht.",32
+330,"Selbstanzeige bei Steuerdelikten","Eine wirksame Selbstanzeige führt zur Straffreiheit. Wir erstellen für Sie die notwendigen Unterlagen und sorgen für eine lückenlose Nachversteuerung.",32
+331,"Steuerliche Falschberatung","Hat Ihr Steuerberater Fehler gemacht, die jetzt zu strafrechtlichen Vorwürfen führen? Wir klären die Haftung und verteidigen Sie gegen die Konsequenzen der Fehlberatung.",32
+332,"Unterschlagung von Firmenvermögen","Vorwürfe der Untreue oder Unterschlagung im geschäftlichen Kontext erfordern eine diskrete und fachkundige Verteidigung zur Schonung Ihres Rufs.",32
+333,"Unerklärte Auslandskonten","Der automatische Informationsaustausch deckt viele Auslandskonten auf. Wir helfen Ihnen bei der rechtssicheren Offenlegung und der Vermeidung von drakonischen Strafen.",32
+334,Schwarzarbeit,"Lohnsteuerhinterziehung durch Schwarzarbeit wird hart verfolgt. Wir unterstützen Sie bei der Aufarbeitung und verteidigen Sie im Strafverfahren.",32
+335,"Nicht abgeführte Lohnsteuer","Das Einbehalten von Lohnsteuer ohne Abführung ist eine Straftat. Wir beraten Geschäftsführer in der Krise zur Vermeidung persönlicher Strafbarkeit.",32
+336,"Fehlende Umsatzsteuervoranmeldung","Ständige Verspätungen können als Steuerhinterziehung auf Zeit gewertet werden. Wir helfen Ihnen, Ihre Meldepflichten in den Griff zu bekommen und Sanktionen abzuwenden.",32
+337,"Fehlerhafte Bilanzierung","Manipulationen in der Bilanz führen zu falschen Steuerfestsetzungen. Wir unterstützen Sie bei der Korrektur und der Verteidigung gegen den Vorwurf der Bilanzfälschung.",32
+338,"Verstoß gegen Buchführungspflichten","Mangelhafte Buchführung ist oft der Ausgangspunkt für steuerstrafrechtliche Ermittlungen. Wir beraten Sie zur Sanierung Ihrer Buchhaltung und zur Abwehr von Vorwürfen.",32
+339,"Steuerstrafrecht (Allgemeine Beratung)","Spezialisierte Verteidigung in allen Phasen des Steuerstrafverfahrens, von der Hausdurchsuchung bis zur Vertretung vor dem Strafrichter.",32
+340,Körperverletzungsvorwurf,"Ob Schlägerei oder fahrlässige Körperverletzung – wir prüfen die Notwehrlage und setzen uns für eine Einstellung des Verfahrens oder eine milde Strafe ein.",33
+341,Betrugsverdacht,"Bei Vorwürfen wie Internetbetrug oder Abrechnungsbetrug analysieren wir die Beweislast und erarbeiten eine schlüssige Verteidigungsstrategie.",33
+342,Drogenbesitz-Vorwurf,"Besitz oder Handel mit Betäubungsmitteln? Wir nutzen alle rechtlichen Spielräume, um die Folgen für Ihr Leben und Ihren Führerschein zu minimieren.",33
+343,Verkehrsdelikt,"Fahrerflucht, Trunkenheit am Steuer oder Nötigung – wir verteidigen Sie im Strafverfahren und kämpfen für den Erhalt Ihrer Fahrerlaubnis.",33
+344,"Häusliche Gewalt","Vorwürfe im familiären Bereich sind hochsensibel. Wir sorgen für eine objektive Klärung der Sachlage und schützen Ihre Rechte gegenüber den Ermittlungsbehörden.",33
+345,Cyberkriminalität,"Hacking, Datenhehlerei oder Betrug im Netz erfordern technisches Verständnis in der Verteidigung. Wir vertreten Sie in komplexen IT-Strafverfahren.",33
+346,Sachbeschädigung,"Ob Graffiti oder mutwillige Zerstörung – wir prüfen Möglichkeiten des Täter-Opfer-Ausgleichs zur Vermeidung einer Vorstrafe.",33
+347,"Vorwurf der Nötigung","Nötigung im Straßenverkehr oder im Alltag wird oft subjektiv wahrgenommen. Wir dekonstruieren die Vorwürfe und entlasten Sie.",33
+348,Urkundenfälschung,"Manipulierte Dokumente oder falsche Unterschriften? Wir prüfen die rechtliche Einordnung und verteidigen Sie gegen den Vorwurf der Fälschung.",33
+349,"Verstoß gegen Auflagen","Haben Sie Bewährungsauflagen verletzt? Wir setzen uns dafür ein, den Widerruf der Bewährung zu verhindern und Ihnen eine zweite Chance zu sichern.",33
+350,Beleidigungsanklage,"Beleidigungen, insbesondere im Internet, werden zunehmend verfolgt. Wir prüfen die Grenzen der Meinungsfreiheit und fordern die Einstellung des Verfahrens.",33
+351,"Strafrecht (Allgemeine Beratung)","Ihr erfahrener Verteidiger in allen strafrechtlichen Angelegenheiten – engagiert, diskret und kompetent von der ersten Stunde an.",33
+352,"Forderungen abwehren","In der Krise werden Liquiditätsreserven knapp. Wir wehren unberechtigte Forderungen ab und helfen Ihnen bei Verhandlungen über Ratenzahlungen oder Vergleiche.",34
+353,"Insolvenz vermeiden","Wir prüfen Sanierungsmöglichkeiten außerhalb der Insolvenz (z. B. nach dem StaRUG), um Ihr Unternehmen fortzuführen und Arbeitsplätze zu sichern.",34
+354,"Vertragsrisiken minimieren","In Krisenzeiten müssen unrentable Verträge angepasst oder beendet werden. Wir beraten Sie zu Kündigungsrechten und der Anpassung von Lieferantenverträgen.",34
+355,Geschäftsführerhaftung,"Geschäftsführer haften persönlich, wenn sie in der Krise Zahlungen leisten. Wir beraten Sie zur Vermeidung von Haftungsfallen nach § 15b InsO.",34
+356,"Arbeitsrechtliche Fragen","Personalabbau oder Kurzarbeit sind in Krisen oft unumgänglich. Wir gestalten die rechtssichere Umsetzung dieser Maßnahmen zur Kostenentlastung.",34
+357,"Insolvenzantragspflicht prüfen","Wer zu spät Insolvenz anmeldet, macht sich strafbar. Wir führen eine genaue Liquiditäts- und Überschuldungsprüfung durch, um Sie abzusichern.",34
+358,"Haftung und Strafbarkeit vermeiden","Wir beraten Sie präventiv zur Vermeidung von Insolvenzverschleppung und Bankrottdelikten, damit die Krise nicht zum persönlichen Desaster wird.",34
+359,"Hinweisgeberschutz im Unternehmen","Unternehmen ab 50 Mitarbeitern müssen interne Meldekanäle einrichten. Wir unterstützen Sie bei der rechtskonformen Umsetzung des Hinweisgeberschutzgesetzes.",35
+360,"Abmahnung wegen Filesharing","Haben Sie eine Abmahnung wegen illegaler Downloads erhalten? Wir prüfen die Berechtigung und wehren überhöhte Schadensersatzforderungen ab.",36
+361,"Nutzung von Stockfotos","Fehlende Urheberkennzeichnung bei Stockfotos führt oft zu Abmahnungen. Wir unterstützen Sie bei der rechtssicheren Lizenzierung und Schadensbegrenzung.",36
+362,"Musik in Videos verwenden","Die Verwendung von Musik (z. B. auf YouTube) erfordert Lizenzen. Wir klären die Rechtslage und helfen bei Urheberrechtsstreitigkeiten mit Verwertungsgesellschaften.",36
+363,"Urheberrecht auf Webseiten","Ob Texte, Designs oder Code – wir schützen Ihr geistiges Eigentum auf Ihrer Website gegen Diebstahl und unbefugte Kopien durch Wettbewerber.",36
+364,"Teilen von E-Books","Die Weitergabe digitaler Kopien ist streng reglementiert. Wir beraten Sie zu den Grenzen der Privatkopie und zur Haftung beim Filesharing.",36
+365,"Cover-Songs aufnehmen","Darf man Covers auf Spotify hochladen? Wir klären die notwendigen Lizenzen über GEMA und GVL, damit Sie Ihre Musik rechtssicher veröffentlichen können.",36
+366,"Zitate in Veröffentlichungen","Zitierfreiheit hat Grenzen. Wir prüfen Ihre Texte auf die Einhaltung des Zitatrechts, um Abmahnungen durch die Original-Urheber zu vermeiden.",36
+367,Software-Lizenzverletzungen,"Die Nutzung von Software über den lizenzierten Umfang hinaus ist eine Urheberrechtsverletzung. Wir beraten Sie bei Audits und Lizenzstreitigkeiten mit Softwareherstellern.",36
+368,"Verkauf von Fan-Art","Darf man Zeichnungen von Filmfiguren verkaufen? Wir beraten Künstler zu den rechtlichen Risiken bei der Nutzung geschützter Charaktere und Marken.",36
+369,"Anfertigung von Lehrmaterialien","Schulen und Unis dürfen Werke eingeschränkt nutzen. Wir klären für Dozenten und Institutionen die Grenzen der Schrankenbestimmungen im Urheberrecht.",36
+370,Urheberrechtsverletzung,"Wir setzen Ihre Ansprüche auf Unterlassung, Beseitigung und Schadensersatz bei jeder Form der Verletzung Ihres geistigen Eigentums effektiv durch.",36
+371,"Urheberrecht (Allgemeine Beratung)","Ihr Partner für den Schutz kreativer Leistungen im digitalen Zeitalter – kompetent, zukunftsorientiert und durchsetzungsstark.",36
+372,"Unfall mit Fahrzeug","Reguliert Ihre Versicherung den Schaden nicht? Wir setzen Ihre Ansprüche auf Reparaturkosten, Wertminderung und Nutzungsausfall gegen die Versicherung durch.",37
+373,Versicherungsvertragskündigung,"Wurde Ihr Vertrag unberechtigt gekündigt oder möchten Sie selbst aus einem teuren Vertrag raus? Wir prüfen die Kündigungsfristen und -gründe.",37
+374,Krankenversicherungsstreitigkeiten,"Verweigert die private Krankenversicherung die Übernahme von Behandlungskosten oder erhöht die Beiträge übermäßig? Wir setzen Ihre Leistungsrechte durch.",37
+375,Berufsunfähigkeitsversicherung,"Die Anerkennung der Berufsunfähigkeit scheitert oft an medizinischen Gutachten. Wir kämpfen für Ihre Rente und begleiten Sie durch den langwierigen Prozess.",37
+376,Lebensversicherungsauszahlung,"Bei Unstimmigkeiten über die Ablaufleistung oder den Rückkaufswert Ihrer Lebensversicherung prüfen wir die Abrechnung und fordern Nachzahlungen.",37
+377,"Unklare Versicherungsbedingungen","Kleingedrucktes darf Kunden nicht unangemessen benachteiligen. Wir prüfen Ihre Bedingungen auf unwirksame Klauseln zur Haftungsbegrenzung.",37
+378,Hausratschaden,"Ob Einbruch, Feuer oder Leitungswasser – wenn die Hausratversicherung die Regulierung verzögert oder kürzt, übernehmen wir die rechtliche Durchsetzung.",37
+379,Reiserücktrittsversicherung,"Hat die Versicherung Ihren Rücktrittsgrund nicht anerkannt? Wir klären die Rechtslage bei Krankheit oder anderen unvorhergesehenen Ereignissen.",37
+380,Unfallversicherungsanspruch,"Nach einem privaten Unfall steht Ihnen bei Invalidität oft eine Kapitalleistung zu. Wir unterstützen Sie bei der Bemessung des Invaliditätsgrades.",37
+381,Prämienrückforderung,"Viele Beitragserhöhungen in der privaten Krankenversicherung waren in der Vergangenheit formell unwirksam. Wir fordern zu viel gezahlte Prämien für Sie zurück.",37
+382,"Versicherungsrecht (Allgemeine Beratung)","Ihr Schutz gegen zahlungsunwillige Versicherungen – wir bringen Waffengleichheit in den Streit mit großen Konzernen.",37
+383,"Mangelhafte Ware erhalten","Entspricht die bestellte Ware nicht der Beschreibung oder ist sie defekt? Wir unterstützen Sie bei der Reklamation und der Durchsetzung von Gewährleistungsrechten.",38
+384,"Kündigung eines Vertrags","Ob Fitnessstudio, Handyvertrag oder Zeitschriften-Abo – wir prüfen die Kündigungsfristen und helfen Ihnen, sich von ungewollten Verträgen zu lösen.",38
+385,"Verzug der Zahlung","Zahlt Ihr Kunde nicht? Wir übernehmen das Mahnwesen und leiten das gerichtliche Mahnverfahren ein, um Ihre Liquidität zu sichern.",38
+386,"Unklare Vertragsbedingungen","Wir analysieren Verträge vor der Unterzeichnung, um versteckte Risiken aufzudecken und für Sie vorteilhafte Regelungen auszuhandeln.",38
+387,"Vertragsbruch durch Anbieter","Erbringt ein Dienstleister seine versprochene Leistung nicht? Wir fordern Nacherfüllung, mindern den Preis oder erklären den Rücktritt vom Vertrag.",38
+388,"Widerrufsrecht ausüben","Innerhalb von 14 Tagen können Sie viele Online-Verträge widerrufen. Wir helfen Ihnen, wenn der Anbieter den Widerruf nicht akzeptiert.",38
+389,"Falschberatung bei Vertragsabschluss","Wurden Ihnen falsche Versprechungen gemacht? Wir prüfen Möglichkeiten der Anfechtung wegen arglistiger Täuschung oder Schadensersatz wegen Beratungsfehlern.",38
+390,Abofalle,"Sind Sie in eine Kostenfalle im Internet getippt? Wir wehren unberechtigte Forderungen ab und sorgen für die Löschung unrechtmäßiger Verträge.",38
+391,"Überhöhte Rechnung","Weicht die Rechnung deutlich vom Angebot ab? Wir prüfen die Abrechnung und kürzen sie auf das rechtlich zulässige Maß.",38
+392,Internetbetrug,"Opfer von Scamming oder Phishing geworden? Wir unterstützen Sie bei der Schadensbegrenzung und der Kommunikation mit Zahlungsdienstleistern.",38
+393,"Widerruf Coaching-Vertrag","Viele teure Coaching-Verträge (z. B. Hochpreis-Coaching) sind wegen Verstoßes gegen das Fernunterrichtsschutzgesetz unwirksam. Wir fordern Ihr Geld zurück.",38
+394,"Vertragsrecht (Allgemeine Beratung)","Ihr Partner für die Gestaltung, Prüfung und Durchsetzung von Verträgen in allen Lebenslagen.",38
+395,"Bauvorhaben Nachbarschaft","Möchten Sie sich gegen ein Bauvorhaben in Ihrer direkten Nachbarschaft wehren? Wir prüfen die Einhaltung des Gebots der Rücksichtnahme und legen Widerspruch ein.",39
+396,Lärmbelästigung,"Ob Gastronomie, Gewerbebetrieb oder öffentliche Veranstaltungen – wir setzen Ihre Rechte auf Ruhe gegenüber der Ordnungsbehörde durch.",39
+397,"Ablehnung Baugenehmigung","Hat die Baubehörde Ihren Antrag abgelehnt? Wir prüfen die planungsrechtliche Zulässigkeit und vertreten Sie im Widerspruchs- und Klageverfahren.",39
+398,"Widerruf Gewerbeerlaubnis","Steht Ihre berufliche Existenz auf dem Spiel? Wir verteidigen Sie gegen den Entzug Ihrer Konzession oder Gewerbezulassung wegen angeblicher Unzuverlässigkeit.",39
+399,"Anfechtung Steuerbescheid","Verwaltungsentscheidungen wie Gebührenbescheide oder Kommunalabgaben prüfen wir auf ihre Rechtmäßigkeit und wehren überhöhte Forderungen ab.",39
+400,Umweltschutzverletzung,"Verstöße gegen Umweltauflagen können Stilllegungen zur Folge haben. Wir beraten Unternehmen zur Einhaltung öffentlich-rechtlicher Vorgaben.",39
+401,"Fehlende Barrierefreiheit","Wir unterstützen Sie bei der Durchsetzung Ihrer Ansprüche auf barrierefreien Zugang zu öffentlichen Gebäuden und Leistungen.",39
+402,Datenschutzverstöße,"Bei Verletzungen Ihrer Rechte durch Behörden (z. B. unzulässige Speicherung in Registern) fordern wir Löschung und Auskunft.",39
+403,"Zulassung Bildungseinrichtung","Streit um Schulformen, Kitaplätze oder Studienzulassung? Wir setzen Ihr Recht auf Zugang zu staatlichen Bildungseinrichtungen durch.",39
+404,"Klage gegen Behördenentscheidung","Ob Gaststättenerlaubnis, Waffenbesitzkarte oder Fahrerlaubnisentzug – wir sind Ihre starke Vertretung gegenüber der Verwaltung.",39
+405,"Verwaltungsrecht (Allgemeine Beratung)","Kompetente Begleitung im Umgang mit Behörden, zur Wahrung Ihrer Bürgerrechte und zur Vermeidung staatlicher Willkür.",39
+406,"Vertragsbruch Lieferant","Liefert ein Partner nicht rechtzeitig oder in mangelhafter Qualität? Wir setzen Ihre Ansprüche auf Nachlieferung, Schadensersatz oder Vertragsstrafe durch.",40
+407,"Unlauterer Wettbewerb","Werben Ihre Wettbewerber mit falschen Versprechungen oder behindern sie Ihr Geschäft? Wir mahnen Wettbewerbsverstöße ab und schützen Ihren fairen Marktzugang.",40
+408,Markenrechtsverletzung,"Wir verteidigen Ihr geistiges Eigentum gegen unbefugte Nutzung und Plagiate, um den Wert Ihres Unternehmens zu sichern.",40
+409,"Gesellschaftsrechtliche Streitigkeiten","Bei Konflikten zwischen Gesellschaftern oder mit der Geschäftsführung beraten wir Sie strategisch und vertreten Sie vor den Kammern für Handelssachen.",40
+410,Forderungsmanagement,"Wir optimieren Ihren Mahnprozess und setzen offene Forderungen im In- und Ausland konsequent durch, um Ihre Cash-Flow zu sichern.",40
+411,Datenschutzverletzungen,"In Zeiten der DSGVO sind Datenpannen existenzbedrohend. Wir unterstützen Sie beim Risikomanagement und der Verteidigung gegen Bußgelder.",40
+412,Vertragsgestaltung,"Rechtssichere Verträge sind die Basis für den Geschäftserfolg. Wir erstellen AGB, Lieferverträge und Kooperationsvereinbarungen nach aktuellem Standard.",40
+413,Unternehmenskauf/-verkauf,"Wir begleiten M&A-Transaktionen von der Due Diligence bis zum unterschriftsreifen Kaufvertrag, egal ob Share Deal oder Asset Deal.",40
